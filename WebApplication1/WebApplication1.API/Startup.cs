@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebApplication1.Infrastructure;
-using WebApplication1.Infrastructure.Extensions;
-using WebApplication1.Infrastructure.Filters;
+using WebApplication1.API.Infrastructure.Extensions;
+using WebApplication1.API.Infrastructure.Filters;
 
-namespace WebApplication1
+namespace WebApplication1.API
 {
     /// <summary>
     /// Main Startup class
@@ -35,12 +34,12 @@ namespace WebApplication1
         /// <param name="services">service container collection</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAppConfiguration(Configuration);
-
-            services.AddControllers(configure => 
+            services.AddControllers(configure =>
             {
                 configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
             });
+
+            services.AddAppConfiguration(Configuration);
 
             services.AddIocContainer(Configuration);
         }
@@ -64,7 +63,7 @@ namespace WebApplication1
 
             app.UseAuthorization();
 
-            app.UseAppConfiguration();
+            app.UseAppConfiguration(env);
 
             app.UseEndpoints(endpoints =>
             {

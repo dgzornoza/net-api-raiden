@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
 
-namespace WebApplication1.Infrastructure.Filters.Swagger
+namespace WebApplication1.API.Infrastructure.Filters.Swagger
 {
     /// <summary>
     /// Filter for remove version parameter in swagger

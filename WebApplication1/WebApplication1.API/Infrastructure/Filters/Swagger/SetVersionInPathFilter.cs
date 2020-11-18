@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 
-namespace WebApplication1.Infrastructure.Filters.Swagger
+namespace WebApplication1.API.Infrastructure.Filters.Swagger
 {
     /// <summary>
     /// Filter to set Version in path for swagger api

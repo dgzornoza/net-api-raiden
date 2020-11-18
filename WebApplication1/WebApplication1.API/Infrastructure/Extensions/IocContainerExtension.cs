@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApplication1.Infrastructure
+namespace WebApplication1.API.Infrastructure.Extensions
 {
     /// <summary>
     /// Extension class for manage Application Inversion Of Control container

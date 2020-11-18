@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace WebApplication1
+namespace WebApplication1.API
 {
     /// <summary>
     /// Main entry program class

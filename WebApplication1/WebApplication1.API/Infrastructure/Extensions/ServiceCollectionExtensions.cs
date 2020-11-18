@@ -4,9 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using WebApplication1.Infrastructure.Filters.Swagger;
+using WebApplication1.API;
+using WebApplication1.API.Infrastructure.Extensions;
+using WebApplication1.API.Infrastructure.Filters.Swagger;
 
-namespace WebApplication1.Infrastructure.Extensions
+namespace WebApplication1.API.Infrastructure.Extensions
 {
     /// <summary>
     /// Extensions class for manage third party services

@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace WebApplication1.Infrastructure.Filters
+namespace WebApplication1.API.Infrastructure.Filters
 {
     /// <summary>
     /// Filter for manage all http global exception
@@ -25,7 +25,7 @@ namespace WebApplication1.Infrastructure.Filters
         /// <param name="logger">Logger</param>
         public HttpGlobalExceptionFilter(IWebHostEnvironment env, ILogger<HttpGlobalExceptionFilter> logger)
         {
-            this.environment = env;
+            environment = env;
             this.logger = logger;
         }
 
@@ -84,7 +84,7 @@ namespace WebApplication1.Infrastructure.Filters
             // Attach to response
             context.Result = new ObjectResult(problemDetails) { StatusCode = statusCode };
             context.HttpContext.Response.StatusCode = statusCode;
-            
+
             context.ExceptionHandled = true;
         }
 

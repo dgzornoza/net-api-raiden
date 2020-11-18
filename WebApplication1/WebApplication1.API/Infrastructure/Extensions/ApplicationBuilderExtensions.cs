@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace WebApplication1.Infrastructure.Extensions
+namespace WebApplication1.API.Infrastructure.Extensions
 {
     /// <summary>
     /// Application builder extension builder with custom app configuration
@@ -15,7 +17,7 @@ namespace WebApplication1.Infrastructure.Extensions
         /// </summary>
         /// <param name="app">application builder</param>
         /// <returns>application builder</returns>
-        public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app)
+        public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             // middleware for manage languages
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
@@ -31,11 +33,14 @@ namespace WebApplication1.Infrastructure.Extensions
             });
 
             // Swagger
-            app.UseSwagger()
-                .UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
-                });
+            if (env.IsDevelopment())
+            {
+                app.UseSwagger()
+                    .UseSwaggerUI(c =>
+                    {
+                        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                    });
+            }
 
             // CORS
             app.UseCors("CorsPolicy");
