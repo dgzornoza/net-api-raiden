@@ -89,7 +89,7 @@ namespace WebApplication1.API.Infrastructure.Filters
         }
 
 
-        private Dictionary<string, string[]> CreateCommonControlledExceptionError(Exception exception)
+        private static Dictionary<string, string[]> CreateCommonControlledExceptionError(Exception exception)
         {
             return new Dictionary<string, string[]>()
             {

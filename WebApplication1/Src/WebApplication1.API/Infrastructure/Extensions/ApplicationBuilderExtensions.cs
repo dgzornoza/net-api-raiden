@@ -16,6 +16,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// Custom App configuration
         /// </summary>
         /// <param name="app">application builder</param>
+        /// <param name="env">webhost environment</param>
         /// <returns>application builder</returns>
         public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
