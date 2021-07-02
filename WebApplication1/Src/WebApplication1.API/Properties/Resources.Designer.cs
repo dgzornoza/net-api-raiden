@@ -63,9 +63,36 @@ namespace WebApplication1.API.Properties {
         /// <summary>
         ///   Looks up a localized string similar to One or more errors occurred, please refer to the &apos;errors&apos; property for additional details..
         /// </summary>
-        internal static string GLOBAL_ERROR_TITLE {
+        internal static string GlobalErrorTitle {
             get {
-                return ResourceManager.GetString("GLOBAL_ERROR_TITLE", resourceCulture);
+                return ResourceManager.GetString("GlobalErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not configured AssemblyDescriptionAttribute in application..
+        /// </summary>
+        internal static string InvalidAssemblyDescriptionAttribute {
+            get {
+                return ResourceManager.GetString("InvalidAssemblyDescriptionAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not configured AssemblyProductAttribute in application..
+        /// </summary>
+        internal static string InvalidAssemblyProductAttribute {
+            get {
+                return ResourceManager.GetString("InvalidAssemblyProductAttribute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid certificate..
+        /// </summary>
+        internal static string InvalidCertificateError {
+            get {
+                return ResourceManager.GetString("InvalidCertificateError", resourceCulture);
             }
         }
     }

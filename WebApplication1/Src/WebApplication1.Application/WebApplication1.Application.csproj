@@ -17,11 +17,11 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Common\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>

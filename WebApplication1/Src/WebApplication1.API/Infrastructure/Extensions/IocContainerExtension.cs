@@ -1,5 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication1.API.Settings;
+using WebApplication1.Application.Behaviors;
+using WebApplication1.Application.Common.Commands;
 
 namespace WebApplication1.API.Infrastructure.Extensions
 {
@@ -16,17 +22,25 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// <returns>Services container collection object</returns>
         public static IServiceCollection AddIocContainer(this IServiceCollection services, IConfiguration configuration)
         {
-            // Connection String
-            // services.AddDbContext<Data.Interfaces.IUnitOfWorkPrincipal, Data.Repository.UnitOfWorkPrincipal>(options => options.UseSqlServer(configuration.GetConnectionString("AppSqlServerConnection")));
+            // Miscelaneo
+            // services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
 
-            // Mappers
-            ////services.AddAutoMapper(Assembly.GetAssembly(typeof(Application.Mappers.MappingProfile)));
+            // MediatR
+            services.AddMediatR(typeof(ICommand).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
-            // Services
-            ////services.AddScoped<ILanguageService, LanguageService>();
+            // Validadores
+            services.AddValidatorsFromAssembly(typeof(ICommand).GetTypeInfo().Assembly);
 
             // Repositories
-            ////services.AddScoped<ILanguageRepository, LanguageRepository>();
+            // ...
+
+            // Servicios API
+            // ...
+
+            // Configuraciones
+            services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection("AppConfiguration"));
 
             return services;
         }

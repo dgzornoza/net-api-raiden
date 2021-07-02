@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using FluentValidation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,37 +13,38 @@ using Microsoft.Extensions.Logging;
 namespace WebApplication1.API.Infrastructure.Filters
 {
     /// <summary>
-    /// Filter for manage all http global exception
+    /// Filtro para gestionar todas las excepciones http globales.
     /// </summary>
     public class HttpGlobalExceptionFilter : IExceptionFilter
     {
         private readonly IWebHostEnvironment environment;
         private readonly ILogger<HttpGlobalExceptionFilter> logger;
 
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        /// <param name="env">Web host environment</param>
-        /// <param name="logger">Logger</param>
         public HttpGlobalExceptionFilter(IWebHostEnvironment env, ILogger<HttpGlobalExceptionFilter> logger)
         {
             this.environment = env;
             this.logger = logger;
         }
 
-        /// <summary>
-        /// Invoked function for manage Excepcion
-        /// </summary>
-        /// <param name="context">Exception context</param>
         public void OnException(ExceptionContext context)
         {
             this.logger.LogError(context.Exception, $"Error Message --> {context.Exception.Message}");
 
-            // create message and code for specific exception
+            // Crear el mensaje y codigo para las excepciones especificas
             int statusCode;
             IDictionary<string, string[]> errors;
             switch (context.Exception)
             {
+                case ValidationException exception:
+
+                    errors = exception.Errors
+                        .Select(item => new { Key = item.PropertyName.Split('.').Last(), Value = item.ErrorCode })
+                        .GroupBy(item => item.Key)
+                        .ToDictionary(grouped => grouped.Key, grouped => grouped.Select(item => item.Value).ToArray());
+
+                    statusCode = StatusCodes.Status400BadRequest;
+                    break;
+
                 case InvalidOperationException _:
                     errors = CreateCommonControlledExceptionError(context.Exception);
                     statusCode = StatusCodes.Status400BadRequest;
@@ -63,14 +66,13 @@ namespace WebApplication1.API.Infrastructure.Filters
                     break;
             }
 
-            // Create problem details
-            ValidationProblemDetails problemDetails = new ValidationProblemDetails(errors)
+            var problemDetails = new ValidationProblemDetails(errors)
             {
-                Title = Properties.Resources.GLOBAL_ERROR_TITLE,
+                Title = Properties.Resources.GlobalErrorTitle,
                 Status = statusCode,
             };
 
-            // Add debug info
+            // Añadir informacion de depuracion (solo disponible para entornos de desarrollo)
             if (this.environment.IsDevelopment())
             {
                 problemDetails.Instance = context.HttpContext.Request.Path;
@@ -79,7 +81,7 @@ namespace WebApplication1.API.Infrastructure.Filters
                 problemDetails.Extensions.Add("traceId", Activity.Current?.Id ?? context.HttpContext.TraceIdentifier);
             }
 
-            // Attach to response
+            // Establecer la respuesta
             context.Result = new ObjectResult(problemDetails) { StatusCode = statusCode };
             context.HttpContext.Response.StatusCode = statusCode;
 

@@ -1,40 +1,29 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApplication1.API;
 using WebApplication1.API.Infrastructure.Extensions;
-using WebApplication1.API.Infrastructure.Filters.Swagger;
+using WebApplication1.API.Infrastructure.Filters;
 
 namespace WebApplication1.API.Infrastructure.Extensions
 {
-    /// <summary>
-    /// Extensions class for manage third party services
-    /// </summary>
     public static class ServiceCollectionExtensions
     {
-        /// <summary>
-        /// Extension method for add third party services to container
-        /// </summary>
-        /// <param name="services">Services container collection</param>
-        /// <param name="configuration">App configuration</param>
-        /// <returns>Services container collection object</returns>
         public static IServiceCollection AddAppConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             return services
+                .AddApiVersioning()
                 .AddCors()
                 .AddSwagger(configuration)
-                .AddAutomapper();
+                .AddAuthentication()
+                .AddAuthorization();
         }
 
-        /// <summary>
-        /// Extension method for add CORS services
-        /// </summary>
-        /// <param name="services">Services container collection</param>
-        /// <returns>Services container collection object</returns>
         private static IServiceCollection AddCors(this IServiceCollection services)
         {
             return services.AddCors(options =>
@@ -47,55 +36,82 @@ namespace WebApplication1.API.Infrastructure.Extensions
             });
         }
 
-        /// <summary>
-        /// Extension method for add Swagger services
-        /// </summary>
-        /// <param name="services">Services container collection</param>
-        /// <param name="configuration">App configuration</param>
-        /// <returns>Services container collection object</returns>
-        private static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddApiVersioning(this IServiceCollection services)
         {
-            return services.AddSwaggerGen(options =>
+            services.AddApiVersioning(x =>
             {
-                options.CustomOperationIds(description => $"{description.ActionDescriptor.RouteValues["controller"]}_{(description.ActionDescriptor as ControllerActionDescriptor)?.ActionName}");
+                x.DefaultApiVersion = new ApiVersion(1, 0);
+                x.AssumeDefaultVersionWhenUnspecified = true;
+                x.ReportApiVersions = true;
+                x.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
+            });
 
-                // configure version 1
-                options.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo
+            services.AddVersionedApiExplorer(
+                options =>
                 {
-                    Title = configuration["App:Title"],
-                    Version = configuration["App:Version"],
-                    Description = configuration["App:Description"],
+                    // formato de la version sera "'v'major[.minor][-status]"
+                    options.GroupNameFormat = "'v'VVV";
                 });
 
-                // delete 'version' param
-                options.OperationFilter<RemoveVersionParameterFilter>();
+            return services;
+        }
 
-                // add version to path
-                options.DocumentFilter<SetVersionInPathFilter>();
+        private static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+        {
+            string title = configuration["App:Title"];
+            string description = configuration["App:Description"];
+            int versions = int.TryParse(configuration["App:Versions"], out versions) ? versions : 1;
 
-                options.CustomSchemaIds(x => x.FullName);
+            AssemblyProductAttribute assemblyProductAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
+                throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
-                // select first operation if exists multiples
+            AssemblyDescriptionAttribute assemblyDescriptionAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
+                throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
+
+            return services.AddSwaggerGen(options =>
+            {
+                var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+
+                // generar documentacion de versiones de swagger desde los controladores
+                foreach (var description in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = $"{assemblyProductAttribute.Product} " + $"{description.ApiVersion}",
+                        Version = description.ApiVersion.ToString(),
+                        Description = description.IsDeprecated ? $"{assemblyDescriptionAttribute.Description} - DEPRECATED" : assemblyDescriptionAttribute.Description,
+                    });
+                }
+
+                // filtro para establecer la version por defecto usada por el documento swagger
+                options.OperationFilter<SwaggerApiVersionFilter>();
+
+                // mostrar namespace completo en la seccion schemes
+                options.CustomSchemaIds(item => item.FullName);
+
+                // seleccionar el primer endpoint en caso de exisir multiples
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                 options.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
             });
         }
 
-        /// <summary>
-        /// Extension method for add Automapper services
-        /// </summary>
-        /// <param name="services">Services container collection</param>
-        /// <returns>Services container collection object</returns>
-        private static IServiceCollection AddAutomapper(this IServiceCollection services)
+        private static IServiceCollection AddAuthentication(this IServiceCollection services)
         {
-            // Mappers
-            services.AddAutoMapper(new[]
-            {
-                Assembly.GetAssembly(typeof(Startup)),
+            // TODO: falta implementar
+            return services;
+        }
 
-                // ... incluir mas ensamblados
-            });
+        private static IServiceCollection AddAuthorization(this IServiceCollection services)
+        {
+            ////services.AddAuthorization(options =>
+            ////{
+            ////    options.AddPolicy(AuthorizationPolicies.AdminUsers, policy => policy
+            ////        .RequireAuthenticatedUser()
+            ////        .RequireClaim(
+            ////            ClaimTypes.Roles,
+            ////            "admin"));
+            ////});
 
             return services;
         }

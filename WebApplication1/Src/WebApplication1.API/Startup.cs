@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -50,7 +51,8 @@ namespace WebApplication1.API
         /// </summary>
         /// <param name="app">application builder</param>
         /// <param name="env">Web host environment</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        /// <param name="provider">Provider for api version</param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -62,8 +64,9 @@ namespace WebApplication1.API
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
-            app.UseAppConfiguration(env);
+            app.UseAppConfiguration(env, provider);
 
             app.UseEndpoints(endpoints =>
             {
