@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace WebApplication1.API.Infrastructure.Extensions
 {
@@ -17,20 +17,20 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// </summary>
         /// <param name="app">application builder</param>
         /// <param name="env">webhost environment</param>
-        /// <returns>application builder</returns>
+        /// <returns>application builder object</returns>
         public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             // middleware for manage languages
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("es"),
-                new CultureInfo("en")
+                new CultureInfo("en"),
             };
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture("en"),
                 SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
+                SupportedUICultures = supportedCultures,
             });
 
             // Swagger
@@ -45,7 +45,6 @@ namespace WebApplication1.API.Infrastructure.Extensions
 
             // CORS
             app.UseCors("CorsPolicy");
-
 
             return app;
         }

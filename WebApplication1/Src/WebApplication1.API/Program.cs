@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +42,7 @@ namespace WebApplication1.API
                 Log.Information("Getting the motors running...");
                 IHost host = CreateHostBuilder(args).Build();
 
-                // Run the Host, and start accepting requests                
+                // Run the Host, and start accepting requests
                 await host.RunAsync();
             }
 #pragma warning disable CA1031 // Do not catch general exception types
@@ -74,7 +74,5 @@ namespace WebApplication1.API
                     webBuilder.UseConfiguration(Configuration);
                     webBuilder.UseSerilog();
                 });
-
-
     }
 }

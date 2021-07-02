@@ -1,6 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
 
 namespace WebApplication1.API.Infrastructure.Filters.Swagger
 {
@@ -16,7 +16,7 @@ namespace WebApplication1.API.Infrastructure.Filters.Swagger
         /// <param name="context">Document filter context</param>
         public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
-            if (swaggerDoc == null) throw new ArgumentNullException(nameof(swaggerDoc));
+            swaggerDoc = swaggerDoc ?? throw new ArgumentNullException(nameof(swaggerDoc));
 
             var replacements = new OpenApiPaths();
 

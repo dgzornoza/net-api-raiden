@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using WebApplication1.API;
 using WebApplication1.API.Infrastructure.Extensions;
 using WebApplication1.API.Infrastructure.Filters.Swagger;
@@ -20,7 +21,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// </summary>
         /// <param name="services">Services container collection</param>
         /// <param name="configuration">App configuration</param>
-        /// <returns>Services container collection</returns>
+        /// <returns>Services container collection object</returns>
         public static IServiceCollection AddAppConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             return services
@@ -33,12 +34,13 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// Extension method for add CORS services
         /// </summary>
         /// <param name="services">Services container collection</param>
-        /// <returns>Services container collection</returns>
+        /// <returns>Services container collection object</returns>
         private static IServiceCollection AddCors(this IServiceCollection services)
         {
             return services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy(
+                    "CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
@@ -50,23 +52,24 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// </summary>
         /// <param name="services">Services container collection</param>
         /// <param name="configuration">App configuration</param>
-        /// <returns>Services container collection</returns>
+        /// <returns>Services container collection object</returns>
         private static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
         {
             return services.AddSwaggerGen(options =>
             {
-                options.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{(e.ActionDescriptor as Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor).ActionName}");
+                options.CustomOperationIds(description => $"{description.ActionDescriptor.RouteValues["controller"]}_{(description.ActionDescriptor as ControllerActionDescriptor)?.ActionName}");
 
                 // configure version 1
                 options.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = configuration["App:Title"],
                     Version = configuration["App:Version"],
-                    Description = configuration["App:Description"]
+                    Description = configuration["App:Description"],
                 });
 
                 // delete 'version' param
                 options.OperationFilter<RemoveVersionParameterFilter>();
+
                 // add version to path
                 options.DocumentFilter<SetVersionInPathFilter>();
 
@@ -77,20 +80,20 @@ namespace WebApplication1.API.Infrastructure.Extensions
 
                 options.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
             });
-
         }
 
         /// <summary>
         /// Extension method for add Automapper services
         /// </summary>
         /// <param name="services">Services container collection</param>
-        /// <returns>Services container collection</returns>
+        /// <returns>Services container collection object</returns>
         private static IServiceCollection AddAutomapper(this IServiceCollection services)
         {
             // Mappers
             services.AddAutoMapper(new[]
             {
-                Assembly.GetAssembly(typeof(Startup))
+                Assembly.GetAssembly(typeof(Startup)),
+
                 // ... incluir mas ensamblados
             });
 

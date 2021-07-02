@@ -7,33 +7,22 @@ using WebApplication1.API;
 
 namespace WebApplication1.API.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching",
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WeatherForecastController> logger;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="logger"></param>
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -42,7 +31,7 @@ namespace WebApplication1.API.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = Summaries[rng.Next(Summaries.Length)],
             })
             .ToArray();
         }

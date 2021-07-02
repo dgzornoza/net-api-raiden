@@ -12,5 +12,4 @@ namespace WebApplication1.Application.Common.Commands
     {
         Guid Id { get; }
     }
-
 }

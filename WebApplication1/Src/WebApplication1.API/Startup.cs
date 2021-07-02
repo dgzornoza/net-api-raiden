@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +19,7 @@ namespace WebApplication1.API
         /// <param name="configuration">Configuration</param>
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace WebApplication1.API
                 configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
             });
 
-            services.AddAppConfiguration(Configuration);
+            services.AddAppConfiguration(this.Configuration);
 
-            services.AddIocContainer(Configuration);
+            services.AddIocContainer(this.Configuration);
         }
 
         /// <summary>

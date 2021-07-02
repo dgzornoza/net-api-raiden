@@ -2,17 +2,16 @@
 
 namespace WebApplication1.Application.Common.Commands
 {
-
     public abstract class CommandBase : ICommand
     {
         protected CommandBase()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
         protected CommandBase(Guid id)
         {
-            Id = id;
+            this.Id = id;
         }
 
         public Guid Id { get; init; }
@@ -22,17 +21,14 @@ namespace WebApplication1.Application.Common.Commands
     {
         protected CommandBase()
         {
-            Id = Guid.NewGuid();
+            this.Id = Guid.NewGuid();
         }
 
         protected CommandBase(Guid id)
         {
-            Id = id;
+            this.Id = id;
         }
 
         public Guid Id { get; init; }
     }
-
-
-
 }

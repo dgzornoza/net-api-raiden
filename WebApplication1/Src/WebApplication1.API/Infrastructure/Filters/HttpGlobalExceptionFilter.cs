@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace WebApplication1.API.Infrastructure.Filters
 {
@@ -25,7 +25,7 @@ namespace WebApplication1.API.Infrastructure.Filters
         /// <param name="logger">Logger</param>
         public HttpGlobalExceptionFilter(IWebHostEnvironment env, ILogger<HttpGlobalExceptionFilter> logger)
         {
-            environment = env;
+            this.environment = env;
             this.logger = logger;
         }
 
@@ -35,14 +35,13 @@ namespace WebApplication1.API.Infrastructure.Filters
         /// <param name="context">Exception context</param>
         public void OnException(ExceptionContext context)
         {
-            logger.LogError(context.Exception, $"Error Message --> {context.Exception.Message}");
+            this.logger.LogError(context.Exception, $"Error Message --> {context.Exception.Message}");
 
             // create message and code for specific exception
             int statusCode;
             IDictionary<string, string[]> errors;
             switch (context.Exception)
             {
-
                 case InvalidOperationException _:
                     errors = CreateCommonControlledExceptionError(context.Exception);
                     statusCode = StatusCodes.Status400BadRequest;
@@ -56,7 +55,7 @@ namespace WebApplication1.API.Infrastructure.Filters
                 default:
                     errors = new Dictionary<string, string[]>()
                     {
-                        { "UnknownError", new[] { context.Exception.Message } }
+                        { "UnknownError", new[] { context.Exception.Message } },
                     };
 
                     statusCode = StatusCodes.Status500InternalServerError;
@@ -64,16 +63,15 @@ namespace WebApplication1.API.Infrastructure.Filters
                     break;
             }
 
-
             // Create problem details
             ValidationProblemDetails problemDetails = new ValidationProblemDetails(errors)
             {
                 Title = Properties.Resources.GLOBAL_ERROR_TITLE,
-                Status = statusCode
+                Status = statusCode,
             };
 
             // Add debug info
-            if (environment.IsDevelopment())
+            if (this.environment.IsDevelopment())
             {
                 problemDetails.Instance = context.HttpContext.Request.Path;
                 problemDetails.Type = $"https://httpstatuses.com/{statusCode}";
@@ -88,12 +86,11 @@ namespace WebApplication1.API.Infrastructure.Filters
             context.ExceptionHandled = true;
         }
 
-
         private static Dictionary<string, string[]> CreateCommonControlledExceptionError(Exception exception)
         {
             return new Dictionary<string, string[]>()
             {
-                { "ControlledError", new[] { exception.Message } }
+                { "ControlledError", new[] { exception.Message } },
             };
         }
     }

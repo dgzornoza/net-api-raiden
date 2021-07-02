@@ -1,26 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-      <Nullable>enable</Nullable>
+      <Nullable>true</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>\WebApplication1.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <DocumentationFile>\WebApplication1.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Domain\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Common\" />
+    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
