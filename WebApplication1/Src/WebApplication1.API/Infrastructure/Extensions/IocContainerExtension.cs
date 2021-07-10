@@ -22,7 +22,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
         /// <returns>Services container collection object</returns>
         public static IServiceCollection AddIocContainer(this IServiceCollection services, IConfiguration configuration)
         {
-            // Miscelaneo
+            // Misc
             // services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
 
             // MediatR
@@ -30,16 +30,16 @@ namespace WebApplication1.API.Infrastructure.Extensions
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidatorBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
-            // Validadores
+            // Validators
             services.AddValidatorsFromAssembly(typeof(ICommand).GetTypeInfo().Assembly);
 
             // Repositories
             // ...
 
-            // Servicios API
+            // API services
             // ...
 
-            // Configuraciones
+            // Configurations
             services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection("AppConfiguration"));
 
             return services;

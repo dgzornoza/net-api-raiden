@@ -15,13 +15,13 @@ namespace WebApplication1.API.Infrastructure.Filters
             var apiVersionParameter = operation.Parameters.SingleOrDefault(p => p.Name == ApiVersionKey);
             if (apiVersionParameter != null)
             {
-                // obtener el atributo [ApiVersion("VV")]
+                // Get attribute [ApiVersion("VV")]
                 var attribute = context?.MethodInfo?.DeclaringType?
                   .GetCustomAttributes(typeof(ApiVersionAttribute), false)
                   .Cast<ApiVersionAttribute>()
                   .SingleOrDefault();
 
-                // extraer el valor de la version y establecerlo en el parametro
+                // Extract version value and set in parameter
                 var version = attribute?.Versions?.SingleOrDefault()?.ToString();
                 if (version != null)
                 {

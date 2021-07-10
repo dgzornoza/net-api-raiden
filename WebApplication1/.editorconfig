@@ -140,6 +140,9 @@ dotnet_diagnostic.SA1642.severity = none
 # SA1402: File may only contain a single type
 dotnet_diagnostic.SA1402.severity = none
 
+# CA1725: Parameter names should match base declaration
+dotnet_diagnostic.CA1725.severity = error
+
 ###############################
 # VB Coding Conventions       #
 ###############################

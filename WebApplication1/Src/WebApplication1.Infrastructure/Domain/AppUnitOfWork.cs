@@ -2,48 +2,52 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using WebApplication1.Infrastructure.Extensions;
 
 namespace WebApplication1.Infrastructure.Domain
 {
-    public class MainUnitOfWork : DbContext, IEfUnitOfWork
+    /// <summary>
+    /// App Entity Framework unit of work
+    /// </summary>
+    public class AppUnitOfWork : DbContext, IEfUnitOfWork
     {
+        private readonly IMediator mediator;
 
-        public MainUnitOfWork(DbContextOptions<MainUnitOfWork> options)
+        public AppUnitOfWork(DbContextOptions<AppUnitOfWork> options, IMediator mediator)
             : base(options)
         {
-
+            this.mediator = mediator;
         }
 
-
-
-        public DbSet<TEntity> GetSet<TEntity>()
+        public DbSet<TEntity> CreateSet<TEntity>()
             where TEntity : class
         {
             return this.Set<TEntity>();
         }
 
-
-        public void ApplyCurrentValues<TEntity>(TEntity original, TEntity current)
+        public void ApplyCurrentValues<TEntity>(TEntity original, object current)
             where TEntity : class
         {
             this.Entry(original).CurrentValues.SetValues(current);
         }
 
-        public void SetModified<TEntity>(TEntity item)
+        public void SetModified<TEntity>(TEntity entity)
             where TEntity : class
         {
-            this.Entry(item).State = EntityState.Modified;
+            this.Entry(entity).State = EntityState.Modified;
         }
-
 
         public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
         {
             int result;
-
             using var scope = new TransactionScope(TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled);
-            result = await this.SaveChangesAsync(cancellationToken);
 
+            // execute domain events before commit changes
+            await this.mediator.DispatchDomainEventsAsync(this);
+
+            result = await this.SaveChangesAsync(cancellationToken);
             scope.Complete();
 
             return result;
@@ -56,6 +60,9 @@ namespace WebApplication1.Infrastructure.Domain
                         .ForEach(entry => entry.State = EntityState.Unchanged);
         }
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        }
     }
 }

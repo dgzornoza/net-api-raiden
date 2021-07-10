@@ -49,7 +49,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
             services.AddVersionedApiExplorer(
                 options =>
                 {
-                    // formato de la version sera "'v'major[.minor][-status]"
+                    // version format "'v'major[.minor][-status]"
                     options.GroupNameFormat = "'v'VVV";
                 });
 
@@ -72,7 +72,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
             {
                 var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
 
-                // generar documentacion de versiones de swagger desde los controladores
+                // generate swagger versions doc from controllers
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
                     options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
@@ -83,13 +83,13 @@ namespace WebApplication1.API.Infrastructure.Extensions
                     });
                 }
 
-                // filtro para establecer la version por defecto usada por el documento swagger
+                // filter to set default version used for swagger doc
                 options.OperationFilter<SwaggerApiVersionFilter>();
 
-                // mostrar namespace completo en la seccion schemes
+                // show full namespace in schemes section
                 options.CustomSchemaIds(item => item.FullName);
 
-                // seleccionar el primer endpoint en caso de exisir multiples
+                // select first endpoint in case of multiple
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                 options.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
@@ -98,7 +98,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
 
         private static IServiceCollection AddAuthentication(this IServiceCollection services)
         {
-            // TODO: falta implementar
+            // TODO: to implement
             return services;
         }
 

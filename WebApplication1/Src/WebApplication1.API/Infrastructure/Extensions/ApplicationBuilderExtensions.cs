@@ -26,7 +26,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
 
         private static void AddLocalization(this IApplicationBuilder app)
         {
-            // middleware para gestionar idiomas
+            // middleware for manage languages
             IList<CultureInfo> supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("es"),
@@ -46,7 +46,7 @@ namespace WebApplication1.API.Infrastructure.Extensions
             app.UseSwagger()
                 .UseSwaggerUI(options =>
                 {
-                    // generar endpoints swagger para todas las versiones disponibles
+                    // generate swagger endpoints for all versions
                     foreach (var description in provider.ApiVersionDescriptions)
                     {
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());

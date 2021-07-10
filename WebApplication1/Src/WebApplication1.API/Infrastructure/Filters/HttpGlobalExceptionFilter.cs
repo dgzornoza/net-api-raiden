@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 namespace WebApplication1.API.Infrastructure.Filters
 {
     /// <summary>
-    /// Filtro para gestionar todas las excepciones http globales.
+    /// Filter to handle all global http exceptions.
     /// </summary>
     public class HttpGlobalExceptionFilter : IExceptionFilter
     {
@@ -30,7 +30,7 @@ namespace WebApplication1.API.Infrastructure.Filters
         {
             this.logger.LogError(context.Exception, $"Error Message --> {context.Exception.Message}");
 
-            // Crear el mensaje y codigo para las excepciones especificas
+            // Create the message and code for the specific exceptions
             int statusCode;
             IDictionary<string, string[]> errors;
             switch (context.Exception)
@@ -72,7 +72,7 @@ namespace WebApplication1.API.Infrastructure.Filters
                 Status = statusCode,
             };
 
-            // Añadir informacion de depuracion (solo disponible para entornos de desarrollo)
+            // Add debugging information (only available for development environments)
             if (this.environment.IsDevelopment())
             {
                 problemDetails.Instance = context.HttpContext.Request.Path;
@@ -81,7 +81,7 @@ namespace WebApplication1.API.Infrastructure.Filters
                 problemDetails.Extensions.Add("traceId", Activity.Current?.Id ?? context.HttpContext.TraceIdentifier);
             }
 
-            // Establecer la respuesta
+            // Set response
             context.Result = new ObjectResult(problemDetails) { StatusCode = statusCode };
             context.HttpContext.Response.StatusCode = statusCode;
 
