@@ -7,12 +7,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>\WebApplication1.Infrastructure.xml</DocumentationFile>
+    <DocumentationFile>.\WebApplication1.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <DocumentationFile>\WebApplication1.Infrastructure.xml</DocumentationFile>
+      <DocumentationFile>.\WebApplication1.Infrastructure.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

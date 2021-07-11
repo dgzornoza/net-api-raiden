@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="NetApiRaidenTemplate.Wizard.Dialogs.Views.SelectContainerDialog" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        Width="500" 
+        Height="285" 
+        Title="Prism - Container Wizard" 
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None">
+
+    <FrameworkElement.Resources>
+        <ResourceDictionary Source="/NetApiRaidenTemplate.Wizard;component/Dialogs/Themes/DefaultTheme.xaml" />
+    </FrameworkElement.Resources>
+
+    <Border BorderThickness="1" BorderBrush="{StaticResource PopupBorderBrush}">
+        
+        <Grid Background="{StaticResource WindowBackgroundBrush}">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <!-- Header -->
+            <Grid Background="{StaticResource LightForegroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Width="48" Height="48" Margin="8,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Grid Width="48" Height="48">
+                        <Image Source="{StaticResource LogoImageSource}" />
+                    </Grid>
+                </Border>
+                <Label Grid.Column="1" Style="{StaticResource HeaderStyle}">.NET API RAIDEN PROJECT WIZARD</Label>
+                <Button Name="_btnClose" Grid.Column="2" Style="{StaticResource IconButtonStyle}" Click="BtnClose_Click">
+                    <Path Width="10" Height="10" Data="{StaticResource CloseIcon}" Stretch="Fill" 
+                          Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
+                </Button>
+            </Grid>
+            
+            <!-- Content -->
+            <Grid Row="1" Margin="20 15 20 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <StackPanel>
+                    <!--<Label Style="{StaticResource TitleStyle}">Select options:</Label>
+                    <Label Style="{StaticResource SubTitleStyle}">Select the dependency injection container your project will use:</Label>-->
+                </StackPanel>
+                
+                <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding CreateProjectCommand}">
+                    <Run Typography.CapitalSpacing="True">CREATE PROJECT</Run>
+                </Button>
+            </Grid>
+
+            <StackPanel Grid.Row="3" Margin="20 0">
+                <TextBlock TextAlignment="Right">
+                    <Hyperlink NavigateUri="https://github.com/dgzornoza" >David González Zornoza</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

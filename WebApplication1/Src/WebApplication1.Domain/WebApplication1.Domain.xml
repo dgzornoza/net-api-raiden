@@ -20,5 +20,212 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="T:WebApplication1.Domain.SeedWork.BusinessRuleValidationException">
+            <summary>
+            Exception class for domain business rules
+            </summary>
+        </member>
+        <member name="P:WebApplication1.Domain.SeedWork.BusinessRuleValidationException.BrokenRule">
+            <summary>
+            Get business broken rule
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.DomainEvent">
+            <summary>
+            Base class for domain events
+            </summary>
+        </member>
+        <member name="P:WebApplication1.Domain.SeedWork.DomainEvent.TriggeredOn">
+            <summary>
+            Date and time on event ocurred
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.Entity">
+            <summary>
+            Base class for entities.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.Domain.SeedWork.Entity.DomainEvents">
+            <summary>
+            Get all entity domain events
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.Entity.ClearDomainEvents">
+            <summary>
+            Clear all entity domain events
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.Enumeration">
+            <summary>
+            Enumeration class as substitute language enums
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IAggregateRoot">
+            <summary>
+            Domain Aggregate roots interface
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IBusinessRule">
+            <summary>
+            Domain business rules interface
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IDomainEvent">
+            <summary>
+            Domain events interface
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IgnoreMemberAttribute">
+            <summary>
+            Attribute to specify member should be ignored
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IRepository">
+            <summary>
+            Repository Interface
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IRepository`1">
+            <summary>
+            Repository specific entity type interface
+            </summary>
+            <typeparam name="TEntity">Entity to use by repository</typeparam>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Count">
+            <summary>
+            Count entities
+            </summary>
+            <returns>Total entities</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Count entities with filter
+            </summary>
+            <param name="filter">filter for counting</param>
+            <returns>Total entites</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetAll">
+            <summary>
+            Get all entities
+            </summary>
+            <returns>Entities list</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Function to check if elements exist using an input filter
+            </summary>
+            <param name="filter">Query input filter</param>
+            <returns>True if exist elements for query, false otherwise</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Any(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String[])">
+            <summary>
+            Function to check if elements exist using an input filter and related entities
+            </summary>
+            <param name="filter">Query input filter</param>
+            <param name="includes">Navigation properties to include</param>
+            <returns>True if exist elements for query, false otherwise</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFiltered(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Function to get entities by input filter
+            </summary>
+            <param name="filter">Query input filter</param>
+            <returns>Entities list</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFiltered``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Function to get custom mapped entities by input filter
+            </summary>
+            <typeparam name="TResult">Result mapped model type</typeparam>
+            <param name="filter">Query input filter</param>
+            <param name="mapperExpression">Mapper expression for select return model</param>
+            <returns>Entities of type Tresult</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFiltered(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String[])">
+            <summary>
+            Function to get entities by input filter and related entities
+            </summary>
+            <param name="filter">Query input filter</param>
+            <param name="includes">Navigation properties to include</param>
+            <returns>Entities list</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFiltered``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String[])">
+            <summary>
+            Function to get custom mapped entities by input filter and related entities
+            </summary>
+            <typeparam name="TResult">Tipo del modelo de retorno</typeparam>
+            <param name="filter">Query input filter</param>
+            <param name="mapperExpression">Mapper expression for select return model</param>
+            <param name="includes">Navigation properties to include</param>
+            <returns>Entities of type Tresult</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFirstElementFiltered(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Function to get the first entity by input filter
+            </summary>
+            <param name="filter">Query input filter</param>
+            <returns>Found entity, null otherwise</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.GetFirstElementFiltered(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.String[])">
+            <summary>
+            Function to get the first entity by input filter and related entities with dbcontext tracking entity option
+            </summary>
+            <param name="filter">Query input filter</param>
+            <param name="tracking">true to track entity by context</param>
+            <param name="includes">Navigation properties to include</param>
+            <returns>Found entity, null otherwise</returns>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Remove(`0)">
+            <summary>
+            Remove entity from repository
+            </summary>
+            <param name="entity">Entity to remove from repository</param>
+            <remarks>
+            This method does not have to remove entity from the data store, it only removes from the local repository, to remove from the data store, a UnitOfWork commit must be made
+            </remarks>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.AddOrUpdate(`0)">
+            <summary>
+            Add or update entity in repository
+            </summary>
+            <param name="entity">Entity to add or update on repository</param>
+            <returns>Modelo entidades añadido o eliminado en el respositorio</returns>
+            <remarks>
+            This method does not have to add or update entity on data store, it only add or update on local repository, to add or update on data store, a UnitOfWork commit must be made
+            </remarks>
+        </member>
+        <member name="M:WebApplication1.Domain.SeedWork.IRepository`1.Add(`0)">
+            <summary>
+            Add entity in repository
+            </summary>
+            <param name="entity">Entity to add on repository</param>
+            <returns>Modelo entidades añadido en el respositorio</returns>
+            <remarks>
+            This method does not have to add entity on data store, it only add on local repository, to add on data store, a UnitOfWork commit must be made
+            </remarks>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.IUnitOfWork">
+            <summary>
+            Repository unit of work interface
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SeedWork.ValueObject">
+            <summary>
+            Domain value object base class
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Domain.SharedKernel.IValueUniquenessChecker`1">
+            <summary>
+            Interface to declare a check of the uniqueness of values ​​that is commonly used
+            by the entities to validate a value is unique in the whole system.
+            </summary>
+            <typeparam name="T">Value Type</typeparam>
+        </member>
+        <member name="T:WebApplication1.Domain.SharedKernel.ValueMustBeUniqueRule`1">
+            <summary>
+            Class with the definition of base rule to validate the uniqueness of values ​​in entities
+            </summary>
+            <typeparam name="T">Tipo del valor a validar</typeparam>
+        </member>
     </members>
 </doc>

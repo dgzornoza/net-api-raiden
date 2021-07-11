@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication1.API</name>
+    </assembly>
+    <members>
+        <member name="T:WebApplication1.API.Infrastructure.Extensions.IocContainerExtension">
+            <summary>
+            Extension class for manage Application Inversion Of Control container
+            </summary>
+        </member>
+        <member name="M:WebApplication1.API.Infrastructure.Extensions.IocContainerExtension.AddIocContainer(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Extension method for manage Application Inversion Of Control container
+            </summary>
+            <param name="services">Services container collection</param>
+            <param name="configuration">App configuration</param>
+            <returns>Services container collection object</returns>
+        </member>
+        <member name="T:WebApplication1.API.Infrastructure.Filters.HttpGlobalExceptionFilter">
+            <summary>
+            Filter to handle all global http exceptions.
+            </summary>
+        </member>
+        <member name="T:WebApplication1.API.Program">
+            <summary>
+            Main entry program class
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Program.Configuration">
+            <summary>
+            Application configuration
+            </summary>
+        </member>
+        <member name="M:WebApplication1.API.Program.Main(System.String[])">
+            <summary>
+            App main entry point
+            </summary>
+            <param name="args">Application arguments</param>
+            <returns>Task result</returns>
+        </member>
+        <member name="M:WebApplication1.API.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Method for create application host builder
+            </summary>
+            <param name="args">Application arguments</param>
+            <returns>Host builder created</returns>
+        </member>
+        <member name="T:WebApplication1.API.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.GlobalErrorTitle">
+            <summary>
+              Looks up a localized string similar to One or more errors occurred, please refer to the &apos;errors&apos; property for additional details..
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.InvalidAssemblyDescriptionAttribute">
+            <summary>
+              Looks up a localized string similar to Not configured AssemblyDescriptionAttribute in application..
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.InvalidAssemblyProductAttribute">
+            <summary>
+              Looks up a localized string similar to Not configured AssemblyProductAttribute in application..
+            </summary>
+        </member>
+        <member name="P:WebApplication1.API.Properties.Resources.InvalidCertificateError">
+            <summary>
+              Looks up a localized string similar to Invalid certificate..
+            </summary>
+        </member>
+        <member name="T:WebApplication1.API.Startup">
+            <summary>
+            Main Startup class
+            </summary>
+        </member>
+        <member name="M:WebApplication1.API.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="configuration">Configuration</param>
+        </member>
+        <member name="P:WebApplication1.API.Startup.Configuration">
+            <summary>
+            App configuration
+            </summary>
+        </member>
+        <member name="M:WebApplication1.API.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Function for configure application container services
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">service container collection</param>
+        </member>
+        <member name="M:WebApplication1.API.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
+            <summary>
+            Function for configure Application request pipeline
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">application builder</param>
+            <param name="env">Web host environment</param>
+            <param name="provider">Provider for api version</param>
+        </member>
+    </members>
+</doc>
