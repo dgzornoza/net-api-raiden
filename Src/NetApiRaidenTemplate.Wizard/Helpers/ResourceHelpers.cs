@@ -1,4 +1,6 @@
-﻿namespace NetApiRaidenTemplate.Wizard.Helpers
+﻿using System.Reflection;
+
+namespace NetApiRaidenTemplate.Wizard.Helpers
 {
     public static class ResourceHelpers
     {
@@ -10,7 +12,7 @@
         public static byte[] GetEmbeddedResource(string resourceName)
         {
             byte[] bytes;
-            using (System.IO.Stream resourceStream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream($"NetApiRaidenTemplate.Wizard.{resourceName}"))
+            using (System.IO.Stream resourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream($"NetApiRaidenTemplate.Wizard.{resourceName}"))
             {
                 bytes = new byte[resourceStream.Length];
                 resourceStream.Read(bytes, 0, (int)resourceStream.Length);

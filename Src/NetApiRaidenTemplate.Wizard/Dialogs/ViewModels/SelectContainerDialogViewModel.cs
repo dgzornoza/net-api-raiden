@@ -9,7 +9,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.ViewModels
         {
             base.CreateProject();
 
-            ProjectDialogResult result = new ProjectDialogResult();
+            var result = new ProjectDialogResult();
             this.RaiseCreateProject(new ProjectDialogResultEventArgs(result));
         }
     }

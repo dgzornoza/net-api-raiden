@@ -146,6 +146,9 @@ dotnet_diagnostic.CA1725.severity = error
 # SA1601: Partial elements should be documented
 dotnet_diagnostic.SA1601.severity = none
 
+# SA0001: comments XML
+dotnet_diagnostic.SA0001.severity=none
+
 ###############################
 # VB Coding Conventions       #
 ###############################

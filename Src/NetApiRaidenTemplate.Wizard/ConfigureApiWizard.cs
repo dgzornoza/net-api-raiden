@@ -40,6 +40,7 @@ namespace NetApiRaidenTemplate.Wizard
                 string filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], "Readme.html");
                 byte[] fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
                 File.WriteAllBytes(filePath, fileBytes);
+
                 this.dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
             }
 
@@ -73,13 +74,13 @@ namespace NetApiRaidenTemplate.Wizard
 
                 SelectContainerDialog selectContainerDialog = new SelectContainerDialog();
                 selectContainerDialog.ShowDialog();
+
                 ProjectDialogResult result = selectContainerDialog.Result;
                 if (result.Cancelled)
                 {
                     throw new WizardBackoutException();
                 }
 
-                // replacementsDictionary.Add("passthrough:Container", result.ContainerType.ToString());
                 if (replacementsDictionary.ContainsKey("$targetframeworkversion$"))
                 {
                     replacementsDictionary.Add("passthrough:TargetFrameworkVersion", replacementsDictionary["$targetframeworkversion$"] ?? string.Empty);
@@ -99,7 +100,7 @@ namespace NetApiRaidenTemplate.Wizard
 
         private void DeleteSolutionFolders()
         {
-            // delete solucion folders
+            // delete solution folders
             IEnumerable<string> folders = new string[]
             {
                 this.replacementsDictionary["$destinationdirectory$"],
