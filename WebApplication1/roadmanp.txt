@@ -1,0 +1,14 @@
+Opciones:
+-- Identity
+-- OData
+-- Feature toggles
+-- Sample files
+-- proyecto Angular
+-- configurar docker
+-- pipelines azure
+
+Funcionalidades
+-- Crear wizard
+-- API Templates
+-- angular templates
+
