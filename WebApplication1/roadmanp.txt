@@ -8,7 +8,7 @@ Opciones:
 -- pipelines azure
 
 Funcionalidades
--- Crear wizard
+-- Crear wizard -- OK
 -- API Templates
 -- angular templates
 
