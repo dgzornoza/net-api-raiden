@@ -1,0 +1,42 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Domain</Name>
+    <Description>NetApiRaiden Domain Layer Project</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Domain</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>    
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Domain.csproj" File="Domain.csproj" ReplaceParameters="true">
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      </Folder>
+      <Folder Name="SeedWork" TargetFolderName="SeedWork">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BusinessRuleValidationException.cs">BusinessRuleValidationException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DomainEvent.cs">DomainEvent.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Entity.cs">Entity.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Enumeration.cs">Enumeration.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IAggregateRoot.cs">IAggregateRoot.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IBusinessRule.cs">IBusinessRule.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IDomainEvent.cs">IDomainEvent.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IgnoreMemberAttribute.cs">IgnoreMemberAttribute.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IRepository.cs">IRepository.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IUnitOfWork.cs">IUnitOfWork.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ValueObject.cs">ValueObject.cs</ProjectItem>
+      </Folder>
+      <Folder Name="SharedKernel" TargetFolderName="SharedKernel">
+        <ProjectItem ReplaceParameters="true" TargetFileName="IValueUniquenessChecker.cs">IValueUniquenessChecker.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ValueMustBeUniqueRule.cs">ValueMustBeUniqueRule.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -4,7 +4,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace WebApplication1.API.Infrastructure.Filters
+namespace WebApplication1.Api.Infrastructure.Filters
 {
     public class SwaggerApiVersionFilter : IOperationFilter
     {

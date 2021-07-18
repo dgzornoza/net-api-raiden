@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace WebApplication1.API.Infrastructure.Filters
+namespace WebApplication1.Api.Infrastructure.Filters
 {
     /// <summary>
     /// Filter to handle all global http exceptions.

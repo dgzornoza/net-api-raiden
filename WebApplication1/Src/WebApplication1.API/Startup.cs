@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebApplication1.API.Infrastructure.Extensions;
-using WebApplication1.API.Infrastructure.Filters;
+using WebApplication1.Api.Infrastructure.Extensions;
+using WebApplication1.Api.Infrastructure.Filters;
 
-namespace WebApplication1.API
+namespace WebApplication1.Api
 {
     /// <summary>
     /// Main Startup class

@@ -3,11 +3,11 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApplication1.API.Settings;
+using WebApplication1.Api.Settings;
 using WebApplication1.Application.Behaviors;
 using WebApplication1.Application.Common.Commands;
 
-namespace WebApplication1.API.Infrastructure.Extensions
+namespace WebApplication1.Api.Infrastructure.Extensions
 {
     /// <summary>
     /// Extension class for manage Application Inversion Of Control container

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Hosting;
 
-namespace WebApplication1.API.Infrastructure.Extensions
+namespace WebApplication1.Api.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

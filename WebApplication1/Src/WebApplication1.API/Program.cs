@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace WebApplication1.API
+namespace WebApplication1.Api
 {
     /// <summary>
     /// Main entry program class
@@ -40,7 +40,7 @@ namespace WebApplication1.API
             try
             {
                 Log.Information("Getting the motors running...");
-                IHost host = CreateHostBuilder(args).Build();
+                var host = CreateHostBuilder(args).Build();
 
                 // Run the Host, and start accepting requests
                 await host.RunAsync();

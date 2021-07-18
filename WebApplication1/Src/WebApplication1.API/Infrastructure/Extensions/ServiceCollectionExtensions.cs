@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApplication1.API.Infrastructure.Extensions;
-using WebApplication1.API.Infrastructure.Filters;
+using WebApplication1.Api.Infrastructure.Extensions;
+using WebApplication1.Api.Infrastructure.Filters;
 
-namespace WebApplication1.API.Infrastructure.Extensions
+namespace WebApplication1.Api.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -58,14 +58,14 @@ namespace WebApplication1.API.Infrastructure.Extensions
 
         private static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
         {
-            string title = configuration["App:Title"];
-            string description = configuration["App:Description"];
+            var title = configuration["App:Title"];
+            var description = configuration["App:Description"];
             int versions = int.TryParse(configuration["App:Versions"], out versions) ? versions : 1;
 
-            AssemblyProductAttribute assemblyProductAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
+            var assemblyProductAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
-            AssemblyDescriptionAttribute assemblyDescriptionAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
+            var assemblyDescriptionAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
             return services.AddSwaggerGen(options =>

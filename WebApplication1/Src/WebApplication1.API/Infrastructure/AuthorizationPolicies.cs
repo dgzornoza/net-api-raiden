@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.API.Infrastructure
+﻿namespace WebApplication1.Api.Infrastructure
 {
     public static class AuthorizationPolicies
     {

@@ -1,0 +1,45 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Application</Name>
+    <Description>NetApiRaiden Application layer Project</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Application</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>    
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Application.csproj" File="Application.csproj" ReplaceParameters="true">
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Behaviors" TargetFolderName="Behaviors">
+        <ProjectItem ReplaceParameters="true" TargetFileName="LoggingBehavior.cs">LoggingBehavior.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ValidatorBehavior.cs">ValidatorBehavior.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Commands" TargetFolderName="Commands" />
+      <Folder Name="Common" TargetFolderName="Common">
+        <Folder Name="Commands" TargetFolderName="Commands">
+          <ProjectItem ReplaceParameters="true" TargetFileName="CommandBase.cs">CommandBase.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ICommand.cs">ICommand.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="ICommandHandler.cs">ICommandHandler.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Extensions" TargetFolderName="Extensions">
+          <ProjectItem ReplaceParameters="true" TargetFileName="GenericTypeExtensions.cs">GenericTypeExtensions.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Queries" TargetFolderName="Queries">
+          <ProjectItem ReplaceParameters="true" TargetFileName="IQuery.cs">IQuery.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="IQueryHandler.cs">IQueryHandler.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Queries" TargetFolderName="Queries" />      
+    </Project>
+  </TemplateContent>
+</VSTemplate>
