@@ -1,1 +1,16 @@
 Identity:
+	
+constante caracteristicas:
+$identityserver_feature$
+
+reemplazos:
+$identityserver_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_resource_code$
+$identityserver_resource_secret$
+
+archivos:
+
+
+
+nuget:
+IdentityServer4

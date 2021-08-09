@@ -22,6 +22,12 @@
             Filter to handle all global http exceptions.
             </summary>
         </member>
+        <member name="T:WebApplication1.Api.Infrastructure.IdentityConfiguration">
+            <summary>
+            https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
+            http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
+            </summary>
+        </member>
         <member name="T:WebApplication1.Api.Program">
             <summary>
             Main entry program class

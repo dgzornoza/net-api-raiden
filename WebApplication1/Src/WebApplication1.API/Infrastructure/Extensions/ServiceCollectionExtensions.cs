@@ -66,7 +66,7 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
             var assemblyDescriptionAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
-                throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
+                throw new ApplicationException(Properties.Resources.InvalidAssemblyDescriptionAttribute);
 
             return services.AddSwaggerGen(options =>
             {

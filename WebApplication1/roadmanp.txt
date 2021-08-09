@@ -3,9 +3,9 @@ Opciones:
 -- OData
 -- Feature toggles
 -- Sample files
--- proyecto Angular
 -- configurar docker
 -- pipelines azure
+-- proyecto Angular
 
 Funcionalidades
 -- Crear wizard -- OK

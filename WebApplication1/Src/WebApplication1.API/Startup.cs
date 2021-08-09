@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+/* $identityserver_feature$ start */
+using WebApplication1.Api.Infrastructure;
+/* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
 
@@ -43,6 +46,24 @@ namespace WebApplication1.Api
             services.AddAppConfiguration(this.Configuration);
 
             services.AddIocContainer(this.Configuration);
+
+            /* $identityserver_feature$ start */
+            services.AddIdentityServer()
+                .AddInMemoryClients(IdentityConfiguration.Clients)
+                .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
+                .AddInMemoryApiResources(IdentityConfiguration.ApiResources)
+                .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
+                .AddTestUsers(IdentityConfiguration.TestUsers)
+                .AddDeveloperSigningCredential();
+
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options =>
+                {
+                    options.ApiName = IdentityConfiguration.ApiResourceCode;
+                    options.Authority = "https://localhost:44319";
+                });
+
+            /* $identityserver_feature$ end */
         }
 
         /// <summary>
@@ -63,8 +84,11 @@ namespace WebApplication1.Api
 
             app.UseRouting();
 
+            /* $identityserver_feature$ start */
+            app.UseIdentityServer();
             app.UseAuthorization();
             app.UseAuthentication();
+            /* $identityserver_feature$ end */
 
             app.UseAppConfiguration(env, provider);
 
