@@ -51,6 +51,13 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                     {
                         options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
+
+                    /* $identityserver_feature$ start */
+                    options.OAuthClientId("swagger.client");
+                    options.OAuthAppName("API - Swagger");
+                    options.OAuthScopeSeparator(" ");
+                    options.OAuthUsePkce();
+                    /* $identityserver_feature$ end */
                 });
         }
     }

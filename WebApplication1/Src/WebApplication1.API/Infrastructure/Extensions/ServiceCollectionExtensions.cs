@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+/* $identityserver_feature$ start */
+using Microsoft.OpenApi.Models;
+/* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
 
@@ -93,6 +97,31 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
                 options.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
+
+                /* $identityserver_feature$ start */
+
+                // swagger oauth2 endpoint definition
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://localhost:44319/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:44319/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { IdentityScopes.ApiRead, nameof(IdentityScopes.ApiRead) },
+                                { IdentityScopes.ApiWrite, nameof(IdentityScopes.ApiWrite) },
+                            },
+                        },
+                    },
+                });
+
+                // include access token on AuthorizeAttribute endpoints
+                options.OperationFilter<SwaggerAuthorizeOperationFilter>();
+                /* $identityserver_feature$ end */
             });
         }
 

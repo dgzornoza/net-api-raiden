@@ -6,6 +6,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <Nullable>enable</Nullable>
+    <Description>WebApplication1.Api</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -64,7 +65,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <None Include="wwwroot\index.html" />
   </ItemGroup>
 
 
