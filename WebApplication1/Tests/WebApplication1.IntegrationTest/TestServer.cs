@@ -22,18 +22,20 @@ namespace WebApplication1.IntegrationTest
 
         public TestServer()
         {
+            var testServerSettings = Configuration.GetValue<TestServerSettings>(AppSettingsKeys.TestServer);
+
             // inicializar respawn de BBDD
             this.DbRespawn = new RespawnDb(Configuration);
 
             // inicializar servidor web de test
             var builder = new WebHostBuilder()
-                .UseEnvironment(Configuration[AppSettingsKeys.Environment])
+                .UseEnvironment(testServerSettings.Environment)
                 .UseStartup<TestStartup>()
                 .UseConfiguration(Configuration);
 
             this.server = new Microsoft.AspNetCore.TestHost.TestServer(builder)
             {
-                BaseAddress = new Uri(Configuration[AppSettingsKeys.ApiUrl]),
+                BaseAddress = new Uri(testServerSettings.ApiUrl),
             };
             this.Client = this.server.CreateClient();
 

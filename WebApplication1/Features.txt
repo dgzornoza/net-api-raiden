@@ -7,11 +7,16 @@ WebApplication1.Api.Infrastructure.Extensions.HostBuilderExtensions
 
 nuget:
 Polly
+(Infrastructure)
 <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
   <PrivateAssets>all</PrivateAssets>
   <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 </PackageReference>
-
+(API)
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
 
 Identity:
 https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
@@ -45,6 +50,7 @@ reemplazos:
 $identityserver_client_secret$ -> cambiar por password aleatorio al generar
 $identityserver_swagger_client_secret$ -> cambiar por password aleatorio al generar
 $identityserver_test_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_JWT_secret$ -> cambiar por password aleatorio al generar
 $identityserver_resource_code$
 $identityserver_resource_secret$
 
@@ -54,6 +60,6 @@ SwaggerAuthorizeOperationFilter
 AuthenticateController
 
 nuget:
-IdentityServer4
-IdentityServer4.AccessTokenValidator
-IdentityServer4.EntityFramework
+IdentityServer4 (infrastructure y api)
+IdentityServer4.AccessTokenValidator (api)
+IdentityServer4.EntityFramework (infrastructure y api)

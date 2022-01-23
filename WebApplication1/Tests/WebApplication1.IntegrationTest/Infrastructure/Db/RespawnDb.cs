@@ -10,7 +10,7 @@ namespace WebApplication1.IntegrationTest.Infrastructure.Db
         private static readonly Checkpoint Checkpoint = new ()
         {
             // Ignore tables from reset DDBB
-            TablesToIgnore = new[]
+            TablesToIgnore = new Respawn.Graph.Table[]
             {
                 "__EFMigrationsHistory",
             },

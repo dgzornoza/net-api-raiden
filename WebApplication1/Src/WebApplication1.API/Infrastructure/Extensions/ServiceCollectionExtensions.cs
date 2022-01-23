@@ -4,12 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 /* $identityserver_feature$ start */
 using Microsoft.OpenApi.Models;
 using Polly;
@@ -18,6 +21,7 @@ using WebApplication1.Api.Infrastructure.Authorization;
 /* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
+using WebApplication1.Api.Settings;
 using WebApplication1.Infrastructure.Domain;
 
 namespace WebApplication1.Api.Infrastructure.Extensions
@@ -29,12 +33,12 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             return services
                 .AddApiVersioning()
                 .AddCors()
-                .AddSwagger(configuration)
+                .AddSwagger()
                 .AddPollyPolicies()
                 /* $identityserver_feature$ start */
                 .AddIdentityServer(configuration)
                 /* $identityserver_feature$ end */
-                .AddAuthentication()
+                .AddAuthentication(configuration)
                 .AddAuthorization(Policies.AddPolicies);
         }
 
@@ -70,12 +74,8 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             return services;
         }
 
-        private static IServiceCollection AddSwagger(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            var title = configuration["App:Title"];
-            var description = configuration["App:Description"];
-            int versions = int.TryParse(configuration["App:Versions"], out versions) ? versions : 1;
-
             var assemblyProductAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
@@ -164,16 +164,42 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             return services;
         }
 
-        private static IServiceCollection AddAuthentication(this IServiceCollection services)
+        private static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            // TODO: to implement
+            /* $identityserver_feature$ start */
+            var jwtSettings = configuration.GetObject<JwtSettings>(AppSettingsKeys.Jwt);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.Authority = jwtSettings.Authority;
+                options.Audience = jwtSettings.ValidAudience;
+
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = jwtSettings.ValidAudience,
+                    ValidIssuer = jwtSettings.ValidIssuer,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
+                };
+            });
+            /* $identityserver_feature$ end */
+
             return services;
         }
 
         /* $identityserver_feature$ start */
         private static IServiceCollection AddIdentityServer(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("AppConnectionString");
+            var connectionString = configuration.GetConnectionString(AppSettingsKeys.AppConnectionString);
 
             // configure identity server
             var migrationsAssembly = typeof(AppUnitOfWork).GetTypeInfo().Assembly.GetName().Name;

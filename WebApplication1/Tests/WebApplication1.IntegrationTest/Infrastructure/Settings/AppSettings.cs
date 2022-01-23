@@ -8,9 +8,9 @@ namespace WebApplication1.IntegrationTest.Infrastructure.Settings
     {
         public AppSettings(string sectionKey)
         {
-            IConfiguration configuration = TestServer.Configuration.GetSection(sectionKey);
+            var configurationSection = TestServer.Configuration.GetSection(sectionKey);
             var options = new T();
-            configuration.Bind(options);
+            configurationSection.Bind(options);
 
             this.Value = options;
         }

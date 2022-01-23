@@ -25,7 +25,7 @@ namespace WebApplication1.Api.Infrastructure.Extensions
         public static IServiceCollection AddIocContainer(this IServiceCollection services, IConfiguration configuration)
         {
             // DbContext
-            services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
+            services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString(AppSettingsKeys.AppConnectionString)));
 
             // MediatR
             services.AddMediatR(typeof(ICommand).GetTypeInfo().Assembly);
@@ -42,7 +42,8 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             // ...
 
             // Configurations
-            services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection("AppConfiguration"));
+            services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection(AppSettingsKeys.AppConfiguration));
+            services.AddOptions<JwtSettings>().Bind(configuration.GetSection(AppSettingsKeys.Jwt));
 
             return services;
         }

@@ -97,13 +97,14 @@
 			/* $identityserver_feature$ start */
             <article>
                 <h3>IdentityServer:</h3>
-                <p>Ejecutar los siguientes comandos para generar las migraciones:</p>
+                <p>Ejecutar los siguientes comandos para generar las migraciones (en el ensamblado infrastructure):</p>
 				<p>Desde Nuget Package Manager Console:
-				PM> <code>add-migration InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext</code>
-				dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
+				PM> <code>add-migration InitialIdentityServerPersistedGrantDbMigration -context PersistedGrantDbContext -outputDir Migrations/IdentityServer/PersistedGrantDb</code>
+				PM> <code>add-migration InitialIdentityServerConfigurationDbMigration -context ConfigurationDbContext -outputDir Migrations/IdentityServer/ConfigurationDb</code>
 				</p> 
 				<p>Desde consola:
-				> dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb
+				> <code>dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb</code>
+				> <code>dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb</code>
 				</p> 
             </article>
 			/* $identityserver_feature$ end */
