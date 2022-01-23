@@ -7,6 +7,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 /* $identityserver_feature$ start */
@@ -17,6 +18,7 @@ using WebApplication1.Api.Infrastructure.Authorization;
 /* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
+using WebApplication1.Infrastructure.Domain;
 
 namespace WebApplication1.Api.Infrastructure.Extensions
 {
@@ -29,6 +31,9 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 .AddCors()
                 .AddSwagger(configuration)
                 .AddPollyPolicies()
+                /* $identityserver_feature$ start */
+                .AddIdentityServer(configuration)
+                /* $identityserver_feature$ end */
                 .AddAuthentication()
                 .AddAuthorization(Policies.AddPolicies);
         }
@@ -164,5 +169,45 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             // TODO: to implement
             return services;
         }
+
+        /* $identityserver_feature$ start */
+        private static IServiceCollection AddIdentityServer(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("AppConnectionString");
+
+            // configure identity server
+            var migrationsAssembly = typeof(AppUnitOfWork).GetTypeInfo().Assembly.GetName().Name;
+            services.AddIdentityServer(options =>
+            {
+                ////options.UserInteraction = new UserInteractionOptions()
+                ////{
+                ////    LogoutUrl = "set logout url",
+                ////    LoginUrl = "set login url",
+                ////    LoginReturnUrlParameter = "returnUrl",
+                ////};
+            })
+            .AddDeveloperSigningCredential()
+            .AddTestUsers(IdentityConfiguration.TestUsers)
+            // add the config data from DB (clients, resources)
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+            })
+            // add the operational data from DB (codes, tokens, consents)
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = builder =>
+                    builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                // enables automatic token cleanup
+                options.EnableTokenCleanup = true;
+                options.TokenCleanupInterval = 30;
+            });
+
+            return services;
+        }
+
+        /* $identityserver_feature$ end */
     }
 }
