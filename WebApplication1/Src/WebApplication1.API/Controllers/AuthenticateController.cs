@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using WebApplication1.Api.Infrastructure;
+using WebApplication1.Api.Infrastructure.Authorization;
 
 namespace WebApplication1.Api.Controllers
 {
@@ -34,8 +34,7 @@ namespace WebApplication1.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             var context = await this.interaction.GetAuthorizationContextAsync(request.ReturnUrl);
-            var user = IdentityConfiguration.GetTestUsers()
-                   .FirstOrDefault(usr => usr.Password == request.Password && usr.Username == request.Username);
+            var user = IdentityConfiguration.TestUsers.FirstOrDefault(usr => usr.Password == request.Password && usr.Username == request.Username);
 
             if (user != null && context != null)
             {

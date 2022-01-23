@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using WebApplication1.Api.Infrastructure.Extensions;
+using WebApplication1.Infrastructure.Domain;
 
 namespace WebApplication1.Api
 {
@@ -40,7 +42,9 @@ namespace WebApplication1.Api
             try
             {
                 Log.Information("Getting the motors running...");
-                var host = CreateHostBuilder(args).Build();
+                var host = CreateHostBuilder(args)
+                    .Build()
+                    .MigrateDbContext<IEfUnitOfWork>();
 
                 // Run the Host, and start accepting requests
                 await host.RunAsync();

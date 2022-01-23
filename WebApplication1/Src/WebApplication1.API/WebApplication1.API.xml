@@ -4,6 +4,17 @@
         <name>WebApplication1.Api</name>
     </assembly>
     <members>
+        <member name="T:WebApplication1.Api.Infrastructure.Authorization.IdentityConfiguration">
+            <summary>
+            Indentity Configuration
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Api.Infrastructure.Authorization.Policies.AddPolicies(Microsoft.AspNetCore.Authorization.AuthorizationOptions)">
+            <summary>
+            Function for add authorization policies
+            </summary>
+            <param name="options">Authorization options</param>
+        </member>
         <member name="T:WebApplication1.Api.Infrastructure.Extensions.IocContainerExtension">
             <summary>
             Extension class for manage Application Inversion Of Control container
@@ -20,12 +31,6 @@
         <member name="T:WebApplication1.Api.Infrastructure.Filters.HttpGlobalExceptionFilter">
             <summary>
             Filter to handle all global http exceptions.
-            </summary>
-        </member>
-        <member name="T:WebApplication1.Api.Infrastructure.IdentityConfiguration">
-            <summary>
-            https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
-            http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
             </summary>
         </member>
         <member name="T:WebApplication1.Api.Program">

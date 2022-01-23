@@ -4,11 +4,10 @@ using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
-namespace WebApplication1.Api.Infrastructure
+namespace WebApplication1.Api.Infrastructure.Authorization
 {
     /// <summary>
-    /// https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
-    /// http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
+    /// Indentity Configuration
     /// </summary>
     public class IdentityConfiguration
     {
@@ -67,12 +66,14 @@ namespace WebApplication1.Api.Infrastructure
                     ClientName = "Swagger UI Client",
                     ClientSecrets = { new Secret("$identityserver_swagger_client_secret$".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RequirePkce = true,
-                    RequireClientSecret = false,
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
 
-                    RedirectUris = { "https://localhost:44319/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins = { "https://localhost:44319" },
+                    ////AllowedGrantTypes = GrantTypes.Code,
+                    ////RequirePkce = true,
+                    ////RequireClientSecret = false,
+
+                    ////RedirectUris = { "https://localhost:44319/swagger/oauth2-redirect.html" },
+                    ////AllowedCorsOrigins = { "https://localhost:44319" },
                     AllowedScopes = { IdentityScopes.ApiRead, IdentityScopes.ApiWrite },
                 },
                 new Client
@@ -86,31 +87,6 @@ namespace WebApplication1.Api.Infrastructure
                     AllowedScopes = { IdentityScopes.ApiRead },
                 },
             };
-
-        internal static List<TestUser> GetTestUsers()
-        {
-            return new List<TestUser>
-            {
-                new TestUser
-                {
-                    SubjectId = "1", Username = "alice", Password = "alice",
-                    Claims =
-                    {
-                        new Claim(JwtClaimTypes.Name, "Alice Smith"),
-                        new Claim(JwtClaimTypes.Email, "AliceSmith@email.com"),
-                    },
-                },
-                new TestUser
-                {
-                    SubjectId = "11", Username = "bob", Password = "bob",
-                    Claims =
-                    {
-                        new Claim(JwtClaimTypes.Name, "Bob Smith"),
-                        new Claim(JwtClaimTypes.Email, "BobSmith@email.com"),
-                    },
-                },
-            };
-        }
     }
 
     public class IdentityScopes

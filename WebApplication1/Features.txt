@@ -1,15 +1,21 @@
+General:
+
+Archivos:
+WebApplication1.Infrastructure.Constants.Polly
+WebApplication1.Infrastructure.Constants.ColumnSizes
+
+nuget:
+Polly
+
+
 Identity:
 https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
 http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
 https://www.scottbrady91.com/Identity-Server/ASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4
 https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
 https://www.returngis.net/2019/04/oauth-2-0-openid-connect-y-json-web-tokens-jwt-que-es-que/
-https://taithienbo.medium.com/configure-oauth2-implicit-flow-for-swagger-ui-b7d0181d4b0c
-https://stackoverflow.com/questions/60845270/implicit-bearer-flow-for-swagger-asp-net-core-3-1
-https://lurumad.github.io/swagger-ui-with-pkce-using-swashbuckle-asp-net-core
+
 	
-custom ui:
-https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/785
 
 Tutorial:
 http://docs.identityserver.io/en/release/quickstarts/2_resource_owner_passwords.html
@@ -32,6 +38,8 @@ $identityserver_feature$
 
 reemplazos:
 $identityserver_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_swagger_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_test_client_secret$ -> cambiar por password aleatorio al generar
 $identityserver_resource_code$
 $identityserver_resource_secret$
 
@@ -43,3 +51,4 @@ AuthenticateController
 nuget:
 IdentityServer4
 IdentityServer4.AccessTokenValidator
+IdentityServer4.EntityFramework

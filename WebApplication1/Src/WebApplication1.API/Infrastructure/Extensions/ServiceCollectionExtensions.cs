@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -10,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 /* $identityserver_feature$ start */
 using Microsoft.OpenApi.Models;
+using Polly;
+using Polly.Registry;
+using WebApplication1.Api.Infrastructure.Authorization;
 /* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
@@ -24,8 +28,9 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 .AddApiVersioning()
                 .AddCors()
                 .AddSwagger(configuration)
+                .AddPollyPolicies()
                 .AddAuthentication()
-                .AddAuthorization();
+                .AddAuthorization(Policies.AddPolicies);
         }
 
         private static IServiceCollection AddCors(this IServiceCollection services)
@@ -79,7 +84,7 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 // generate swagger versions doc from controllers
                 foreach (var description in provider.ApiVersionDescriptions)
                 {
-                    options.SwaggerDoc(description.GroupName, new Microsoft.OpenApi.Models.OpenApiInfo()
+                    options.SwaggerDoc(description.GroupName, new OpenApiInfo()
                     {
                         Title = $"{assemblyProductAttribute.Product} " + $"{description.ApiVersion}",
                         Version = description.ApiVersion.ToString(),
@@ -106,6 +111,16 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                     Type = SecuritySchemeType.OAuth2,
                     Flows = new OpenApiOAuthFlows
                     {
+                        ClientCredentials = new OpenApiOAuthFlow
+                        {
+                            // AuthorizationUrl = new Uri("https://localhost:44319/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:44319/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { IdentityScopes.ApiRead, nameof(IdentityScopes.ApiRead) },
+                                { IdentityScopes.ApiWrite, nameof(IdentityScopes.ApiWrite) },
+                            },
+                        },
                         AuthorizationCode = new OpenApiOAuthFlow
                         {
                             AuthorizationUrl = new Uri("https://localhost:44319/connect/authorize"),
@@ -125,23 +140,28 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             });
         }
 
-        private static IServiceCollection AddAuthentication(this IServiceCollection services)
+        private static IServiceCollection AddPollyPolicies(this IServiceCollection services)
         {
-            // TODO: to implement
+            PolicyRegistry registry = new PolicyRegistry
+            {
+                {
+                    WebApplication1.Infrastructure.Constants.Polly.WaitAndRetry,
+                    Policy.Handle<HttpRequestException>().WaitAndRetry(new[]
+                        {
+                            TimeSpan.FromSeconds(3),
+                            TimeSpan.FromSeconds(5),
+                            TimeSpan.FromSeconds(8),
+                        })
+                },
+            };
+
+            services.AddSingleton<IReadOnlyPolicyRegistry<string>>(registry);
             return services;
         }
 
-        private static IServiceCollection AddAuthorization(this IServiceCollection services)
+        private static IServiceCollection AddAuthentication(this IServiceCollection services)
         {
-            ////services.AddAuthorization(options =>
-            ////{
-            ////    options.AddPolicy(AuthorizationPolicies.AdminUsers, policy => policy
-            ////        .RequireAuthenticatedUser()
-            ////        .RequireClaim(
-            ////            ClaimTypes.Roles,
-            ////            "admin"));
-            ////});
-
+            // TODO: to implement
             return services;
         }
     }

@@ -1,5 +1,6 @@
 ﻿/* $identityserver_feature$ start */
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,12 +8,13 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 /* $identityserver_feature$ start */
 using Microsoft.IdentityModel.Tokens;
-using WebApplication1.Api.Infrastructure;
+using WebApplication1.Api.Infrastructure.Authorization;
 /* $identityserver_feature$ end */
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
@@ -55,50 +57,44 @@ namespace WebApplication1.Api
             services.AddIocContainer(this.Configuration);
 
             /* $identityserver_feature$ start */
-            services.AddIdentityServer(options =>
-            {
-                options.UserInteraction = new UserInteractionOptions()
-                {
-                    LogoutUrl = "set logout url",
-                    LoginUrl = "set login url",
-                    LoginReturnUrlParameter = "returnUrl",
-                };
-            })
-            .AddInMemoryClients(IdentityConfiguration.Clients)
-            .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
-            .AddInMemoryApiResources(IdentityConfiguration.ApiResources)
-            .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
-            .AddTestUsers(IdentityConfiguration.TestUsers)
-            .AddDeveloperSigningCredential();
+            ////services.AddIdentityServer(options =>
+            ////{
+            ////    ////options.UserInteraction = new UserInteractionOptions()
+            ////    ////{
+            ////    ////    LogoutUrl = "set logout url",
+            ////    ////    LoginUrl = "set login url",
+            ////    ////    LoginReturnUrlParameter = "returnUrl",
+            ////    ////};
+            ////})
+            ////.AddInMemoryClients(IdentityConfiguration.Clients)
+            ////.AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
+            ////.AddInMemoryApiResources(IdentityConfiguration.ApiResources)
+            ////.AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
+            ////.AddTestUsers(IdentityConfiguration.TestUsers)
+            ////.AddDeveloperSigningCredential();
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = this.Configuration["JWT:ValidAudience"],
-                    ValidIssuer = this.Configuration["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JWT:Secret"])),
-                };
+            ////services.AddAuthentication(options =>
+            ////{
+            ////    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            ////    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            ////    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            ////})
+            ////.AddJwtBearer(options =>
+            ////{
+            ////    options.SaveToken = true;
+            ////    options.RequireHttpsMetadata = false;
+            ////    options.Authority = this.Configuration["JWT:Authority"];
+            ////    options.Audience = this.Configuration["JWT:ValidAudience"];
 
-                ////options.TokenValidationParameters.ValidIssuers = new[] { "https://identity.important.stuff", "https://identity.newaddress.important.stuff" };
-                ////options.SecurityTokenValidators.Clear();
-                ////options.SecurityTokenValidators.Add(new JwtSecurityTokenHandler
-                ////{
-                ////    MapInboundClaims = false,
-                ////});
-                ////options.TokenValidationParameters.NameClaimType = "name";
-                ////options.TokenValidationParameters.RoleClaimType = "role";
-            });
+            ////    options.TokenValidationParameters = new TokenValidationParameters()
+            ////    {
+            ////        ValidateIssuer = true,
+            ////        ValidateAudience = true,
+            ////        ValidAudience = this.Configuration["JWT:ValidAudience"],
+            ////        ValidIssuer = this.Configuration["JWT:ValidIssuer"],
+            ////        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["JWT:Secret"])),
+            ////    };
+            ////});
             /* $identityserver_feature$ end */
         }
 
