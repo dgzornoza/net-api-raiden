@@ -3,9 +3,14 @@ General:
 Archivos:
 WebApplication1.Infrastructure.Constants.Polly
 WebApplication1.Infrastructure.Constants.ColumnSizes
+WebApplication1.Api.Infrastructure.Extensions.HostBuilderExtensions
 
 nuget:
 Polly
+<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
 
 
 Identity:
