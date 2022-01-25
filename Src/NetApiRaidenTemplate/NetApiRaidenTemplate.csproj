@@ -46,8 +46,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs" />
+    <None Include="Api\Infrastructure\Authorization\AuthorizationPolicies.cs" />
+    <None Include="Api\Infrastructure\Authorization\Policies.cs" />
+    <None Include="Api\Controllers\AuthenticateController_id4.cs" />
+    <None Include="Api\Controllers\TestController.cs" />
+    <None Include="Api\Settings\AppSettingsKeys.cs" />
+    <None Include="Api\Settings\JwtSettings.cs" />
+    <None Include="Tests.Helpers\Extensions\EntityExtension.cs" />
+    <None Include="Tests.Helpers\Mocks\MockValueChecker.cs" />
+    <None Include="Domain.SeedData\Domain.SeedData.csproj" />
+    <None Include="Tests.Helpers\Tests.Helpers.csproj" />
     <None Include="UnitTest\Class1.cs" />
-    <None Include="Api\Infrastructure\AuthorizationPolicies.cs" />
     <None Include="Api\Infrastructure\Extensions\ApplicationBuilderExtensions.cs" />
     <None Include="Api\Infrastructure\Extensions\IocContainerExtension.cs" />
     <None Include="Api\Infrastructure\Extensions\ServiceCollectionExtensions.cs" />
@@ -87,6 +97,12 @@
     <None Include="Infrastructure\Extensions\MediatorExtensions.cs" />
     <None Include="Infrastructure\Properties\Resources.Designer.cs" />
     <None Include="IntegrationTest\Class1.cs" />
+    <None Include="Api\Infrastructure\Extensions\AppSettingsExtensions.cs" />
+    <None Include="Api\Infrastructure\Extensions\HostBuilderExtensions.cs" />
+    <None Include="Domain.SeedData\IdentityServer\ConfigurationDbSeedData.cs" />
+    <None Include="Domain.SeedData\IdentityServer\IdentityConfiguration.cs" />
+    <None Include="Infrastructure\Constants\ColumnSizes.cs" />
+    <None Include="Infrastructure\Constants\Polly.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +141,12 @@
     <None Include="Infrastructure\Properties\Resources.es.resx" />
     <None Include="Infrastructure\Properties\Resources.resx" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Api\Controllers\" />
+    <Content Include="Domain.SeedData\Domain.SeedData.vstemplate" />
+    <Content Include="Domain.SeedData\__TemplateIcon.ico" />
+    <Content Include="Tests.Helpers\Tests.Helpers.vstemplate" />
+    <Content Include="Tests.Helpers\__TemplateIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

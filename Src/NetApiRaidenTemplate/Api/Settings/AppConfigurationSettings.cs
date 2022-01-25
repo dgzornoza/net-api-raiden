@@ -1,6 +1,9 @@
 ﻿namespace $safeprojectname$.Settings
 {
-    public class AppConfigurationSettings
+    public record AppConfigurationSettings
     {
+        /* $identityserver_feature$ start */
+        public bool ExecuteIdentityServerSeedData { get; set; }
+        /* $identityserver_feature$ end */
     }
 }

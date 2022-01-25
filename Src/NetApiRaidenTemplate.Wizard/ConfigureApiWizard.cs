@@ -34,11 +34,16 @@ namespace NetApiRaidenTemplate.Wizard
                 return;
             }
 
-            // copy readme html in solution folder and show in VS
+            // copy resource template files
             if (this.replacementsDictionary.ContainsKey(Configuration.TemplateParams.DestinationDirectoryKey))
             {
-                string filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], "Readme.html");
-                byte[] fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
+                string filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], ".editorconfig");
+                byte[] fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.editorconfig");
+                File.WriteAllBytes(filePath, fileBytes);
+
+                // copy readme html in solution folder and show in VS
+                filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], "Readme.html");
+                fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
                 File.WriteAllBytes(filePath, fileBytes);
 
                 this.dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);

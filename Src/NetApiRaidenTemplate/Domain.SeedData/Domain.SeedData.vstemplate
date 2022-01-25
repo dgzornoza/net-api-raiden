@@ -1,0 +1,25 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Domain.SeedData</Name>
+    <Description>NetApiRaiden Domain Seed Data layer Project</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Domain.SeedData</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Domain.SeedData.csproj" File="Domain.SeedData.csproj" ReplaceParameters="true">
+      <Folder Name="IdentityServer" TargetFolderName="IdentityServer">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ConfigurationDbSeedData.cs">ConfigurationDbSeedData.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IdentityConfiguration.cs">IdentityConfiguration.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>.\$safeprojectname$.Domain.SeedData.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>.\$safeprojectname$.Domain.SeedData.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="$safeprojectname$.Domain.SeedData.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IdentityServer4" Version="4.1.2" />
+        <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
+    </ItemGroup>
+
+</Project>

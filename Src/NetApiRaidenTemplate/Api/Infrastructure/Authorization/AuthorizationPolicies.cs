@@ -1,4 +1,4 @@
-﻿namespace $safeprojectname$.Infrastructure
+﻿namespace $safeprojectname$.Infrastructure.Authorization
 {
     public static class AuthorizationPolicies
     {

@@ -75,6 +75,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <EmbeddedResource Include="Resources\TemplateFiles\editorconfig" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>

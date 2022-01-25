@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using $safeprojectname$.Infrastructure.Extensions;
+using $ext_safeprojectname$.Infrastructure.Domain;
 
 namespace $safeprojectname$
 {
@@ -40,7 +42,9 @@ namespace $safeprojectname$
             try
             {
                 Log.Information("Getting the motors running...");
-                IHost host = CreateHostBuilder(args).Build();
+                var host = CreateHostBuilder(args)
+                    .Build()
+                    .BuildContext();
 
                 // Run the Host, and start accepting requests
                 await host.RunAsync();

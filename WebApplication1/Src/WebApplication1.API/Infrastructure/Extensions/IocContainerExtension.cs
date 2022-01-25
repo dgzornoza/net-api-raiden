@@ -34,8 +34,10 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                     sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                 }));
 
+            /* $identityserver_feature$ start */
             // IdentityServer
             services.AddTransient<ConfigurationDbSeedData>();
+            /* $identityserver_feature$ end */
 
             // MediatR
             services.AddMediatR(typeof(ICommand).GetTypeInfo().Assembly);
