@@ -4,11 +4,6 @@
         <name>WebApplication1.Api</name>
     </assembly>
     <members>
-        <member name="T:WebApplication1.Api.Infrastructure.Authorization.IdentityConfiguration">
-            <summary>
-            Indentity Configuration
-            </summary>
-        </member>
         <member name="M:WebApplication1.Api.Infrastructure.Authorization.Policies.AddPolicies(Microsoft.AspNetCore.Authorization.AuthorizationOptions)">
             <summary>
             Function for add authorization policies

@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Security.Claims;
-using IdentityModel;
 using IdentityServer4.Models;
-using IdentityServer4.Test;
 
-namespace WebApplication1.Api.Infrastructure.Authorization
+namespace WebApplication1.Domain.SeedData.IdentityServer
 {
     /// <summary>
     /// Indentity Configuration
@@ -13,25 +10,6 @@ namespace WebApplication1.Api.Infrastructure.Authorization
     {
         public const string ApiResourceCode = "$identityserver_resource_code$";
         public const string ApiResourceSecret = "$identityserver_resource_secret$";
-
-        public static List<TestUser> TestUsers =>
-            new ()
-            {
-                new TestUser
-                {
-                    SubjectId = "1",
-                    Username = "dgzornoza",
-                    Password = "123456789",
-                    Claims =
-                    {
-                        new Claim(JwtClaimTypes.Name, "David González Zornoza"),
-                        new Claim(JwtClaimTypes.GivenName, "David"),
-                        new Claim(JwtClaimTypes.FamilyName, "González Zornoza"),
-                        new Claim(JwtClaimTypes.NickName, "dgzornoza"),
-                        new Claim(JwtClaimTypes.WebSite, "https://github.com/dgzornoza"),
-                    },
-                },
-            };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]

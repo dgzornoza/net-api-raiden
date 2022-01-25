@@ -22,6 +22,7 @@ using WebApplication1.Api.Infrastructure.Authorization;
 using WebApplication1.Api.Infrastructure.Extensions;
 using WebApplication1.Api.Infrastructure.Filters;
 using WebApplication1.Api.Settings;
+using WebApplication1.Domain.SeedData.IdentityServer;
 using WebApplication1.Infrastructure.Domain;
 
 namespace WebApplication1.Api.Infrastructure.Extensions
@@ -213,21 +214,28 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 ////};
             })
             .AddDeveloperSigningCredential()
-            .AddTestUsers(IdentityConfiguration.TestUsers)
             // add the config data from DB (clients, resources)
             .AddConfigurationStore(options =>
             {
+                options.DefaultSchema = "dbo";
                 options.ConfigureDbContext = builder =>
-                    builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+                    builder.UseSqlServer(connectionString, sqlOptions => {
+                        sqlOptions.MigrationsAssembly(migrationsAssembly);
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                    });
             })
             // add the operational data from DB (codes, tokens, consents)
             .AddOperationalStore(options =>
             {
+                options.DefaultSchema = "dbo";
                 options.ConfigureDbContext = builder =>
-                    builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+                    builder.UseSqlServer(connectionString, sqlOptions => {
+                        sqlOptions.MigrationsAssembly(migrationsAssembly);
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                    });
 
-                // enables automatic token cleanup
-                options.EnableTokenCleanup = true;
+            // enables automatic token cleanup
+            options.EnableTokenCleanup = true;
                 options.TokenCleanupInterval = 30;
             });
 

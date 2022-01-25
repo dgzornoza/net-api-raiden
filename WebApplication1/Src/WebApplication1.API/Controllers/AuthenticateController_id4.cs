@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using IdentityServer4;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using WebApplication1.Api.Infrastructure.Authorization;
 
 namespace WebApplication1.Api.Controllers
 {
@@ -18,28 +15,35 @@ namespace WebApplication1.Api.Controllers
     [AllowAnonymous]
     public class AuthenticateController : Controller
     {
-        private readonly IIdentityServerInteractionService interaction;
+        private readonly IIdentityServerInteractionService interaction;        
         private readonly IHostEnvironment environment;
+        private readonly SignInManager<IdentityUser> signInManager;
 
         public AuthenticateController(
             IIdentityServerInteractionService interaction,
-            IWebHostEnvironment environment)
+            IWebHostEnvironment environment,
+            SignInManager<IdentityUser> signInManager)
         {
             this.interaction = interaction;
             this.environment = environment;
+            this.signInManager = signInManager;
         }
 
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             var context = await this.interaction.GetAuthorizationContextAsync(request.ReturnUrl);
-            var user = IdentityConfiguration.TestUsers.FirstOrDefault(usr => usr.Password == request.Password && usr.Username == request.Username);
-
-            if (user != null && context != null)
+            
+            if (context != null)
             {
                 try
                 {
-                    await this.HttpContext.SignInAsync(new IdentityServerUser(user.SubjectId), new AuthenticationProperties());
+                    var authResult = await signInManager.PasswordSignInAsync(request.UserName, request.Password, false, true);
+                    if (!authResult.Succeeded)
+                    {
+                        throw new InvalidOperationException();
+                    }
+                    
                     return new JsonResult(new { RedirectUrl = request.ReturnUrl, IsOk = true });
                 }
                 catch (Exception ex)
@@ -104,7 +108,7 @@ namespace WebApplication1.Api.Controllers
 
     public class LoginRequest
     {
-        public string Username { get; set; } = default!;
+        public string UserName { get; set; } = default!;
 
         public string Password { get; set; } = default!;
 

@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using WebApplication1.Api.Infrastructure.Authorization;
+using WebApplication1.Domain.SeedData.IdentityServer;
 
 namespace WebApplication1.Api.Infrastructure.Filters
 {

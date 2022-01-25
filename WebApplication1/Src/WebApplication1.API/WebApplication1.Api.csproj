@@ -46,6 +46,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\WebApplication1.Application\WebApplication1.Application.csproj" />
+        <ProjectReference Include="..\WebApplication1.Domain.SeedData\WebApplication1.Domain.SeedData.csproj" />
         <ProjectReference Include="..\WebApplication1.Infrastructure\WebApplication1.Infrastructure.csproj" />
     </ItemGroup>
 

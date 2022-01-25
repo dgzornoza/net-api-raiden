@@ -1,5 +1,8 @@
 General:
 
+Proyecto:
+WebApplication1.Domain.SeedData
+
 Archivos:
 WebApplication1.Infrastructure.Constants.Polly
 WebApplication1.Infrastructure.Constants.ColumnSizes
@@ -18,7 +21,12 @@ Polly
   <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 </PackageReference>
 
-Identity:
+
+Identity core:
+https://dev.to/isaacojeda/aspnet-core-6-autenticacion-jwt-y-identity-core-170i
+
+
+Identity server:
 https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
 http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
 https://www.scottbrady91.com/Identity-Server/ASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4
@@ -56,10 +64,13 @@ $identityserver_resource_secret$
 
 archivos:
 IdentityConfiguration
-SwaggerAuthorizeOperationFilter
-AuthenticateController
+SwaggerAuthorizeOperationFilter_id4 cambiar por SwaggerAuthorizeOperationFilter
+AuthenticateController_id4 cambiar por AuthenticateController
+ConfigurationDbSeedData
+seedData-> IdentityServer
 
 nuget:
 IdentityServer4 (infrastructure y api)
 IdentityServer4.AccessTokenValidator (api)
 IdentityServer4.EntityFramework (infrastructure y api)
+IdentityServer4.EntityFramework.Storage (SeedData)

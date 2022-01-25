@@ -101,10 +101,14 @@
 				<p>Desde Nuget Package Manager Console:
 				PM> <code>add-migration InitialIdentityServerPersistedGrantDbMigration -context PersistedGrantDbContext -outputDir Migrations/IdentityServer/PersistedGrantDb</code>
 				PM> <code>add-migration InitialIdentityServerConfigurationDbMigration -context ConfigurationDbContext -outputDir Migrations/IdentityServer/ConfigurationDb</code>
+				PM> <code>update-database -context PersistedGrantDbContext</code>
+				PM> <code>update-database -context ConfigurationDbContext</code>
 				</p> 
 				<p>Desde consola:
 				> <code>dotnet ef migrations add InitialIdentityServerPersistedGrantDbMigration -c PersistedGrantDbContext -o Data/Migrations/IdentityServer/PersistedGrantDb</code>
 				> <code>dotnet ef migrations add InitialIdentityServerConfigurationDbMigration -c ConfigurationDbContext -o Data/Migrations/IdentityServer/ConfigurationDb</code>
+				> <code>dotnet ef database update -c PersistedGrantDbContext</code>
+				> <code>dotnet ef database update -c ConfigurationDbContext</code>
 				</p> 
             </article>
 			/* $identityserver_feature$ end */

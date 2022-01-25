@@ -44,7 +44,7 @@ namespace WebApplication1.Api
                 Log.Information("Getting the motors running...");
                 var host = CreateHostBuilder(args)
                     .Build()
-                    .MigrateDbContext<IEfUnitOfWork>();
+                    .BuildContext();
 
                 // Run the Host, and start accepting requests
                 await host.RunAsync();
