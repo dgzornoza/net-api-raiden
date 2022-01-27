@@ -6,20 +6,21 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <DockerfileContext>.</DockerfileContext>
         <Nullable>enable</Nullable>
+        <Description>$safeprojectname$</Description>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DocumentationFile>.\$safeprojectname$.API.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>.\$safeprojectname$.API.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.API.xml" />
+        <None Remove="$safeprojectname$.xml" />
     </ItemGroup>
     
     <ItemGroup>

@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Window x:Class="NetApiRaidenTemplate.Wizard.Dialogs.Views.SelectContainerDialog" 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetApiRaidenTemplate.Wizard.Dialogs.ViewModels"
+        d:DataContext="{d:DesignInstance Type=local:SelectContainerDialogViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        xmlns:res="clr-namespace:NetApiRaidenTemplate.Wizard.Properties"
         Width="500" 
         Height="285" 
         Title="Prism - Container Wizard" 
@@ -50,12 +56,17 @@
                 </Grid.RowDefinitions>
                 
                 <StackPanel>
-                    <!--<Label Style="{StaticResource TitleStyle}">Select options:</Label>
-                    <Label Style="{StaticResource SubTitleStyle}">Select the dependency injection container your project will use:</Label>-->
+                    <Label Style="{StaticResource TitleStyle}" Content="{x:Static res:Resources.OptionsTitle}"></Label>
+                    <Label Style="{StaticResource SubTitleStyle}" Content="{x:Static res:Resources.IdentityOptionTitle}"></Label>
+
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding IdentityOptions}"
+                          DisplayMemberPath="Key"
+                          SelectedValuePath="Value"
+                          SelectedValue="{Binding SelectedIdentityOption}" />
                 </StackPanel>
-                
-                <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" Command="{Binding CreateProjectCommand}">
-                    <Run Typography.CapitalSpacing="True">CREATE PROJECT</Run>
+
+                <Button Grid.Row="2" VerticalAlignment="Bottom" Style="{StaticResource ButtonStyle}" Command="{Binding CreateProjectCommand}">
+                    <Run Typography.CapitalSpacing="True" Text="{x:Static res:Resources.CreateProject}"></Run>
                 </Button>
             </Grid>
 

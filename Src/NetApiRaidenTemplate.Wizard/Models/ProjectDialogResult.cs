@@ -2,7 +2,7 @@
 {
     public class ProjectDialogResult
     {
-        public ProjectDialogResult(bool cancelled = true)
+        public ProjectDialogResult(bool cancelled)
         {
             this.Cancelled = cancelled;
         }
@@ -12,10 +12,8 @@
             this.Cancelled = false;
         }
 
-        public bool Cancelled
-        {
-            get;
-            set;
-        }
+        public bool Cancelled { get; set; }
+
+        public IdentityOption SelectedIdentityOption { get; set; }
     }
 }

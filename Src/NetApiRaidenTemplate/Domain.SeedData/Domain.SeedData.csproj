@@ -7,16 +7,16 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.Domain.SeedData.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.Domain.SeedData.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.Domain.SeedData.xml" />
+        <None Remove="$safeprojectname$.xml" />
     </ItemGroup>
 
     <ItemGroup>

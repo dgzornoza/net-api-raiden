@@ -41,7 +41,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.Views
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            this.Result = new ProjectDialogResult();
+            this.Result = new ProjectDialogResult(true);
             this.DialogResult = false;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
@@ -13,6 +14,7 @@ namespace NetApiRaidenTemplate.Wizard
     {
         private DTE dte;
         private Dictionary<string, string> replacementsDictionary;
+        private ProjectDialogResult projectDialogResult;
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
@@ -35,9 +37,9 @@ namespace NetApiRaidenTemplate.Wizard
             }
 
             // copy resource template files
-            if (this.replacementsDictionary.ContainsKey(Configuration.TemplateParams.DestinationDirectoryKey))
+            if (replacementsDictionary.ContainsKey(Configuration.TemplateParams.DestinationDirectoryKey))
             {
-                string filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], ".editorconfig");
+                var filePath = Path.Combine(this.replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], ".editorconfig");
                 byte[] fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.editorconfig");
                 File.WriteAllBytes(filePath, fileBytes);
 
@@ -46,21 +48,21 @@ namespace NetApiRaidenTemplate.Wizard
                 fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
                 File.WriteAllBytes(filePath, fileBytes);
 
-                this.dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
+                dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
             }
 
-            //// read projects and items
-            ////Array activeProjects = (Array)dte.ActiveSolutionProjects;
+            // read projects and items
+            Array activeProjects = (Array)dte.ActiveSolutionProjects;
+            if (activeProjects.Length > 0)
+            {
+                Project activeProj = (Project)activeProjects.GetValue(0);
 
-            ////if (activeProjects.Length > 0)
-            ////{
-            ////    Project activeProj = (Project)activeProjects.GetValue(0);
-
-            ////    foreach (ProjectItem pi in activeProj.ProjectItems)
-            ////    {
-            ////        // Do something for the project items like filename checks etc.
-            ////    }
-            ////}
+                foreach (ProjectItem pi in activeProj.ProjectItems)
+                {
+                    // Do something for the project items like filename checks etc.
+                    var a = pi.Name;
+                }
+            }
         }
 
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
@@ -77,11 +79,11 @@ namespace NetApiRaidenTemplate.Wizard
 
                 this.replacementsDictionary = replacementsDictionary;
 
-                SelectContainerDialog selectContainerDialog = new SelectContainerDialog();
+                var selectContainerDialog = new SelectContainerDialog();
                 selectContainerDialog.ShowDialog();
 
-                ProjectDialogResult result = selectContainerDialog.Result;
-                if (result.Cancelled)
+                projectDialogResult = selectContainerDialog.Result;
+                if (projectDialogResult.Cancelled)
                 {
                     throw new WizardBackoutException();
                 }

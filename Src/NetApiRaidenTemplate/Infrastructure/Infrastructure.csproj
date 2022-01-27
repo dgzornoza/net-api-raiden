@@ -12,11 +12,11 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.Infrastructure.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.Infrastructure.xml" />
+        <None Remove="$safeprojectname$.xml" />
     </ItemGroup>
 
     <ItemGroup>
