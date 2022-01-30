@@ -19,9 +19,11 @@
         <None Remove="$safeprojectname$.xml" />
     </ItemGroup>
 
+    <!-- $identityserver_feature$ start -->
     <ItemGroup>
         <PackageReference Include="IdentityServer4" Version="4.1.2" />
         <PackageReference Include="IdentityServer4.EntityFramework.Storage" Version="4.1.2" />
     </ItemGroup>
-
+    <!-- $identityserver_feature$ end -->
+    
 </Project>

@@ -7,7 +7,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.ViewModels
     internal class SelectContainerDialogViewModel : ViewModelBase
     {
         private readonly Dictionary<IdentityOption, string> identityOptions;
-        private IdentityOption selectedIdentityOption;
+        private KeyValuePair<IdentityOption, string> selectedIdentityOption;
 
         public SelectContainerDialogViewModel()
         {
@@ -16,7 +16,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.ViewModels
 
         public IDictionary<IdentityOption, string> IdentityOptions => identityOptions;
 
-        public IdentityOption SelectedIdentityOption
+        public KeyValuePair<IdentityOption, string> SelectedIdentityOption
         {
             get => selectedIdentityOption;
             set => SetProperty(ref selectedIdentityOption, value);
@@ -27,7 +27,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.ViewModels
             base.CreateProject();
 
             var result = new ProjectDialogResult();
-            result.SelectedIdentityOption = SelectedIdentityOption;
+            result.SelectedIdentityOption = SelectedIdentityOption.Key;
 
             RaiseCreateProject(new ProjectDialogResultEventArgs(result));
         }

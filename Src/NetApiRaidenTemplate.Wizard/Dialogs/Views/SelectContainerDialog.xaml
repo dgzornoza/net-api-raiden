@@ -62,7 +62,7 @@
                     <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding IdentityOptions}"
                           DisplayMemberPath="Key"
                           SelectedValuePath="Value"
-                          SelectedValue="{Binding SelectedIdentityOption}" />
+                          SelectedItem="{Binding SelectedIdentityOption, Mode=TwoWay}" />
                 </StackPanel>
 
                 <Button Grid.Row="2" VerticalAlignment="Bottom" Style="{StaticResource ButtonStyle}" Command="{Binding CreateProjectCommand}">

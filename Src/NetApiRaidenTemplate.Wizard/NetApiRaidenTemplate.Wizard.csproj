@@ -63,9 +63,12 @@
       <DependentUpon>SelectContainerDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="FeaturesManagers\IdentityFeatureManager.cs" />
+    <Compile Include="FeaturesManagers\FeatureManagerBase.cs" />
+    <Compile Include="FeaturesManagers\IFeatureManager.cs" />
+    <Compile Include="Helpers\EnvDTEHelpers.cs" />
     <Compile Include="Helpers\RegistryHelpers.cs" />
     <Compile Include="Helpers\ResourceHelpers.cs" />
-    <Compile Include="Enumerations.cs" />
+    <Compile Include="Infrastructure.cs" />
     <Compile Include="Models\ProjectDialogResult.cs" />
     <Compile Include="Models\ProjectDialogResultEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
