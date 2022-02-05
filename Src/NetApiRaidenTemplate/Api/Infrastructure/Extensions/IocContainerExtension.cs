@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using $safeprojectname$.Settings;
 using $ext_safeprojectname$.Application.Behaviors;
 using $ext_safeprojectname$.Application.Common.Commands;
-using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
+// $identityserver_feature$ using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
 using $ext_safeprojectname$.Infrastructure.Domain;
 
 namespace $safeprojectname$.Infrastructure.Extensions

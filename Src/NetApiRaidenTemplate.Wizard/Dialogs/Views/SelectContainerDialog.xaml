@@ -60,8 +60,9 @@
                     <Label Style="{StaticResource SubTitleStyle}" Content="{x:Static res:Resources.IdentityOptionTitle}"></Label>
 
                     <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding IdentityOptions}"
-                          DisplayMemberPath="Key"
-                          SelectedValuePath="Value"
+                          SelectedIndex="0"
+                          DisplayMemberPath="Value"
+                          SelectedValuePath="Key"
                           SelectedItem="{Binding SelectedIdentityOption, Mode=TwoWay}" />
                 </StackPanel>
 

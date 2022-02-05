@@ -2,86 +2,143 @@
 using EnvDTE;
 using NetApiRaidenTemplate.Wizard.Helpers;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.IO;
-using System;
 
 namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
 {
     public abstract class FeatureManagerBase : IFeatureManager
     {
+        private static IEnumerable<string> CommonFiles { get; } = new List<string>()
+        {
+            @"Readme.html",
+        };
+
         protected FeatureManagerBase(Solution solution)
         {
-            this.solution = solution;
-            ProjectsFilesPaths = solution.GetAllProjects()
-                .ToDictionary(keySelector => keySelector, valueSelector => GetAllProjectItemsFilesPaths(valueSelector.ProjectItems.Cast<ProjectItem>()));
+            this.Solution = solution;
+            ProjectsFilesPaths = solution.GetAllProjects().ToDictionary(
+                keySelector => keySelector,
+                valueSelector => (IList<string>)GetAllProjectItemsFilesPaths(valueSelector.ProjectItems.Cast<ProjectItem>()).ToList());
+
+            this.SolutionPath = Directory.GetParent(Path.GetDirectoryName(ProjectsFilesPaths.First().Key.FileName)).FullName;
         }
 
-        protected Solution solution { get; private set; }
+        protected string SolutionPath { get; set; }
 
-        public IReadOnlyDictionary<Project, IEnumerable<string>> ProjectsFilesPaths { get; private set; }
+        protected Solution Solution { get; private set; }
+
+        protected IDictionary<Project, IList<string>> ProjectsFilesPaths { get; private set; }
 
         protected abstract string FeatureName { get; }
 
-        protected abstract IEnumerable<string> FeatureFilesNames { get; }
+        protected abstract IEnumerable<string> ExclusiveFeatureFiles { get; }
 
         protected abstract IDictionary<string, string> FeatureFileNamesMappers { get; }
 
         public virtual void Exclude()
         {
-            RemoveFiles();
-
-            foreach (var filePath in ProjectsFilesPaths.SelectMany(item => item.Value))
+            // common files
+            foreach (var commonFile in CommonFiles)
             {
-                RemoveFeatureContentFromFile(filePath);
-                RemoveFeatureTagsFromFile(filePath);
+                var filename = Path.Combine(this.SolutionPath, commonFile);
+                RemoveFeatureContentFromFile(filename);
+                RemoveFeatureTagsFromFile(filename);
+            }
+
+            foreach (var projectFilesPaths in ProjectsFilesPaths)
+            {
+                // project
+                RemoveFiles(projectFilesPaths);
+                RemoveFeatureContentFromFile(projectFilesPaths.Key.FileName);
+                RemoveFeatureTagsFromFile(projectFilesPaths.Key.FileName);
+
+                // project items
+                foreach (var filePath in projectFilesPaths.Value)
+                {
+                    RemoveFeatureContentFromFile(filePath);
+                    RemoveFeatureTagsFromFile(filePath);
+                }
             }
         }
 
         public virtual void Include()
         {
-            ReplaceFileNames();
-
-            foreach (var filePath in ProjectsFilesPaths.SelectMany(item => item.Value))
+            // common files
+            foreach (var commonFile in CommonFiles)
             {
-                RemoveFeatureTagsFromFile(filePath);
+                var filename = Path.Combine(this.SolutionPath, commonFile);
+                RemoveFeatureContentFromFile(filename);
+                RemoveFeatureTagsFromFile(filename);
+            }
+
+            foreach (var projectFilesPaths in ProjectsFilesPaths)
+            {
+                // project
+                ReplaceProjectFileNames(projectFilesPaths);
+                RemoveFeatureTagsFromFile(projectFilesPaths.Key.FileName);
+
+                // project items
+                foreach (var filePath in projectFilesPaths.Value)
+                {
+                    RemoveFeatureTagsFromFile(filePath);
+                }
             }
         }
 
-        private void ReplaceFileNames()
+        private void ReplaceProjectFileNames(KeyValuePair<Project, IList<string>> projectFilesPaths)
         {
-            var filesToRename = ProjectsFilesPaths.Values.SelectMany(item => item)
-                .Where(item => FeatureFileNamesMappers.Any(featureFileNamesMappers => item.EndsWith(featureFileNamesMappers.Key)));
-
-            foreach (var file in filesToRename)
+            for (var i = 0; i < projectFilesPaths.Value.Count; i++)
             {
-                var fileNameMap = FeatureFileNamesMappers.First(item => file.EndsWith(item.Key));
+                var file = projectFilesPaths.Value[i];
 
-                File.Move(file, file.Replace(fileNameMap.Key, fileNameMap.Value));
+                if (FeatureFileNamesMappers.Any(item => file.EndsWith(item.Key)))
+                {
+                    var fileNameMap = FeatureFileNamesMappers.First(item => file.EndsWith(item.Key));
+
+                    var newFile = file.Replace(fileNameMap.Key, fileNameMap.Value);
+                    File.Move(file, newFile);
+
+                    projectFilesPaths.Value[i] = newFile;
+                }
             }
         }
 
-        private void RemoveFiles()
+        private void RemoveFiles(KeyValuePair<Project, IList<string>> projectFilesPaths)
         {
-            var filesToRemove = ProjectsFilesPaths.Values.SelectMany(item => item)
-                .Where(item => FeatureFilesNames.Any(featureFile => item.EndsWith(featureFile)));
+            var filesToRemove = projectFilesPaths.Value
+                .Where(item => ExclusiveFeatureFiles.Any(featureFile => item.EndsWith(featureFile))).ToList();
 
             foreach (var file in filesToRemove)
             {
                 File.Delete(file);
+                _ = projectFilesPaths.Value.Remove(file);
             }
         }
 
+        /// <summary>
+        /// Remove feature content, available tags:
+        /// 
+        /// Multiline
+        /// $feature_name$ start
+        /// content ...
+        /// $feature_name$ end
+        /// 
+        /// inline
+        /// // $feature_name$ conent ...
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
         private void RemoveFeatureContentFromFile(string filePath)
         {
             bool isInFeatureCode = false;
             var outputFileLines = File.ReadAllLines(filePath).Select(item =>
             {
+                // multiline
                 string line = null;
                 if (item.Contains($"${FeatureName}$ start"))
                 {
                     isInFeatureCode = true;
-                    line = item;
+                    line = item;    // mantain tag, should be remove later
                 }
                 else if (item.Contains($"${FeatureName}$ end"))
                 {
@@ -90,7 +147,8 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
 
                 if (!isInFeatureCode)
                 {
-                    line = item;
+                    // verify feature inline
+                    line = item.Contains($"// ${FeatureName}$") ? null : item;
                 }
 
                 return line;
@@ -99,18 +157,33 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
             File.WriteAllLines(filePath, outputFileLines);
         }
 
+        /// <summary>
+        /// Remove feature content, available tags:
+        /// 
+        /// Multiline
+        /// $feature_name$ start
+        /// content ...
+        /// $feature_name$ end
+        /// 
+        /// inline
+        /// // $feature_name$ conent ...
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
         private void RemoveFeatureTagsFromFile(string filePath)
         {
             var outputFileLines = File.ReadAllLines(filePath).Select(item =>
             {
                 string line = null;
-                if (item.Contains($"${FeatureName}$ start |"))
+                // multiline
+                if (item.Contains($"${FeatureName}$ start") || item.Contains($"${FeatureName}$ end"))
                 {
-                    line = item.Replace($"${FeatureName}$ start |", string.Empty);
+                    line = null;
                 }
-                else if (item.Contains($"${FeatureName}$ end |"))
+                // inline
+                else if (item.Contains($"// ${FeatureName}$"))
                 {
-                    line = item.Replace($"${FeatureName}$ end |", string.Empty);
+                    line = item.Replace($"// ${FeatureName}$ ", string.Empty);
                 }
                 else
                 {
@@ -118,7 +191,7 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
                 }
 
                 return line;
-            });
+            }).OfType<string>();
 
             File.WriteAllLines(filePath, outputFileLines);
         }

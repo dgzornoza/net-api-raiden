@@ -15,7 +15,7 @@ namespace NetApiRaidenTemplate.Wizard
     public class ConfigureApiWizard : IWizard
     {
         private DTE dte;
-        private Dictionary<string, string> replacementsDictionary;
+        private IDictionary<string, string> replacementsDictionary;
         private ProjectDialogResult projectDialogResult;
 
         public void BeforeOpeningFile(ProjectItem projectItem)
@@ -50,7 +50,7 @@ namespace NetApiRaidenTemplate.Wizard
                 fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
                 File.WriteAllBytes(filePath, fileBytes);
 
-                _ = dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
+                //_ = dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
             }
 
             // execute features managers           

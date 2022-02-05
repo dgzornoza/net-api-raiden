@@ -1,14 +1,14 @@
 ﻿using System;
-using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Polly.Registry;
 using Polly.Retry;
-using $safeprojectname$.Settings;
-using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
+// $identityserver_feature$ using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
+// $identityserver_feature$ using IdentityServer4.EntityFramework.DbContexts;
+// $identityserver_feature$ using Microsoft.Extensions.Options;
+// $identityserver_feature$ using $safeprojectname$.Settings;
 using $ext_safeprojectname$.Infrastructure.Domain;
 
 namespace $safeprojectname$.Infrastructure.Extensions
@@ -17,9 +17,9 @@ namespace $safeprojectname$.Infrastructure.Extensions
     {
         public static IHost BuildContext(this IHost host)
         {
-            host.MigrateDbContext<IEfUnitOfWork>((context, services) => { })
-                /* $identityserver_feature$ start */
-                .MigrateDbContext<PersistedGrantDbContext>((context, services) => { })
+            host.MigrateDbContext<IEfUnitOfWork>((context, services) => { });
+            /* $identityserver_feature$ start */
+            host.MigrateDbContext<PersistedGrantDbContext>((context, services) => { })
                 .MigrateDbContext<ConfigurationDbContext>((context, services) =>
                 {
                     var appConfigurationSettings = services.GetRequiredService<IOptions<AppConfigurationSettings>>().Value;
@@ -29,7 +29,7 @@ namespace $safeprojectname$.Infrastructure.Extensions
                         services.GetRequiredService<ConfigurationDbSeedData>().SeedData().Wait();
                     }
                 });
-                /* $identityserver_feature$ end */
+            /* $identityserver_feature$ end */
 
             return host;
         }

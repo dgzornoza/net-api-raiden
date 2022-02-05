@@ -11,9 +11,9 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
 
         protected override string FeatureName { get; } = "identityserver_feature";
 
-        protected override IEnumerable<string> FeatureFilesNames { get; } = new List<string>()
+        protected override IEnumerable<string> ExclusiveFeatureFiles { get; } = new List<string>()
         {
-            @"Api\Infrastructure\Filters\AuthenticateController_id4.cs",
+            @"Api\Controllers\AuthenticateController_id4.cs",
             @"Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs",
             @"Domain.SeedData\IdentityServer\ConfigurationDbSeedData.cs",
             @"Domain.SeedData\IdentityServer\IdentityConfiguration.cs",
@@ -21,7 +21,7 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
 
         protected override IDictionary<string, string> FeatureFileNamesMappers { get; } = new Dictionary<string, string>
         {
-            {@"Api\Infrastructure\Filters\AuthenticateController_id4.cs", @"Api\Infrastructure\Filters\AuthenticateController.cs"},
+            {@"Api\Controllers\AuthenticateController_id4.cs", @"Api\Controllers\AuthenticateController.cs"},
             {@"Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs", @"Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter.cs"},
         };
     }

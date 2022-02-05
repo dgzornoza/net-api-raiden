@@ -63,6 +63,7 @@ namespace $safeprojectname$
 
             app.UseRouting();
             app.UseStaticFiles();
+
             /* $identityserver_feature$ start */
             app.UseIdentityServer();
             app.UseAuthorization();

@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-/* $identityserver_feature$ start */
 using Microsoft.OpenApi.Models;
-using Polly;
-using Polly.Registry;
+using Microsoft.Extensions.DependencyInjection;
 using $safeprojectname$.Infrastructure.Authorization;
-/* $identityserver_feature$ end */
+using Polly.Registry;
+using Polly;
+// $identityserver_feature$ using System.Text;
+// $identityserver_feature$ using System.Collections.Generic;
+// $identityserver_feature$ using Microsoft.IdentityModel.Tokens;
+// $identityserver_feature$ using Microsoft.EntityFrameworkCore;
+// $identityserver_feature$ using Microsoft.AspNetCore.Authentication.JwtBearer;
+// $identityserver_feature$ using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
+// $identityserver_feature$ using $safeprojectname$.Settings;
+// $identityserver_feature$ using $ext_safeprojectname$.Infrastructure.Domain;
 using $safeprojectname$.Infrastructure.Extensions;
 using $safeprojectname$.Infrastructure.Filters;
-using $safeprojectname$.Settings;
-using $ext_safeprojectname$.Domain.SeedData.IdentityServer;
-using $ext_safeprojectname$.Infrastructure.Domain;
 
 namespace $safeprojectname$.Infrastructure.Extensions
 {
@@ -241,7 +239,6 @@ namespace $safeprojectname$.Infrastructure.Extensions
 
             return services;
         }
-
         /* $identityserver_feature$ end */
     }
 }
