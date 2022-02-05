@@ -44,6 +44,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CreateVsixContainer>False</CreateVsixContainer>
+    <DeployExtension>False</DeployExtension>	
   </PropertyGroup>
   <ItemGroup>
     <None Include="Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs" />
