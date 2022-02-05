@@ -1,0 +1,76 @@
+General:
+
+Proyecto:
+WebApplication1.Domain.SeedData
+
+Archivos:
+WebApplication1.Infrastructure.Constants.Polly
+WebApplication1.Infrastructure.Constants.ColumnSizes
+WebApplication1.Api.Infrastructure.Extensions.HostBuilderExtensions
+
+nuget:
+Polly
+(Infrastructure)
+<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+(API)
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+
+
+Identity core:
+https://dev.to/isaacojeda/aspnet-core-6-autenticacion-jwt-y-identity-core-170i
+
+
+Identity server:
+https://codewithmukesh.com/blog/identityserver4-in-aspnet-core/
+http://docs.identityserver.io/en/latest/quickstarts/1_client_credentials.html
+https://www.scottbrady91.com/Identity-Server/ASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4
+https://docs.identityserver.io/en/release/quickstarts/3_interactive_login.html
+https://www.returngis.net/2019/04/oauth-2-0-openid-connect-y-json-web-tokens-jwt-que-es-que/
+
+	
+
+Tutorial:
+http://docs.identityserver.io/en/release/quickstarts/2_resource_owner_passwords.html
+
+EF:
+https://blog.devgenius.io/identityserver4-authentication-with-asp-net-identity-for-user-management-6449bb985d21
+
+Identityserver;
+https://github.com/identityserver/IdentityServer4
+https://identityserver4.readthedocs.io/en/dev/topics/grant_types.html
+https://github.com/karpikpl/identity-server4-with-SPA-UI
+
+
+
+
+
+
+constante caracteristicas:
+$identityserver_feature$
+
+reemplazos:
+$identityserver_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_swagger_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_test_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_JWT_secret$ -> cambiar por password aleatorio al generar
+$identityserver_resource_code$
+$identityserver_resource_secret$
+
+archivos:
+IdentityConfiguration
+SwaggerAuthorizeOperationFilter_id4 cambiar por SwaggerAuthorizeOperationFilter
+AuthenticateController_id4 cambiar por AuthenticateController
+ConfigurationDbSeedData
+seedData-> IdentityServer
+
+nuget:
+IdentityServer4 (infrastructure y api)
+IdentityServer4.AccessTokenValidator (api)
+IdentityServer4.EntityFramework (infrastructure y api)
+IdentityServer4.EntityFramework.Storage (SeedData)

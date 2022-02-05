@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication1.Infrastructure</name>
+    </assembly>
+    <members>
+        <member name="T:WebApplication1.Infrastructure.Domain.AppUnitOfWork">
+            <summary>
+            App Entity Framework unit of work
+            </summary>
+        </member>
+        <member name="T:WebApplication1.Infrastructure.Domain.EntityConfigurations.EntityConfiguration`1">
+            <summary>
+            Entity configuration base for configure entities
+            </summary>
+            <typeparam name="TEntity">Entity type</typeparam>
+        </member>
+        <member name="T:WebApplication1.Infrastructure.Domain.IEfUnitOfWork">
+            <summary>
+            Entity Framework Unit Of Work interface
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Infrastructure.Domain.IEfUnitOfWork.CreateSet``1">
+            <summary>
+            Create a Microsoft.EntityFrameworkCore.DbSet that can be used to query and save TEntity instances
+            </summary>
+            <typeparam name="TEntity">DbSet entity type</typeparam>
+            <returns>Entity DbSet</returns>
+        </member>
+        <member name="M:WebApplication1.Infrastructure.Domain.IEfUnitOfWork.Attach``1(``0)">
+            <summary>
+            Starts tracking of specified entity by the context and all related navigation entities found.
+            <see cref="M:Microsoft.EntityFrameworkCore.DbContext.Attach(System.Object)"/>
+            </summary>
+            <typeparam name="TEntity">Entity type</typeparam>
+            <param name="entity">Entity to attach to context</param>
+            <returns>EntityEntry that provides access to information on tracking changes and operations for the entity.</returns>
+        </member>
+        <member name="M:WebApplication1.Infrastructure.Domain.IEfUnitOfWork.SetModified``1(``0)">
+            <summary>
+            Sets the state of the specified entity as modified.
+            This method establishes only the modified state in the specified entity and not in the rest of the entities, also not in related entities.
+            </summary>
+            <typeparam name="TEntity">Entity type</typeparam>
+            <param name="entity">Entity to set as modified</param>
+        </member>
+        <member name="M:WebApplication1.Infrastructure.Domain.IEfUnitOfWork.ApplyCurrentValues``1(``0,System.Object)">
+            <summary>
+            Sets the values ​​by copying the current object to the original.
+            The current object can be of any type. Any property on the current object that
+            matches the original object in the entity will be read and copied. The rest of the properties will be
+            ignored. This allows, for example, to copy properties from DTOs
+            </summary>
+            <typeparam name="TEntity">Entity type</typeparam>
+            <param name="original">Current entity to which the matching properties will be copied</param>
+            <param name="current">Object whose matching properties will be copied to the entity</param>
+        </member>
+        <member name="T:WebApplication1.Infrastructure.Domain.Repositories.Repository`1">
+            <summary>
+            Repository base class
+            </summary>
+            <typeparam name="TEntity">Repository entity type</typeparam>
+        </member>
+        <member name="T:WebApplication1.Infrastructure.Extensions.MediatorExtensions">
+            <summary>
+            Class with MediatR extension methods.
+            </summary>
+        </member>
+        <member name="M:WebApplication1.Infrastructure.Extensions.MediatorExtensions.DispatchDomainEventsAsync(MediatR.IMediator,Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Function to execute all events registered in the domain currently
+            </summary>
+            <param name="mediator">MediatR mediator object</param>
+            <param name="dbContext">Database DbContext</param>
+            <returns>Execution task</returns>
+        </member>
+        <member name="T:WebApplication1.Infrastructure.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.Infrastructure.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebApplication1.Infrastructure.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

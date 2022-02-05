@@ -1,0 +1,42 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Infrastructure</Name>
+    <Description>NetApiRaiden Infrastructure Layer Project</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Infrastructure</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>    
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Infrastructure.csproj" File="Infrastructure.csproj" ReplaceParameters="true">
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      </Folder>
+        <Folder Name="Constants" TargetFolderName="Constants">
+            <ProjectItem ReplaceParameters="true" TargetFileName="ColumnSizes.cs">ColumnSizes.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Polly.cs">Polly.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Domain" TargetFolderName="Domain">
+        <Folder Name="EntityConfigurations" TargetFolderName="EntityConfigurations">
+          <ProjectItem ReplaceParameters="true" TargetFileName="EntityConfiguration.cs">EntityConfiguration.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Repositories" TargetFolderName="Repositories">
+          <ProjectItem ReplaceParameters="true" TargetFileName="Repository.cs">Repository.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AppUnitOfWork.cs">AppUnitOfWork.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="IEfUnitOfWork.cs">IEfUnitOfWork.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Extensions" TargetFolderName="Extensions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="MediatorExtensions.cs">MediatorExtensions.cs</ProjectItem>
+      </Folder>      
+    </Project>
+  </TemplateContent>
+</VSTemplate>

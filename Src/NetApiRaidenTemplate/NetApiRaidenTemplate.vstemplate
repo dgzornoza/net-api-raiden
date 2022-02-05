@@ -1,0 +1,74 @@
+﻿<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  
+    <TemplateData>
+        <Name>NetApiRaiden Template</Name>
+        <Description>Template to help in generation and development of .net api projects.</Description>
+        <ProjectType>CSharp</ProjectType>
+        <ProjectSubType></ProjectSubType>
+        <SortOrder>1000</SortOrder>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>NetApiRaiden</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <LocationField>Enabled</LocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    </TemplateData>
+
+    <TemplateContent>
+
+        <ProjectCollection>
+
+            <SolutionFolder Name="1-Domain">
+                <ProjectTemplateLink ProjectName="$projectname$.Domain" CopyParameters="true">
+                    Domain\Domain.vstemplate
+                </ProjectTemplateLink>
+                <ProjectTemplateLink ProjectName="$projectname$.Domain.SeedData" CopyParameters="true">
+                    Domain.SeedData\Domain.SeedData.vstemplate
+                </ProjectTemplateLink>                
+            </SolutionFolder>
+
+            <SolutionFolder Name="2-Infrastructure">
+                <ProjectTemplateLink ProjectName="$projectname$.Infrastructure" CopyParameters="true">
+                    Infrastructure\Infrastructure.vstemplate
+                </ProjectTemplateLink>
+            </SolutionFolder>
+
+            
+            <SolutionFolder Name="3-Application">
+                <ProjectTemplateLink ProjectName="$projectname$.Application" CopyParameters="true">
+                    Application\Application.vstemplate
+                </ProjectTemplateLink>
+            </SolutionFolder>
+            
+            
+            <SolutionFolder Name="4-Ports" >
+                <ProjectTemplateLink ProjectName="$projectname$.Api" CopyParameters="true">
+                    Api\Api.vstemplate
+                </ProjectTemplateLink>
+            </SolutionFolder>
+
+
+            <SolutionFolder Name="5-Tests">
+                <ProjectTemplateLink ProjectName="$projectname$.IntegrationTest" CopyParameters="true">
+                    IntegrationTest\IntegrationTest.vstemplate
+                </ProjectTemplateLink>
+                <ProjectTemplateLink ProjectName="$projectname$.Tests.Helpers" CopyParameters="true">
+                    Tests.Helpers\Tests.Helpers.vstemplate
+                </ProjectTemplateLink>
+                <ProjectTemplateLink ProjectName="$projectname$.UnitTest" CopyParameters="true">
+                    UnitTest\UnitTest.vstemplate
+                </ProjectTemplateLink>
+            </SolutionFolder>
+
+            
+            <SolutionFolder Name="Solution Items" >
+            </SolutionFolder>
+            
+        </ProjectCollection>
+    </TemplateContent>
+
+  <WizardExtension>
+    <Assembly>NetApiRaidenTemplate.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <FullClassName>NetApiRaidenTemplate.Wizard.ConfigureApiWizard</FullClassName>
+  </WizardExtension>
+  
+</VSTemplate>
