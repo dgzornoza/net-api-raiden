@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Domain.SeedWork;
+using $ext_safeprojectname$.Domain.SeedWork;
 
 namespace $safeprojectname$.Domain.Repositories
 {

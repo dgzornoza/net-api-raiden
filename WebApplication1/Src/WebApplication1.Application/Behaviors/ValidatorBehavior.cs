@@ -10,7 +10,7 @@ using WebApplication1.Application.Common.Extensions;
 namespace WebApplication1.Application.Behaviors
 {
     public class ValidatorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : notnull
+        where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<ValidatorBehavior<TRequest, TResponse>> logger;
         private readonly IEnumerable<IValidator<TRequest>> validators;

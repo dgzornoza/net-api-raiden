@@ -20,7 +20,11 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
       </Folder>
-      <Folder Name="Domain" TargetFolderName="Domain">
+        <Folder Name="Constants" TargetFolderName="Constants">
+            <ProjectItem ReplaceParameters="true" TargetFileName="ColumnSizes.cs">ColumnSizes.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Polly.cs">Polly.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Domain" TargetFolderName="Domain">
         <Folder Name="EntityConfigurations" TargetFolderName="EntityConfigurations">
           <ProjectItem ReplaceParameters="true" TargetFileName="EntityConfiguration.cs">EntityConfiguration.cs</ProjectItem>
         </Folder>

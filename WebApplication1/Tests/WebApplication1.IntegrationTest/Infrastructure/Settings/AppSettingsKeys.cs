@@ -4,7 +4,6 @@
     {
         public const string AppConnectionString = "ConnectionStrings:AppConnectionString";
         public const string Authentication = "Authentication";
-        public const string Environment = "TestServer:Environment";
-        public const string ApiUrl = "TestServer:ApiUrl";
+        public const string TestServer = "TestServer";
     }
 }

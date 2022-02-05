@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Domain.SeedWork;
+using $ext_safeprojectname$.Domain.SeedWork;
 
 namespace $safeprojectname$.Extensions
 {

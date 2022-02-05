@@ -1,11 +1,15 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication1.Api.Settings;
 using WebApplication1.Application.Behaviors;
 using WebApplication1.Application.Common.Commands;
+using WebApplication1.Domain.SeedData.IdentityServer;
+using WebApplication1.Infrastructure.Domain;
 
 namespace WebApplication1.Api.Infrastructure.Extensions
 {
@@ -22,8 +26,18 @@ namespace WebApplication1.Api.Infrastructure.Extensions
         /// <returns>Services container collection object</returns>
         public static IServiceCollection AddIocContainer(this IServiceCollection services, IConfiguration configuration)
         {
-            // Misc
-            // services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
+            // DbContext
+            services.AddDbContext<IEfUnitOfWork, AppUnitOfWork>(options => options.UseSqlServer(configuration.GetConnectionString(AppSettingsKeys.AppConnectionString),
+                sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly(typeof(AppUnitOfWork).GetTypeInfo().Assembly.GetName().Name);
+                    sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                }));
+
+            /* $identityserver_feature$ start */
+            // IdentityServer
+            services.AddTransient<ConfigurationDbSeedData>();
+            /* $identityserver_feature$ end */
 
             // MediatR
             services.AddMediatR(typeof(ICommand).GetTypeInfo().Assembly);
@@ -40,7 +54,8 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             // ...
 
             // Configurations
-            services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection("AppConfiguration"));
+            services.AddOptions<AppConfigurationSettings>().Bind(configuration.GetSection(AppSettingsKeys.AppConfiguration));
+            services.AddOptions<JwtSettings>().Bind(configuration.GetSection(AppSettingsKeys.Jwt));
 
             return services;
         }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using WebApplication1.Domain.SeedWork;
+using $ext_safeprojectname$.Domain.SeedWork;
 
 namespace $safeprojectname$.Domain.EntityConfigurations
 {

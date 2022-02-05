@@ -62,9 +62,12 @@ namespace WebApplication1.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseStaticFiles();
+            /* $identityserver_feature$ start */
+            app.UseIdentityServer();
             app.UseAuthorization();
             app.UseAuthentication();
+            /* $identityserver_feature$ end */
 
             app.UseAppConfiguration(env, provider);
 

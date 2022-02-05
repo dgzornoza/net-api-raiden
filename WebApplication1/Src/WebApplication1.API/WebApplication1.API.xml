@@ -4,6 +4,12 @@
         <name>WebApplication1.Api</name>
     </assembly>
     <members>
+        <member name="M:WebApplication1.Api.Infrastructure.Authorization.Policies.AddPolicies(Microsoft.AspNetCore.Authorization.AuthorizationOptions)">
+            <summary>
+            Function for add authorization policies
+            </summary>
+            <param name="options">Authorization options</param>
+        </member>
         <member name="T:WebApplication1.Api.Infrastructure.Extensions.IocContainerExtension">
             <summary>
             Extension class for manage Application Inversion Of Control container
