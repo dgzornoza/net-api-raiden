@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
@@ -7,6 +11,15 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
     public class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private readonly IEnumerable<PropertyInfo> canProperties;
+
+        public BindableBase()
+        {
+            // obtener cancommands para reevaluarse en notificaciones (por convencion seran usados CanXXXCmd)
+            canProperties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(item => item.Name.StartsWith("Can") && item.Name.EndsWith("Cmd"));
+        }
 
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
@@ -16,20 +29,33 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
             }
 
             storage = value;
-            this.RaisePropertyChanged(propertyName);
+            RaisePropertyChanged(propertyName);
             return true;
         }
 
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            args = args ?? throw new ArgumentNullException("args");
+            args = args ?? throw new ArgumentNullException(nameof(args));
 
-            this.PropertyChanged?.Invoke(this, args);
+            PropertyChanged?.Invoke(this, args);
+        }
+
+        public void RaisePropertyChanged<TProperty>(Expression<Func<TProperty>> property)
+        {
+            RaisePropertyChanged((property.Body as MemberExpression).Member.Name);
         }
 
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            var propertyChangedEventArgs = new PropertyChangedEventArgs(propertyName);
+
+            OnPropertyChanged(propertyChangedEventArgs);
+
+            // notificar cancommands en todas las propiedades
+            for (int i = 0; i < canProperties.Count(); i++)
+            {
+                OnPropertyChanged(propertyChangedEventArgs);
+            }
         }
     }
 }
