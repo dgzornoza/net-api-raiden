@@ -51,13 +51,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-	<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="ConfigureApiWizard.cs" />
     <Compile Include="Dialogs\Infrastructure\BindableBase.cs" />
     <Compile Include="Dialogs\Infrastructure\DelegateCommand.cs" />
+    <Compile Include="Dialogs\Infrastructure\DelegateCommandBase.cs" />
     <Compile Include="Dialogs\Infrastructure\ViewModelBase.cs" />
     <Compile Include="Dialogs\ViewModels\SelectContainerDialogViewModel.cs" />
     <Compile Include="Dialogs\Views\SelectContainerDialog.xaml.cs">
