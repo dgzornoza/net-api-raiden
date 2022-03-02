@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
 {
-    internal sealed class DelegateCommand : DelegateCommandBase<Action, Func<bool>>
+    public sealed class DelegateCommand : DelegateCommandBase<Action, Func<bool>>
     {
         public DelegateCommand(Action executeMethod) : base(executeMethod, null)
         {
@@ -20,7 +20,7 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
         public override void Execute(object parameter) => executeMethod?.Invoke();
     }
 
-    internal sealed class DelegateCommand<T> : DelegateCommandBase<Action<T>, Predicate<T>>
+    public sealed class DelegateCommand<T> : DelegateCommandBase<Action<T>, Predicate<T>>
     {
         public DelegateCommand(Action<T> executeMethod) : base(executeMethod, null)
         {

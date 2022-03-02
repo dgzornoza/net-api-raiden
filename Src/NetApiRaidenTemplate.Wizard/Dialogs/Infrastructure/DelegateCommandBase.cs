@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
 {
-    internal abstract class DelegateCommandBase<TExecute, TCanExecute> : ICommand
+    public abstract class DelegateCommandBase<TExecute, TCanExecute> : ICommand
         where TExecute : Delegate
         where TCanExecute : Delegate
     {
