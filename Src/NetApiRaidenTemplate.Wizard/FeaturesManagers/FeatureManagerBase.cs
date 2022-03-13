@@ -158,7 +158,7 @@ namespace NetApiRaidenTemplate.Wizard.FeaturesManagers
         }
 
         /// <summary>
-        /// Remove feature content, available tags:
+        /// Remove feature tags, available tags:
         /// 
         /// Multiline
         /// $feature_name$ start
