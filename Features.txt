@@ -1,0 +1,38 @@
+General:
+
+Proyecto:
+
+
+Archivos:
+
+
+nuget:
+
+
+
+reemplazos IdentityServer:
+$identityserver_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_swagger_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_test_client_secret$ -> cambiar por password aleatorio al generar
+$identityserver_JWT_secret$ -> cambiar por password aleatorio al generar
+$identityserver_resource_code$
+$identityserver_resource_secret$
+
+
+
+Identity core:
+https://dev.to/isaacojeda/aspnet-core-6-autenticacion-jwt-y-identity-core-170i
+
+constante caracteristicas:
+$identitycore_feature$
+
+reemplazos IdentityCore:
+
+
+Proyecto:
+
+
+Archivos:
+
+
+nuget:
