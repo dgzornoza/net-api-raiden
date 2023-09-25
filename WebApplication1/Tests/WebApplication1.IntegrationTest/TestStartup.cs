@@ -25,7 +25,7 @@ namespace WebApplication1.IntegrationTest
             {
                 configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
             })
-            .AddApplicationPart(Assembly.GetAssembly(typeof(Startup)));
+            .AddApplicationPart(Assembly.GetAssembly(typeof(Program))!);
 
             services.AddAppConfiguration(this.Configuration);
 

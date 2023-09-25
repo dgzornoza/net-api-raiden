@@ -53,7 +53,6 @@
             <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Production.json">appsettings.Production.json</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Staging.json">appsettings.Staging.json</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="Program.cs">Program.cs</ProjectItem>
-            <ProjectItem ReplaceParameters="true" TargetFileName="Startup.cs">Startup.cs</ProjectItem>
         </Project>
     </TemplateContent>
 </VSTemplate>

@@ -45,7 +45,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CreateVsixContainer>False</CreateVsixContainer>
-    <DeployExtension>False</DeployExtension>	
+    <DeployExtension>False</DeployExtension>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs" />
@@ -68,7 +68,6 @@
     <None Include="Api\Program.cs" />
     <None Include="Api\Properties\Resources.Designer.cs" />
     <None Include="Api\Settings\AppConfigurationSettings.cs" />
-    <None Include="Api\Startup.cs" />
     <None Include="Application\Behaviors\LoggingBehavior.cs" />
     <None Include="Application\Behaviors\ValidatorBehavior.cs" />
     <None Include="Application\Common\Commands\CommandBase.cs" />

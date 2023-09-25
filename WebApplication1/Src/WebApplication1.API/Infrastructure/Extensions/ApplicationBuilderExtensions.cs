@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -47,9 +48,9 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 .UseSwaggerUI(options =>
                 {
                     // generate swagger endpoints for all versions
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    foreach (var groupName in provider.ApiVersionDescriptions.Select(item => item.GroupName))
                     {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                        options.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
                     }
 
                     /* $identityserver_feature$ start */

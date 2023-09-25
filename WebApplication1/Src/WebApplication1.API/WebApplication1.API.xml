@@ -28,30 +28,6 @@
             Filter to handle all global http exceptions.
             </summary>
         </member>
-        <member name="T:WebApplication1.Api.Program">
-            <summary>
-            Main entry program class
-            </summary>
-        </member>
-        <member name="P:WebApplication1.Api.Program.Configuration">
-            <summary>
-            Application configuration
-            </summary>
-        </member>
-        <member name="M:WebApplication1.Api.Program.Main(System.String[])">
-            <summary>
-            App main entry point
-            </summary>
-            <param name="args">Application arguments</param>
-            <returns>Task result</returns>
-        </member>
-        <member name="M:WebApplication1.Api.Program.CreateHostBuilder(System.String[])">
-            <summary>
-            Method for create application host builder
-            </summary>
-            <param name="args">Application arguments</param>
-            <returns>Host builder created</returns>
-        </member>
         <member name="T:WebApplication1.Api.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -87,38 +63,6 @@
             <summary>
               Looks up a localized string similar to Invalid certificate..
             </summary>
-        </member>
-        <member name="T:WebApplication1.Api.Startup">
-            <summary>
-            Main Startup class
-            </summary>
-        </member>
-        <member name="M:WebApplication1.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="configuration">Configuration</param>
-        </member>
-        <member name="P:WebApplication1.Api.Startup.Configuration">
-            <summary>
-            App configuration
-            </summary>
-        </member>
-        <member name="M:WebApplication1.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
-            <summary>
-            Function for configure application container services
-            This method gets called by the runtime. Use this method to add services to the container.
-            </summary>
-            <param name="services">service container collection</param>
-        </member>
-        <member name="M:WebApplication1.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.AspNetCore.Mvc.ApiExplorer.IApiVersionDescriptionProvider)">
-            <summary>
-            Function for configure Application request pipeline
-            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            </summary>
-            <param name="app">application builder</param>
-            <param name="env">Web host environment</param>
-            <param name="provider">Provider for api version</param>
         </member>
     </members>
 </doc>

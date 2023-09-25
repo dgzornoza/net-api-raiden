@@ -1,82 +1,74 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using $safeprojectname$.Infrastructure.Filters;
 using $safeprojectname$.Infrastructure.Extensions;
 using $ext_safeprojectname$.Infrastructure.Domain;
 
-namespace $safeprojectname$
+namespace $safeprojectname$;
+
+public static class Program
 {
-    /// <summary>
-    /// Main entry program class
-    /// </summary>
-    public static class Program
+
+    private static void Main(string[] args)
     {
-        /// <summary>
-        /// Application configuration
-        /// </summary>
-        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environments.Production}.json", optional: true)
-            .AddEnvironmentVariables()
-            .Build();
+        Log.Logger = new LoggerConfiguration().CreateBootstrapLogger();
 
-        /// <summary>
-        /// App main entry point
-        /// </summary>
-        /// <param name="args">Application arguments</param>
-        /// <returns>Task result</returns>
-        public static async Task Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Serilog
+        builder.Host.UseSerilog((context, logConfiguration) => logConfiguration.ReadFrom.Configuration(context.Configuration));
+
+        // Add services to the container.
+        builder.Services.AddControllers(configure =>
         {
-            // Initialize Serilog
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(Configuration)
-                .Enrich.FromLogContext()
-                .CreateLogger();
+            configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
+        }).AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
 
-            try
-            {
-                Log.Information("Getting the motors running...");
-                var host = CreateHostBuilder(args)
-                    .Build()
-                    .BuildContext();
+        builder.Services.AddIocContainer(builder.Configuration);
+        builder.Services.AddAppConfiguration(builder.Configuration);
+        builder.Services.AddEndpointsApiExplorer();
 
-                // Run the Host, and start accepting requests
-                await host.RunAsync();
-            }
-#pragma warning disable CA1031 // Do not catch general exception types
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Host terminated unexpectedly");
-            }
-#pragma warning restore CA1031 // Do not catch general exception types
-            finally
-            {
-                Log.CloseAndFlush();
-            }
+        // APP Builder
+        var app = builder
+            .Build()
+            .BuildContext();
+
+        app.UseHttpsRedirection();
+
+        app.UseStaticFiles();
+
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        app.UseAppConfiguration(builder.Environment, provider);
+
+        /* $identityserver_feature$ start */
+        app.UseAuthentication();
+        app.UseAuthorization();
+        /* $identityserver_feature$ end */
+
+        app.MapControllers();
+
+        try
+        {
+            Log.Information("Getting the motors running...");
+
+            // Run the Host, and start accepting requests
+            app.Run();
         }
-
-        /// <summary>
-        /// Method for create application host builder
-        /// </summary>
-        /// <param name="args">Application arguments</param>
-        /// <returns>Host builder created</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((hostingContext, config) =>
-                {
-                    config.ClearProviders();
-                })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.UseConfiguration(Configuration);
-                    webBuilder.UseSerilog();
-                });
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Host terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 }
+
