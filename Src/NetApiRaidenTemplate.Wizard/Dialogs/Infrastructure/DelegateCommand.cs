@@ -1,130 +1,39 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Input;
 
 namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
 {
-    public sealed class DelegateCommand : ICommand
+    public sealed class DelegateCommand : DelegateCommandBase<Action, Func<bool>>
     {
-        private readonly Func<bool> canExecuteMethod;
-        private readonly Action executeMethod;
-
-        public DelegateCommand(Action executeMethod)
-            : this(executeMethod, null)
+        public DelegateCommand(Action executeMethod) : base(executeMethod, null)
         {
         }
 
-        public DelegateCommand(Action executeMethod, Func<bool> canExecuteMethod)
+        public DelegateCommand(Action executeMethod, Func<bool> canExecuteMethod) : base(executeMethod, canExecuteMethod)
         {
-            this.executeMethod = executeMethod ?? throw new ArgumentNullException("executeMethod");
-            this.canExecuteMethod = canExecuteMethod;
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add
-            {
-                if (this.canExecuteMethod != null)
-                {
-                    CommandManager.RequerySuggested += value;
-                }
-            }
-
-            remove
-            {
-                if (this.canExecuteMethod != null)
-                {
-                    CommandManager.RequerySuggested -= value;
-                }
-            }
         }
 
         [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
-        {
-            if (this.canExecuteMethod != null)
-            {
-                return this.canExecuteMethod();
-            }
-
-            return true;
-        }
-
-        public void CanExecuteChanged_RaiseEvent(object sender, EventArgs e)
-        {
-            if (this.canExecuteMethod != null)
-            {
-                CommandManager.InvalidateRequerySuggested();
-            }
-        }
+        public override bool CanExecute(object parameter) => canExecuteMethod == null || canExecuteMethod();
 
         [DebuggerStepThrough]
-        public void Execute(object parameter)
-        {
-            this.executeMethod?.Invoke();
-        }
+        public override void Execute(object parameter) => executeMethod?.Invoke();
     }
 
-    public sealed class DelegateCommand<T> : ICommand
+    public sealed class DelegateCommand<T> : DelegateCommandBase<Action<T>, Predicate<T>>
     {
-        private readonly Predicate<T> canExecuteMethod;
-        private readonly Action<T> executeMethod;
-
-        public DelegateCommand(Action<T> executeMethod)
-            : this(executeMethod, null)
+        public DelegateCommand(Action<T> executeMethod) : base(executeMethod, null)
         {
         }
 
-        public DelegateCommand(Action<T> executeMethod, Predicate<T> canExecuteMethod)
+        public DelegateCommand(Action<T> executeMethod, Predicate<T> canExecuteMethod) : base(executeMethod, canExecuteMethod)
         {
-            executeMethod = executeMethod ?? throw new ArgumentNullException("executeMethod");
-
-            this.executeMethod = executeMethod;
-            this.canExecuteMethod = canExecuteMethod;
-        }
-
-        public event EventHandler CanExecuteChanged
-        {
-            add
-            {
-                if (this.canExecuteMethod != null)
-                {
-                    CommandManager.RequerySuggested += value;
-                }
-            }
-
-            remove
-            {
-                if (this.canExecuteMethod != null)
-                {
-                    CommandManager.RequerySuggested -= value;
-                }
-            }
         }
 
         [DebuggerStepThrough]
-        public bool CanExecute(object parameter)
-        {
-            if (this.canExecuteMethod != null)
-            {
-                return this.canExecuteMethod((T)parameter);
-            }
-
-            return true;
-        }
-
-        public void CanExecuteChanged_RaiseEvent(object sender, EventArgs e)
-        {
-            if (this.canExecuteMethod != null)
-            {
-                CommandManager.InvalidateRequerySuggested();
-            }
-        }
+        public override bool CanExecute(object parameter) => canExecuteMethod == null || canExecuteMethod((T)parameter);
 
         [DebuggerStepThrough]
-        public void Execute(object parameter)
-        {
-            this.executeMethod((T)parameter);
-        }
+        public override void Execute(object parameter) => executeMethod((T)parameter);
     }
 }

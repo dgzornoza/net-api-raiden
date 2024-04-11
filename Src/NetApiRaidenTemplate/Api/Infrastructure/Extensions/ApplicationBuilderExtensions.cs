@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace $safeprojectname$.Infrastructure.Extensions
 {
@@ -47,9 +48,9 @@ namespace $safeprojectname$.Infrastructure.Extensions
                 .UseSwaggerUI(options =>
                 {
                     // generate swagger endpoints for all versions
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    foreach (var groupName in provider.ApiVersionDescriptions.Select(item => item.GroupName))
                     {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                        options.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
                     }
 
                     /* $identityserver_feature$ start */

@@ -1,5 +1,6 @@
 ﻿using System;
 using IdentityServer4.EntityFramework.DbContexts;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +16,7 @@ namespace WebApplication1.Api.Infrastructure.Extensions
 {
     public static class HostBuilderExtensions
     {
-        public static IHost BuildContext(this IHost host)
+        public static WebApplication BuildContext(this WebApplication host)
         {
             host.MigrateDbContext<IEfUnitOfWork>((context, services) => { })
                 /* $identityserver_feature$ start */

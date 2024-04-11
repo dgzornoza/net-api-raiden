@@ -20,14 +20,17 @@ namespace NetApiRaidenTemplate.Wizard
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
+            // Actualmente no necesario
         }
 
         public void ProjectFinishedGenerating(Project project)
         {
+            // Actualmente no necesario
         }
 
         public void ProjectItemFinishedGenerating(ProjectItem projectItem)
         {
+            // Actualmente no necesario
         }
 
         public void RunFinished()
@@ -50,7 +53,7 @@ namespace NetApiRaidenTemplate.Wizard
                 fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");
                 File.WriteAllBytes(filePath, fileBytes);
 
-                //_ = dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
+                ////_ = dte.ItemOperations.Navigate(filePath, vsNavigateOptions.vsNavigateOptionsNewWindow);
             }
 
             // execute features managers           
@@ -64,9 +67,9 @@ namespace NetApiRaidenTemplate.Wizard
                 ThreadHelper.ThrowIfNotOnUIThread();
 
                 // store DTE and template params dictionary
-                if (automationObject is DTE dte)
+                if (automationObject is DTE automationObjectAsDte)
                 {
-                    this.dte = dte;
+                    this.dte = automationObjectAsDte;
                 }
 
                 this.replacementsDictionary = replacementsDictionary;
@@ -117,6 +120,7 @@ namespace NetApiRaidenTemplate.Wizard
                 }
                 catch
                 {
+                    System.Diagnostics.Debug.WriteLine($"Error deleting folder {folder}");
                 }
             }
         }

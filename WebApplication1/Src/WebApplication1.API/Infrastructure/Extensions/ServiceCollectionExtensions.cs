@@ -75,12 +75,13 @@ namespace WebApplication1.Api.Infrastructure.Extensions
             return services;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S1075:URIs should not be hardcoded", Justification = "<Pending>")]
         private static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            var assemblyProductAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
+            var assemblyProductAttribute = typeof(Program).Assembly.GetCustomAttribute<AssemblyProductAttribute>() ??
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyProductAttribute);
 
-            var assemblyDescriptionAttribute = typeof(Startup).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
+            var assemblyDescriptionAttribute = typeof(Program).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>() ??
                 throw new ApplicationException(Properties.Resources.InvalidAssemblyDescriptionAttribute);
 
             return services.AddSwaggerGen(options =>
@@ -107,7 +108,7 @@ namespace WebApplication1.Api.Infrastructure.Extensions
                 // select first endpoint in case of multiple
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
 
-                options.IncludeXmlComments(Path.ChangeExtension(typeof(Startup).Assembly.Location, "xml"));
+                options.IncludeXmlComments(Path.ChangeExtension(typeof(Program).Assembly.Location, "xml"));
 
                 /* $identityserver_feature$ start */
 

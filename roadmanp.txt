@@ -1,5 +1,6 @@
 Opciones:
--- Identity
+-- Identity Server-- OK
+-- Identity Core
 -- multilanguage
 -- OData
 -- Feature toggles

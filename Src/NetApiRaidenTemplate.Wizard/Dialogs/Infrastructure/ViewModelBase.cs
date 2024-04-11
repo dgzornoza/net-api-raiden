@@ -4,7 +4,7 @@ using NetApiRaidenTemplate.Wizard.Models;
 
 namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
 {
-    internal class ViewModelBase : BindableBase
+    public class ViewModelBase : ViewModelBase<ProjectDialogResultEventArgs>
     {
         private ICommand createProjectCommand;
 
@@ -33,6 +33,35 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.Infrastructure
         protected virtual void OnProjectCreated(ProjectDialogResultEventArgs e)
         {
             this.ProjectCreated?.Invoke(this, e);
+        }
+    }
+
+    public class ViewModelBase<T> : BindableBase where T : ProjectDialogResultEventArgs
+    {
+        protected bool isBusy;
+
+        public ViewModelBase()
+        {
+        }
+
+        public EventHandler<T> DialogResult;
+
+        public bool IsBusy
+        {
+            get
+            {
+                return isBusy;
+            }
+            set
+            {
+                if (value == isBusy)
+                {
+                    return;
+                }
+
+                isBusy = value;
+                RaisePropertyChanged(() => IsBusy);
+            }
         }
     }
 }
