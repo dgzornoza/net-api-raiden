@@ -4,9 +4,9 @@
         <name>NetApiRaiden1.Api</name>
     </assembly>
     <members>
-        <member name="M:NetApiRaiden1.Api.Controllers.OData.V1.SampleController.Get(Microsoft.AspNetCore.OData.Query.ODataQueryOptions{NetApiRaiden1.Application.Queries.Samples.QueryableSamples.QueryableSamplesItemDto})">
+        <member name="M:NetApiRaiden1.Api.Controllers.OData.V1.SamplesController.Get(Microsoft.AspNetCore.OData.Query.ODataQueryOptions{NetApiRaiden1.Application.Queries.Samples.QueryableSamples.QueryableSamplesItemDto})">
             <summary>
-            OData GET odata/events
+            OData GET odata/samples
             </summary>
             <returns></returns>
         </member>
@@ -16,7 +16,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:NetApiRaiden1.Api.Controllers.v1.SamplesController.Get">
+        <member name="M:NetApiRaiden1.Api.Controllers.v1.SamplesController.GetAll">
             <summary>
              GET: api/samples/
             </summary>

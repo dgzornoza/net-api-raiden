@@ -5,8 +5,6 @@ using NetApiRaiden1.Application.Queries.Samples.QueryableSamples;
 
 namespace NetApiRaiden1.Api.Controllers.v1;
 
-[ApiController]
-[Route("[controller]")]
 [ApiVersion(1.0)]
 public class SamplesController : ApiControllerBase
 {
@@ -21,7 +19,7 @@ public class SamplesController : ApiControllerBase
     ///  GET: api/samples/{id}
     /// </summary>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet("{id}")]
     [ProducesResponseType(typeof(QueryableSamplesItemDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Get(Guid id)
@@ -41,7 +39,7 @@ public class SamplesController : ApiControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<QueryableSamplesItemDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAll()
     {
         var query = new QueryableSamplesQuery();
         var response = await mediator.Send(query);

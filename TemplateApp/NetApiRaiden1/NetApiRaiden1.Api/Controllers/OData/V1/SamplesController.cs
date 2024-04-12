@@ -9,17 +9,17 @@ using NetApiRaiden1.Application.Queries.Samples.QueryableSamples;
 namespace NetApiRaiden1.Api.Controllers.OData.V1;
 
 [ApiVersion(1.0)]
-public class SampleController : ODataController
+public class SamplesController : ODataController
 {
     private readonly IMediator mediator;
 
-    public SampleController(IMediator mediator)
+    public SamplesController(IMediator mediator)
     {
         this.mediator = mediator;
     }
 
     /// <summary>
-    /// OData GET odata/events
+    /// OData GET odata/samples
     /// </summary>
     /// <returns></returns>
     [EnableQuery]

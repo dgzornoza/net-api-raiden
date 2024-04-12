@@ -18,12 +18,12 @@ public class QueryableEventsQueryHandler : IQueryHandler<QueryableSamplesQuery, 
         var samples = new List<QueryableSamplesItemDto>
         {
             new() {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("CAE3D281-8D92-4BFB-A2AC-A9B2AF0BB49D"),
                 Name = "Sample 1",
                 Description = "Description 1"
             },
             new() {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("BF44E99E-B926-4ECE-AF12-F7B3180387ED"),
                 Name = "Sample 2",
                 Description = "Description 2"
             }
