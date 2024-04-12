@@ -1,26 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.Domain.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.Domain.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.xml" />
+        <None Remove="$safeprojectname$.Domain.xml" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
     </ItemGroup>
 
     <ItemGroup>

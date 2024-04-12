@@ -12,14 +12,9 @@
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <CreateInPlace>true</CreateInPlace>
-    <Icon>__TemplateIcon.ico</Icon>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="Domain.SeedData.csproj" File="Domain.SeedData.csproj" ReplaceParameters="true">
-      <Folder Name="IdentityServer" TargetFolderName="IdentityServer">
-        <ProjectItem ReplaceParameters="true" TargetFileName="ConfigurationDbSeedData.cs">ConfigurationDbSeedData.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IdentityConfiguration.cs">IdentityConfiguration.cs</ProjectItem>
-      </Folder>
     </Project>
   </TemplateContent>
 </VSTemplate>

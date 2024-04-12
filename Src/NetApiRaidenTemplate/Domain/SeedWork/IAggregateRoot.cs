@@ -1,9 +1,8 @@
-﻿namespace $safeprojectname$.SeedWork
+﻿namespace $safeprojectname$.SeedWork;
+
+/// <summary>
+/// Domain Aggregate roots interface
+/// </summary>
+public interface IAggregateRoot
 {
-    /// <summary>
-    /// Domain Aggregate roots interface
-    /// </summary>
-    public interface IAggregateRoot
-    {
-    }
 }

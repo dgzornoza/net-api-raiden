@@ -48,6 +48,10 @@ namespace NetApiRaidenTemplate.Wizard
                 var fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.editorconfig");
                 File.WriteAllBytes(filePath, fileBytes);
 
+                filePath = Path.Combine(replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], ".Directory.Build.props");
+                fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Directory.Build.props");
+                File.WriteAllBytes(filePath, fileBytes);
+
                 // copy readme html in solution folder and show in VS
                 filePath = Path.Combine(replacementsDictionary[Configuration.TemplateParams.DestinationDirectoryKey], "Readme.html");
                 fileBytes = ResourceHelpers.GetEmbeddedResource("Resources.TemplateFiles.Readme.html");

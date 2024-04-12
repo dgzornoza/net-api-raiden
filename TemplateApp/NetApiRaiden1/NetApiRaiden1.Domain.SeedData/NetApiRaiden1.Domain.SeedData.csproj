@@ -17,9 +17,4 @@
         <ProjectReference Include="..\NetApiRaiden1.Infrastructure\NetApiRaiden1.Infrastructure.csproj" />
     </ItemGroup>
     
-    <!-- Grouping files -->
-    <ItemGroup>
-        <Compile Update="AppSeed.*.cs" DependentUpon="AppSeed.cs" />
-    </ItemGroup>
-    
 </Project>

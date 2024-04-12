@@ -1,36 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <DocumentationFile>.\$safeprojectname$.Infrastructure.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.Infrastructure.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.xml" />
+        <None Remove="$safeprojectname$.Infrastructure.xml" />
     </ItemGroup>
 
     <ItemGroup>
-        <!-- $identityserver_feature$ start -->
-        <PackageReference Include="IdentityServer4" Version="4.1.2" />
-        <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.2" />
-        <!-- $identityserver_feature$ end -->
-        <PackageReference Include="MediatR" Version="10.0.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\$ext_projectname$.Domain\$ext_projectname$.Domain.csproj" />
+        <ProjectReference Include="..\$ext_safeprojectname$.Domain\$ext_safeprojectname$.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

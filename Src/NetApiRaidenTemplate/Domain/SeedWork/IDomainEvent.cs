@@ -1,13 +1,11 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 
-namespace $safeprojectname$.SeedWork
+namespace $safeprojectname$.SeedWork;
+
+/// <summary>
+/// Domain events interface
+/// </summary>
+public interface IDomainEvent : INotification
 {
-    /// <summary>
-    /// Domain events interface
-    /// </summary>
-    public interface IDomainEvent : INotification
-    {
-        DateTime TriggeredOn { get; }
-    }
+    DateTime TriggeredOn { get; }
 }

@@ -37,8 +37,8 @@ namespace NetApiRaidenTemplate.Wizard.Dialogs.ViewModels
             return new Dictionary<IdentityOption, string>()
             {
                 { IdentityOption.None, "Ninguno" },
-                { IdentityOption.IdentityServer, "IdentityServer4" },
-                { IdentityOption.IdentityCore, "Identity Core" },
+                // { IdentityOption.IdentityServer, "IdentityServer4" },
+                // { IdentityOption.IdentityCore, "Identity Core" },
             };
         }
     }

@@ -1,120 +1,118 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace $safeprojectname$.SeedWork
+namespace $safeprojectname$.SeedWork;
+
+/// <summary>
+/// Domain value object base class
+/// </summary>
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S4035:Classes implementing \"IEquatable<T>\" should be sealed", Justification = "<Pending>")]
+public abstract class ValueObject : IEquatable<ValueObject>
 {
-    /// <summary>
-    /// Domain value object base class
-    /// </summary>
-    public abstract class ValueObject : IEquatable<ValueObject>
+    private List<PropertyInfo>? properties;
+    private List<FieldInfo>? fields;
+
+    public static bool operator ==(ValueObject obj1, ValueObject obj2)
     {
-        private List<PropertyInfo>? properties;
-        private List<FieldInfo>? fields;
-
-        public static bool operator ==(ValueObject obj1, ValueObject obj2)
+        if (Equals(obj1, null))
         {
-            if (Equals(obj1, null))
+            return Equals(obj2, null);
+        }
+
+        return obj1.Equals(obj2);
+    }
+
+    public static bool operator !=(ValueObject obj1, ValueObject obj2)
+    {
+        return !(obj1 == obj2);
+    }
+
+    public bool Equals(ValueObject? other)
+    {
+        return Equals(other as object);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+
+        return
+            GetProperties().All(p => PropertiesAreEqual(obj, p)) &&
+            GetFields().All(f => FieldsAreEqual(obj, f));
+    }
+
+    public override int GetHashCode()
+    {
+        // allow overflow
+        unchecked
+        {
+            var hash = 17;
+            foreach (var prop in GetProperties())
             {
-                return Equals(obj2, null);
+                var value = prop.GetValue(this, null);
+                hash = HashValue(hash, value ?? 0);
             }
 
-            return obj1.Equals(obj2);
-        }
-
-        public static bool operator !=(ValueObject obj1, ValueObject obj2)
-        {
-            return !(obj1 == obj2);
-        }
-
-        public bool Equals(ValueObject? other)
-        {
-            return this.Equals(other as object);
-        }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj == null || this.GetType() != obj.GetType())
+            foreach (var field in GetFields())
             {
-                return false;
+                var value = field.GetValue(this);
+                hash = HashValue(hash, value ?? 0);
             }
 
-            return
-                this.GetProperties().All(p => this.PropertiesAreEqual(obj, p)) &&
-                this.GetFields().All(f => this.FieldsAreEqual(obj, f));
+            return hash;
         }
+    }
 
-        public override int GetHashCode()
+    protected static void CheckRule(IBusinessRule rule)
+    {
+        if (rule.IsBroken())
         {
-            // allow overflow
-            unchecked
-            {
-                var hash = 17;
-                foreach (var prop in this.GetProperties())
-                {
-                    var value = prop.GetValue(this, null);
-                    hash = HashValue(hash, value ?? 0);
-                }
-
-                foreach (var field in this.GetFields())
-                {
-                    var value = field.GetValue(this);
-                    hash = HashValue(hash, value ?? 0);
-                }
-
-                return hash;
-            }
+            throw new BusinessRuleValidationException(rule);
         }
+    }
 
-        protected static void CheckRule(IBusinessRule rule)
+    private static int HashValue(int seed, object value)
+    {
+        var currentHash = value?.GetHashCode() ?? 0;
+
+        return seed * 23 + currentHash;
+    }
+
+    private bool PropertiesAreEqual(object obj, PropertyInfo p)
+    {
+        return Equals(p.GetValue(this, null), p.GetValue(obj, null));
+    }
+
+    private bool FieldsAreEqual(object obj, FieldInfo f)
+    {
+        return Equals(f.GetValue(this), f.GetValue(obj));
+    }
+
+    private IEnumerable<PropertyInfo> GetProperties()
+    {
+        if (properties == null)
         {
-            if (rule.IsBroken())
-            {
-                throw new BusinessRuleValidationException(rule);
-            }
+            properties = GetType()
+                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => !Attribute.IsDefined(p, typeof(IgnoreMemberAttribute)))
+                .ToList();
         }
 
-        private static int HashValue(int seed, object value)
+        return properties;
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3011:Reflection should not be used to increase accessibility of classes, methods, or fields", Justification = "<Pending>")]
+    private IEnumerable<FieldInfo> GetFields()
+    {
+        if (fields == null)
         {
-            var currentHash = value?.GetHashCode() ?? 0;
-
-            return (seed * 23) + currentHash;
+            fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+                .Where(p => !Attribute.IsDefined(p, typeof(IgnoreMemberAttribute)))
+                .ToList();
         }
 
-        private bool PropertiesAreEqual(object obj, PropertyInfo p)
-        {
-            return Equals(p.GetValue(this, null), p.GetValue(obj, null));
-        }
-
-        private bool FieldsAreEqual(object obj, FieldInfo f)
-        {
-            return Equals(f.GetValue(this), f.GetValue(obj));
-        }
-
-        private IEnumerable<PropertyInfo> GetProperties()
-        {
-            if (this.properties == null)
-            {
-                this.properties = this.GetType()
-                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(p => !Attribute.IsDefined(p, typeof(IgnoreMemberAttribute)))
-                    .ToList();
-            }
-
-            return this.properties;
-        }
-
-        private IEnumerable<FieldInfo> GetFields()
-        {
-            if (this.fields == null)
-            {
-                this.fields = this.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                    .Where(p => !Attribute.IsDefined(p, typeof(IgnoreMemberAttribute)))
-                    .ToList();
-            }
-
-            return this.fields;
-        }
+        return fields;
     }
 }

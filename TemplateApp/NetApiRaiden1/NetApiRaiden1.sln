@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApiRaiden1.IntegrationTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApiRaiden1.UnitTest", "NetApiRaiden1.UnitTest\NetApiRaiden1.UnitTest.csproj", "{47D6F8D7-E15E-4CB2-986F-CAD6EA5A5313}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A340DA7-60E7-4EEA-991A-3592F58D206B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApiRaiden1.Test.Common", "NetApiRaiden1.Test.Common\NetApiRaiden1.Test.Common.csproj", "{2E1AB2F3-A249-4C2E-8189-E543C155BA10}"
 EndProject
 Global
