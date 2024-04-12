@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DocumentationFile>.\NetApiRaiden1.Domain.SeedData.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>.\NetApiRaiden1.Domain.SeedData.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="NetApiRaiden1.Domain.SeedData.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NetApiRaiden1.Domain\NetApiRaiden1.Domain.csproj" />
+        <ProjectReference Include="..\NetApiRaiden1.Infrastructure\NetApiRaiden1.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <!-- Grouping files -->
+    <ItemGroup>
+        <Compile Update="AppSeed.*.cs" DependentUpon="AppSeed.cs" />
+    </ItemGroup>
+    
+</Project>
