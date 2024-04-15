@@ -15,28 +15,38 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="Domain.csproj" File="Domain.csproj" ReplaceParameters="true">
-      <Folder Name="Properties" TargetFolderName="Properties">
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
-      </Folder>
-      <Folder Name="SeedWork" TargetFolderName="SeedWork">
-        <ProjectItem ReplaceParameters="true" TargetFileName="BusinessRuleValidationException.cs">BusinessRuleValidationException.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="DomainEvent.cs">DomainEvent.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Entity.cs">Entity.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Enumeration.cs">Enumeration.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IAggregateRoot.cs">IAggregateRoot.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IBusinessRule.cs">IBusinessRule.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IDomainEvent.cs">IDomainEvent.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IgnoreMemberAttribute.cs">IgnoreMemberAttribute.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IRepository.cs">IRepository.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IUnitOfWork.cs">IUnitOfWork.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="ValueObject.cs">ValueObject.cs</ProjectItem>
-      </Folder>
-      <Folder Name="SharedKernel" TargetFolderName="SharedKernel">
-        <ProjectItem ReplaceParameters="true" TargetFileName="IValueUniquenessChecker.cs">IValueUniquenessChecker.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="ValueMustBeUniqueRule.cs">ValueMustBeUniqueRule.cs</ProjectItem>
-      </Folder>
+        <Folder Name="Properties" TargetFolderName="Properties">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+        </Folder>
+        <Folder Name="AuditAggregate" TargetFolderName="AuditAggregate">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Audit.cs">Audit.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="AuditType.cs">AuditType.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IAuditRepository.cs">IAuditRepository.cs</ProjectItem>
+        </Folder>
+        <Folder Name="SeedWork" TargetFolderName="SeedWork">
+            <ProjectItem ReplaceParameters="true" TargetFileName="BusinessRuleValidationException.cs">BusinessRuleValidationException.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="DomainEvent.cs">DomainEvent.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Entity.cs">Entity.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Enumeration.cs">Enumeration.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IAggregateRoot.cs">IAggregateRoot.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IBusinessRule.cs">IBusinessRule.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IDomainEvent.cs">IDomainEvent.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IgnoreMemberAttribute.cs">IgnoreMemberAttribute.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IRepository.cs">IRepository.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IUnitOfWork.cs">IUnitOfWork.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="ValueObject.cs">ValueObject.cs</ProjectItem>
+        </Folder>
+        <Folder Name="SharedKernel" TargetFolderName="SharedKernel">
+            <Folder Name="Rules" TargetFolderName="Rules">
+                <ProjectItem ReplaceParameters="true" TargetFileName="ComparisonRule.cs">ComparisonRule.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="IValueUniquenessChecker.cs">IValueUniquenessChecker.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="ValueMustBeUniqueRule.cs">ValueMustBeUniqueRule.cs</ProjectItem>
+            </Folder>
+            <ProjectItem ReplaceParameters="true" TargetFileName="AuditableEntity.cs">AuditableEntity.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Enums.cs">Enums.cs</ProjectItem>
+        </Folder>
     </Project>
   </TemplateContent>
 </VSTemplate>

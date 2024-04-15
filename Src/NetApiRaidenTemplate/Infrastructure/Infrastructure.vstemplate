@@ -15,28 +15,28 @@
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="Infrastructure.csproj" File="Infrastructure.csproj" ReplaceParameters="true">
-      <Folder Name="Properties" TargetFolderName="Properties">
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
-      </Folder>
-        <Folder Name="Constants" TargetFolderName="Constants">
-            <ProjectItem ReplaceParameters="true" TargetFileName="ColumnSizes.cs">ColumnSizes.cs</ProjectItem>
-            <ProjectItem ReplaceParameters="true" TargetFileName="Polly.cs">Polly.cs</ProjectItem>
+        <Folder Name="Properties" TargetFolderName="Properties">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.es.resx">Resources.es.resx</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
         </Folder>
         <Folder Name="Domain" TargetFolderName="Domain">
-        <Folder Name="EntityConfigurations" TargetFolderName="EntityConfigurations">
-          <ProjectItem ReplaceParameters="true" TargetFileName="EntityConfiguration.cs">EntityConfiguration.cs</ProjectItem>
+            <Folder Name="EntityConfigurations" TargetFolderName="EntityConfigurations">
+                <ProjectItem ReplaceParameters="true" TargetFileName="AuditableEntityConfiguration.cs">AuditableEntityConfiguration.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="EntityConfiguration.cs">EntityConfiguration.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Repositories" TargetFolderName="Repositories">
+                <ProjectItem ReplaceParameters="true" TargetFileName="AuditRepository.cs">AuditRepository.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="Repository.cs">Repository.cs</ProjectItem>
+            </Folder>
+            <ProjectItem ReplaceParameters="true" TargetFileName="AppUnitOfWork.cs">AppUnitOfWork.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="EfUnitOfWork.cs">EfUnitOfWork.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="IEfUnitOfWork.cs">IEfUnitOfWork.cs</ProjectItem>
         </Folder>
-        <Folder Name="Repositories" TargetFolderName="Repositories">
-          <ProjectItem ReplaceParameters="true" TargetFileName="Repository.cs">Repository.cs</ProjectItem>
+        <Folder Name="Extensions" TargetFolderName="Extensions">
+            <ProjectItem ReplaceParameters="true" TargetFileName="MediatorExtensions.cs">MediatorExtensions.cs</ProjectItem>
         </Folder>
-        <ProjectItem ReplaceParameters="true" TargetFileName="AppUnitOfWork.cs">AppUnitOfWork.cs</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="IEfUnitOfWork.cs">IEfUnitOfWork.cs</ProjectItem>
-      </Folder>
-      <Folder Name="Extensions" TargetFolderName="Extensions">
-        <ProjectItem ReplaceParameters="true" TargetFileName="MediatorExtensions.cs">MediatorExtensions.cs</ProjectItem>
-      </Folder>      
+        <ProjectItem ReplaceParameters="true" TargetFileName="Declarations.cs">Declarations.cs</ProjectItem>  
     </Project>
   </TemplateContent>
 </VSTemplate>

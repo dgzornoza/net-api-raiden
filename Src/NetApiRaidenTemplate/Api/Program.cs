@@ -1,21 +1,22 @@
-﻿using System;
+﻿using System.Reflection;
 using System.Text.Json;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using $safeprojectname$.Infrastructure.Filters;
+using Asp.Versioning.ApiExplorer;
+using Microsoft.AspNetCore.OData;
 using $safeprojectname$.Infrastructure.Extensions;
-using $ext_safeprojectname$.Infrastructure.Domain;
+using $safeprojectname$.Infrastructure.Filters;
+using Serilog;
 
 namespace $safeprojectname$;
 
-public static class Program
+public partial class Program
 {
-
     private static void Main(string[] args)
     {
-        Log.Logger = new LoggerConfiguration().CreateBootstrapLogger();
+        // HACK: Solo crear log estatico si se ejecuta este ensamblado como principal, en los tests no se puede crear por que da error.
+        if (Assembly.GetEntryAssembly()!.FullName == typeof(Program).GetTypeInfo().Assembly.FullName)
+        {
+            Log.Logger = new LoggerConfiguration().CreateBootstrapLogger();
+        }
 
         var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ public static class Program
         }).AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        }).AddOData((options, provider) =>
+        {
+            options.Select().Filter().OrderBy().SetMaxTop(50).Count();
         });
 
         builder.Services.AddIocContainer(builder.Configuration);
@@ -44,13 +48,12 @@ public static class Program
 
         app.UseStaticFiles();
 
-        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-        app.UseAppConfiguration(builder.Environment, provider);
+        // this method get all api descriptions and inject 'IApiVersionDescriptionProvider' for call all OData 'IModelConfiguration'
+        var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        app.UseAppConfiguration(builder.Environment, apiVersionDescriptionProvider);
 
-        /* $identityserver_feature$ start */
         app.UseAuthentication();
         app.UseAuthorization();
-        /* $identityserver_feature$ end */
 
         app.MapControllers();
 
@@ -71,4 +74,3 @@ public static class Program
         }
     }
 }
-

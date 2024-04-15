@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <UserSecretsId>ff5a5754-4089-4267-ae72-58e4710066f8</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>.</DockerfileContext>
+        <Nullable>enable</Nullable>
+        <Description>NetApiRaiden1.Api</Description>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DocumentationFile>.\NetApiRaiden1.Api.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>.\NetApiRaiden1.Api.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="NetApiRaiden1.Api.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.OData.ApiExplorer" Version="8.1.0" />
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />        
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+        <PackageReference Include="Polly" Version="8.3.1" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+        <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NetApiRaiden1.Application\NetApiRaiden1.Application.csproj" />
+        <ProjectReference Include="..\NetApiRaiden1.Domain.SeedData\NetApiRaiden1.Domain.SeedData.csproj" />
+        <ProjectReference Include="..\NetApiRaiden1.Infrastructure\NetApiRaiden1.Infrastructure.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.es.resx">
+            <Generator></Generator>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <!-- Group files -->
+    <ItemGroup>
+        <Compile Update="Infrastructure/Extensions/ServiceCollectionExtensions.*.cs" DependentUpon="ServiceCollectionExtensions.cs" />
+    </ItemGroup>
+    
+</Project>

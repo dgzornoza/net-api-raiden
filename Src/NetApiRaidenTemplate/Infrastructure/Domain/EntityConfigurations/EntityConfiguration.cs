@@ -2,19 +2,18 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using $ext_safeprojectname$.Domain.SeedWork;
 
-namespace $safeprojectname$.Domain.EntityConfigurations
+namespace $safeprojectname$.Domain.EntityConfigurations;
+
+/// <summary>
+/// Entity configuration base for configure entities
+/// </summary>
+/// <typeparam name="TEntity">Entity type</typeparam>
+public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+    where TEntity : Entity
 {
-    /// <summary>
-    /// Entity configuration base for configure entities
-    /// </summary>
-    /// <typeparam name="TEntity">Entity type</typeparam>
-    internal abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
-        where TEntity : Entity
+    public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
-        {
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.Id).ValueGeneratedOnAdd();
-        }
+        builder.HasKey(item => item.Id);
+        builder.Property(item => item.Id).ValueGeneratedOnAdd();
     }
 }

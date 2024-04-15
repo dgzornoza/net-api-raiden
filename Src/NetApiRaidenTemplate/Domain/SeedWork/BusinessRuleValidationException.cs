@@ -1,26 +1,23 @@
-﻿using System;
+﻿namespace $safeprojectname$.SeedWork;
 
-namespace $safeprojectname$.SeedWork
+/// <summary>
+/// Exception class for domain business rules
+/// </summary>
+public class BusinessRuleValidationException : Exception
 {
-    /// <summary>
-    /// Exception class for domain business rules
-    /// </summary>
-    public class BusinessRuleValidationException : Exception
+    public BusinessRuleValidationException(IBusinessRule brokenRule)
+        : base(brokenRule.Message)
     {
-        public BusinessRuleValidationException(IBusinessRule brokenRule)
-            : base(brokenRule.Message)
-        {
-            this.BrokenRule = brokenRule;
-        }
+        BrokenRule = brokenRule;
+    }
 
-        /// <summary>
-        /// Get business broken rule
-        /// </summary>
-        public IBusinessRule BrokenRule { get; }
+    /// <summary>
+    /// Get business broken rule
+    /// </summary>
+    public IBusinessRule BrokenRule { get; }
 
-        public override string ToString()
-        {
-            return $"{this.BrokenRule.GetType().FullName}: {this.BrokenRule.Message}";
-        }
+    public override string ToString()
+    {
+        return $"{BrokenRule.GetType().FullName}: {BrokenRule.Message}";
     }
 }

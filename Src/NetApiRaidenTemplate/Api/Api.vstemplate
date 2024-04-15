@@ -22,31 +22,43 @@
                 <ProjectItem ReplaceParameters="true" TargetFileName="Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
             </Folder>
             <Folder Name="Controllers" TargetFolderName="Controllers">
-                <ProjectItem ReplaceParameters="true" TargetFileName="AuthenticateController_id4.cs">AuthenticateController_id4.cs</ProjectItem>
-                <ProjectItem ReplaceParameters="true" TargetFileName="TestController.cs">TestController.cs</ProjectItem>
+                <Folder Name="OData" TargetFolderName="OData">
+                    <Folder Name="ModelConfiguration" TargetFolderName="ModelConfiguration">
+                        <ProjectItem ReplaceParameters="true" TargetFileName="SampleConfiguration.cs">SampleConfiguration.cs</ProjectItem>
+                    </Folder>
+                    <Folder Name="V1" TargetFolderName="V1">
+                        <ProjectItem ReplaceParameters="true" TargetFileName="SamplesController.cs">SamplesController.cs</ProjectItem>
+                    </Folder>
+                </Folder>
+                <Folder Name="v1" TargetFolderName="v1">
+                    <ProjectItem ReplaceParameters="true" TargetFileName="SamplesController.cs">SamplesController.cs</ProjectItem>
+                </Folder>
+                <ProjectItem ReplaceParameters="true" TargetFileName="ApiControllerBase.cs">ApiControllerBase.cs</ProjectItem>
             </Folder>
+            
             <Folder Name="Infrastructure" TargetFolderName="Infrastructure">
                 <Folder Name="Authorization" TargetFolderName="Authorization">
                     <ProjectItem ReplaceParameters="true" TargetFileName="AuthorizationPolicies.cs">AuthorizationPolicies.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="Policies.cs">Policies.cs</ProjectItem>
                 </Folder>
                 <Folder Name="Extensions" TargetFolderName="Extensions">
+                    <!-- nota: Debido  a rutas largas, se acorta el directorio -->
                     <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationBuilderExtensions.cs">ApplicationBuilderExtensions.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="AppSettingsExtensions.cs">AppSettingsExtensions.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="HostBuilderExtensions.cs">HostBuilderExtensions.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="IocContainerExtension.cs">IocContainerExtension.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.cs">ServiceCollectionExtensions.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.ApiVersion.cs">ServiceCollectionExtensions.ApiVersion.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.Authentication.cs">ServiceCollectionExtensions.Authentication.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.Cors.cs">ServiceCollectionExtensions.Cors.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.Polly.cs">ServiceCollectionExtensions.Polly.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.Reflection.cs">ServiceCollectionExtensions.Reflection.cs</ProjectItem>
+                    <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.Swagger.cs">ServiceCollectionExtensions.Swagger.cs</ProjectItem>
                 </Folder>
                 <Folder Name="Filters" TargetFolderName="Filters">
                     <ProjectItem ReplaceParameters="true" TargetFileName="HttpGlobalExceptionFilter.cs">HttpGlobalExceptionFilter.cs</ProjectItem>
                     <ProjectItem ReplaceParameters="true" TargetFileName="SwaggerApiVersionFilter.cs">SwaggerApiVersionFilter.cs</ProjectItem>
-                    <ProjectItem ReplaceParameters="true" TargetFileName="SwaggerAuthorizeOperationFilter_id4.cs">SwaggerAuthorizeOperationFilter_id4.cs</ProjectItem>
                 </Folder>
-            </Folder>
-            <Folder Name="Settings" TargetFolderName="Settings">
-                <ProjectItem ReplaceParameters="true" TargetFileName="AppConfigurationSettings.cs">AppConfigurationSettings.cs</ProjectItem>
-                <ProjectItem ReplaceParameters="true" TargetFileName="AppSettingsKeys.cs">AppSettingsKeys.cs</ProjectItem>
-                <ProjectItem ReplaceParameters="true" TargetFileName="JwtSettings.cs">JwtSettings.cs</ProjectItem>
             </Folder>
             <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.json">appsettings.json</ProjectItem>
             <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Development.json">appsettings.Development.json</ProjectItem>

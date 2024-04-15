@@ -1,12 +1,10 @@
 Opciones:
--- Identity Server-- OK
+-- OpenIdDict
 -- Identity Core
--- multilanguage
--- OData
+-- multilanguage -- OK
+-- OData -- OK
 -- Feature toggles
--- Sample files
--- configurar docker
--- pipelines azure
+-- Sample files -- OK
 -- proyecto Angular
 
 Funcionalidades

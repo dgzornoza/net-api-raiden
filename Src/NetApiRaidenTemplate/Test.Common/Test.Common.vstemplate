@@ -1,0 +1,43 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+    <TemplateData>
+        <Name>Test.Common</Name>
+        <Description>NetApiRaiden Tests Common Project</Description>
+        <ProjectType>CSharp</ProjectType>
+        <ProjectSubType>
+        </ProjectSubType>
+        <SortOrder>1000</SortOrder>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>Test.Common</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <LocationField>Enabled</LocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <CreateInPlace>true</CreateInPlace>
+    </TemplateData>
+    <TemplateContent>
+        <Project TargetFileName="Test.Common.csproj" File="Test.Common.csproj" ReplaceParameters="true">
+            <Folder Name="Extensions" TargetFolderName="Extensions">
+                <ProjectItem ReplaceParameters="true" TargetFileName="EntityExtension.cs">EntityExtension.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="HttpClientExtensions.cs">HttpClientExtensions.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Handlers" TargetFolderName="Handlers">
+                <ProjectItem ReplaceParameters="true" TargetFileName="TestAuthHandler.cs">TestAuthHandler.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="TestAuthHandlerOptions.cs">TestAuthHandlerOptions.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Helpers" TargetFolderName="Helpers">
+                <ProjectItem ReplaceParameters="true" TargetFileName="BenchmarkHelpers.cs">BenchmarkHelpers.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="FilesHelpers.cs">FilesHelpers.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Infrastructure" TargetFolderName="Infrastructure">
+                <ProjectItem ReplaceParameters="true" TargetFileName="TestContextSqlite.cs">TestContextSqlite.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="TestWebApplicationFactory.cs">TestWebApplicationFactory.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Mocks" TargetFolderName="Mocks">
+                <ProjectItem ReplaceParameters="true" TargetFileName="MockValueChecker.cs">MockValueChecker.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Models" TargetFolderName="Models">
+                <ProjectItem ReplaceParameters="true" TargetFileName="AuthModel.cs">AuthModel.cs</ProjectItem>
+                <ProjectItem ReplaceParameters="true" TargetFileName="HttpContextDataModel.cs">HttpContextDataModel.cs</ProjectItem>
+            </Folder>
+        </Project>
+    </TemplateContent>
+</VSTemplate>

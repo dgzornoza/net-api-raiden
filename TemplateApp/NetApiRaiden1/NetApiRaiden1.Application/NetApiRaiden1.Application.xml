@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NetApiRaiden1.Application</name>
+    </assembly>
+    <members>
+        <member name="T:NetApiRaiden1.Application.Application.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:NetApiRaiden1.Application.Application.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:NetApiRaiden1.Application.Application.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:NetApiRaiden1.Application.Services.Audit.IAuditBufferService">
+            <summary>
+            Servicio para encapsular un buffer concurrente con los log de auditoría, mediante este servicio se podra ir añadiendo a un buffer las auditorias de los
+            accesos a los endpoints y posteriormente podrán ser extraidos del buffer para un almacenamiento persistente. De este modo se optimiza el almacenamiento
+            persistente y no afectará las peticiones http de los clientes evitando tener que almacenar en cada petición la auditoría.
+            </summary>
+            <remarks>
+            Internamente el buffer debe ser único para toda la aplicación, no obstante es recomendable registrar este servicio en ID como singleton.
+            El buffer debe ser seguro en operaciones concurrentes
+            </remarks>
+        </member>
+        <member name="M:NetApiRaiden1.Application.Services.Audit.IAuditBufferService.Add(NetApiRaiden1.Application.Services.Audit.AuditDto)">
+            <summary>
+            Añadir una entrada de auditoria
+            </summary>
+            <param name="entry">entrada de auditoría</param>
+        </member>
+        <member name="M:NetApiRaiden1.Application.Services.Audit.IAuditBufferService.TakeAll">
+            <summary>
+            Función para obtener todas las entradas existentes en el buffer, esta operación vaciara el buffer.
+            </summary>
+            <returns>Enumeracion de auditorias obtenidas</returns>
+        </member>
+        <member name="M:NetApiRaiden1.Application.Services.Audit.IAuditBufferService.TryPeek(NetApiRaiden1.Application.Services.Audit.AuditDto@)">
+            <summary>
+            Función para obtener la ultima entrada del buffer sin eliminarla del mismo.
+            </summary>
+            <param name="entry">Entrada obtenida</param>
+            <returns>true si tiene exito, false en caso contrario</returns>
+        </member>
+        <member name="M:NetApiRaiden1.Application.Services.Audit.IAuditBufferService.TryTake(NetApiRaiden1.Application.Services.Audit.AuditDto@)">
+            <summary>
+            Función para obtener la última entrada del buffer eliminándola del mismo.
+            </summary>
+            <param name="entry">Entrada obtenida</param>
+            <returns>true si tiene exito, false en caso contrario</returns>
+        </member>
+    </members>
+</doc>
