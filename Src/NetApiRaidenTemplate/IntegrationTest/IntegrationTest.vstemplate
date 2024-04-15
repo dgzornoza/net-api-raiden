@@ -15,7 +15,22 @@
     </TemplateData>
     <TemplateContent>
         <Project TargetFileName="IntegrationTest.csproj" File="IntegrationTest.csproj" ReplaceParameters="true" >
-            <ProjectItem ReplaceParameters="true" TargetFileName="Class1.cs">Class1.cs</ProjectItem>
+            <Folder Name="Facts" TargetFolderName="Facts">
+                <Folder Name="Controllers" TargetFolderName="Controllers">
+                    <Folder Name="V1" TargetFolderName="V1">
+                        <ProjectItem ReplaceParameters="true" TargetFileName="SamplesControllerTest.cs">SamplesControllerTest.cs</ProjectItem>
+                    </Folder>
+                </Folder>
+            </Folder>
+            <Folder Name="Infrastructure" TargetFolderName="Infrastructure">
+                <Folder Name="Migrations" TargetFolderName="Migrations">
+                    <ProjectItem ReplaceParameters="false" TargetFileName=".gitkeep">.gitkeep</ProjectItem>
+                </Folder>
+                <ProjectItem ReplaceParameters="true" TargetFileName="TestDbContext.cs">TestDbContext.cs</ProjectItem>
+            </Folder>
+            <Folder Name="Theories" TargetFolderName="Theories">
+                <ProjectItem ReplaceParameters="false" TargetFileName=".gitkeep">.gitkeep</ProjectItem>
+            </Folder>
         </Project>
     </TemplateContent>
 </VSTemplate>

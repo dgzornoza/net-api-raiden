@@ -1,65 +1,56 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using System.Globalization;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Hosting;
-using System.Linq;
+using Microsoft.AspNetCore.OData;
 
-namespace $safeprojectname$.Infrastructure.Extensions
+namespace $safeprojectname$.Infrastructure.Extensions;
+
+public static class ApplicationBuilderExtensions
 {
-    public static class ApplicationBuilderExtensions
+    public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
     {
-        public static IApplicationBuilder UseAppConfiguration(this IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        app.AddLocalization();
+
+        if (env.IsDevelopment())
         {
-            app.AddLocalization();
-
-            if (env.IsDevelopment())
-            {
-                app.AddSwagger(provider);
-            }
-
-            app.UseCors("CorsPolicy");
-
-            return app;
+            app.AddSwagger(provider);
+            // navigate to ~/$odata to determine whether any endpoints did not match an odata route template
+            app.UseODataRouteDebug();
         }
 
-        private static void AddLocalization(this IApplicationBuilder app)
-        {
-            // middleware for manage languages
-            IList<CultureInfo> supportedCultures = new List<CultureInfo>
-            {
-                new CultureInfo("es"),
-                new CultureInfo("en"),
-            };
+        app.UseCors("CorsPolicy");
 
-            app.UseRequestLocalization(new RequestLocalizationOptions
-            {
-                DefaultRequestCulture = new RequestCulture("en"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures,
-            });
-        }
+        return app;
+    }
 
-        private static void AddSwagger(this IApplicationBuilder app, IApiVersionDescriptionProvider provider)
+    private static void AddLocalization(this IApplicationBuilder app)
+    {
+        // middleware for manage languages
+        IList<CultureInfo> supportedCultures = new List<CultureInfo>
         {
-            app.UseSwagger()
-                .UseSwaggerUI(options =>
+            new CultureInfo("es"),
+            new CultureInfo("en"),
+        };
+
+        app.UseRequestLocalization(new RequestLocalizationOptions
+        {
+            DefaultRequestCulture = new RequestCulture("en"),
+            SupportedCultures = supportedCultures,
+            SupportedUICultures = supportedCultures,
+        });
+    }
+
+    private static void AddSwagger(this IApplicationBuilder app, IApiVersionDescriptionProvider provider)
+    {
+        app.UseSwagger()
+            .UseSwaggerUI(options =>
+            {
+                // generate swagger endpoints for all versions
+                foreach (var groupName in provider.ApiVersionDescriptions.Select(item => item.GroupName))
                 {
-                    // generate swagger endpoints for all versions
-                    foreach (var groupName in provider.ApiVersionDescriptions.Select(item => item.GroupName))
-                    {
-                        options.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
-                    }
+                    options.SwaggerEndpoint($"/swagger/{groupName}/swagger.json", groupName.ToUpperInvariant());
+                }
 
-                    /* $identityserver_feature$ start */
-                    options.OAuthClientId("swagger.client");
-                    options.OAuthAppName("API - Swagger");
-                    options.OAuthScopeSeparator(" ");
-                    options.OAuthUsePkce();
-                    /* $identityserver_feature$ end */
-                });
-        }
+            });
     }
 }

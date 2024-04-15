@@ -1,5 +1,5 @@
 ﻿using NetApiRaiden1.Api.Infrastructure.Extensions;
-using NetApiRaiden1.Api.Settings;
+using NetApiRaiden1.Application.Infrastructure.Settings;
 
 namespace NetApiRaiden1.Api.Infrastructure.Extensions;
 

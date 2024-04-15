@@ -1,15 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DocumentationFile>.\$safeprojectname$.Domain.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>.\$safeprojectname$.Domain.xml</DocumentationFile>
+        <DocumentationFile>.\$safeprojectname$.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="$safeprojectname$.Domain.xml" />
+        <None Remove="$safeprojectname$.xml" />
     </ItemGroup>
 
     <ItemGroup>

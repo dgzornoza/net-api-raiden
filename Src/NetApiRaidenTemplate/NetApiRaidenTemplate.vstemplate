@@ -51,8 +51,8 @@
                 <ProjectTemplateLink ProjectName="$projectname$.IntegrationTest" CopyParameters="true">
                     IntegrationTest\IntegrationTest.vstemplate
                 </ProjectTemplateLink>
-                <ProjectTemplateLink ProjectName="$projectname$.Tests.Helpers" CopyParameters="true">
-                    Tests.Helpers\Tests.Helpers.vstemplate
+                <ProjectTemplateLink ProjectName="$projectname$.Test.Common" CopyParameters="true">
+                    Test.Common\Test.Common.vstemplate
                 </ProjectTemplateLink>
                 <ProjectTemplateLink ProjectName="$projectname$.UnitTest" CopyParameters="true">
                     UnitTest\UnitTest.vstemplate

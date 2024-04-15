@@ -95,7 +95,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\TemplateFiles\editorconfig" />
-    <None Include="Resources\TemplateFiles\Directory.Build.props" />
+    <EmbeddedResource Include="Resources\TemplateFiles\Directory.Build.props" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>

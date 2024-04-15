@@ -48,40 +48,35 @@
     <DeployExtension>False</DeployExtension>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Api\Infrastructure\Filters\SwaggerAuthorizeOperationFilter_id4.cs" />
-    <None Include="Api\Infrastructure\Authorization\AuthorizationPolicies.cs" />
-    <None Include="Api\Infrastructure\Authorization\Policies.cs" />
-    <None Include="Api\Controllers\AuthenticateController_id4.cs" />
-    <None Include="Api\Controllers\TestController.cs" />
-    <None Include="Api\Settings\AppSettingsKeys.cs" />
-    <None Include="Api\Settings\JwtSettings.cs" />
+    <None Include="Domain.SeedData\.gitkeep" />
+    <None Include="Test.Common\EXTENSIONS\EntityExtension.cs" />
+    <None Include="Test.Common\EXTENSIONS\HttpClientExtensions.cs" />
+    <None Include="Test.Common\HANDLERS\TestAuthHandler.cs" />
+    <None Include="Test.Common\HANDLERS\TestAuthHandlerOptions.cs" />
+    <None Include="Test.Common\HELPERS\BenchmarkHelpers.cs" />
+    <None Include="Test.Common\HELPERS\FilesHelpers.cs" />
+    <None Include="Test.Common\INFRASTRUCTURE\TestContextSqlite.cs" />
+    <None Include="Test.Common\INFRASTRUCTURE\TestWebApplicationFactory.cs" />
+    <None Include="Test.Common\MOCKS\MockValueChecker.cs" />
+    <None Include="Test.Common\MODELS\AuthModel.cs" />
+    <None Include="Test.Common\MODELS\HttpContextDataModel.cs" />
+    <None Include="Api\appsettings.Development.json" />
+    <None Include="Api\appsettings.json" />
+    <None Include="Api\appsettings.Production.json" />
+    <None Include="Api\appsettings.Staging.json" />
+    <None Include="Api\Api.csproj" />
+    <None Include="Api\PROPERTIES\launchSettings.json" />
     <None Include="Domain\Domain.csproj" />
     <None Include="Infrastructure\Infrastructure.csproj" />
-    <None Include="Tests.Helpers\Extensions\EntityExtension.cs" />
-    <None Include="Tests.Helpers\Mocks\MockValueChecker.cs" />
+    <None Include="IntegrationTest\INFRASTRUCTURE\MIGRATIONS\.gitkeep" />
+    <None Include="IntegrationTest\IntegrationTest.csproj" />
+    <None Include="IntegrationTest\THEORIES\.gitkeep" />
     <None Include="Domain.SeedData\Domain.SeedData.csproj" />
-    <None Include="Tests.Helpers\Tests.Helpers.csproj" />
+    <None Include="Test.Common\Test.Common.csproj" />
     <None Include="UnitTest\Class1.cs" />
-    <None Include="Api\Infrastructure\Extensions\ApplicationBuilderExtensions.cs" />
-    <None Include="Api\Infrastructure\Extensions\IocContainerExtension.cs" />
-    <None Include="Api\Infrastructure\Extensions\ServiceCollectionExtensions.cs" />
-    <None Include="Api\Infrastructure\Filters\HttpGlobalExceptionFilter.cs" />
-    <None Include="Api\Infrastructure\Filters\SwaggerApiVersionFilter.cs" />
-    <None Include="Api\Program.cs" />
-    <None Include="Api\Properties\Resources.Designer.cs" />
-    <None Include="Api\Settings\AppConfigurationSettings.cs" />
-    <None Include="Application\Behaviors\LoggingBehavior.cs" />
-    <None Include="Application\Behaviors\ValidatorBehavior.cs" />
-    <None Include="Application\Common\Commands\CommandBase.cs" />
-    <None Include="Application\Common\Commands\ICommand.cs" />
-    <None Include="Application\Common\Commands\ICommandHandler.cs" />
-    <None Include="Application\Common\Extensions\GenericTypeExtensions.cs" />
-    <None Include="Application\Common\Queries\IQuery.cs" />
-    <None Include="Application\Common\Queries\IQueryHandler.cs" />
-    <None Include="Application\Properties\Resources.Designer.cs" />
-    <None Include="IntegrationTest\Class1.cs" />
-    <None Include="Api\Infrastructure\Extensions\AppSettingsExtensions.cs" />
-    <None Include="Api\Infrastructure\Extensions\HostBuilderExtensions.cs" />
+    <None Include="Application\BEHAVIORS\LoggingBehavior.cs" />
+    <None Include="Application\BEHAVIORS\ValidatorBehavior.cs" />
+    <None Include="Application\PROPERTIES\Resources.Designer.cs" />
     <None Include="Domain\AUDITAGGREGATE\Audit.cs" />
     <None Include="Domain\AUDITAGGREGATE\AuditType.cs" />
     <None Include="Domain\AUDITAGGREGATE\IAuditRepository.cs" />
@@ -112,6 +107,49 @@
     <None Include="Infrastructure\EXTENSIONS\MediatorExtensions.cs" />
     <None Include="Infrastructure\PROPERTIES\Resources.Designer.cs" />
     <None Include="Infrastructure\DOMAIN\ENTITYCONFIGURATIONS\AuditableEntityConfiguration.cs" />
+    <None Include="Application\COMMANDS\AUDITS\CreateAuditCommand.cs" />
+    <None Include="Application\COMMANDS\AUDITS\CreateAuditCommandHandler.cs" />
+    <None Include="Application\COMMANDS\AUDITS\CreateAuditCommandValidator.cs" />
+    <None Include="Application\COMMANDS\AUDITS\CreateAuditDtoValidator.cs" />
+    <None Include="Application\INFRASTRUCTURE\COMMANDS\CommandHandler.cs" />
+    <None Include="Application\INFRASTRUCTURE\COMMANDS\ICommand.cs" />
+    <None Include="Application\INFRASTRUCTURE\COMMANDS\ICommandHandler.cs" />
+    <None Include="Application\INFRASTRUCTURE\EXTENSIONS\GenericTypeExtensions.cs" />
+    <None Include="Application\INFRASTRUCTURE\QUERIES\IQuery.cs" />
+    <None Include="Application\INFRASTRUCTURE\QUERIES\IQueryHandler.cs" />
+    <None Include="Application\INFRASTRUCTURE\SETTINGS\AppConfigurationSettings.cs" />
+    <None Include="Application\INFRASTRUCTURE\SETTINGS\AppSettingsKeys.cs" />
+    <None Include="Application\INFRASTRUCTURE\SETTINGS\CorsSettings.cs" />
+    <None Include="Application\QUERIES\SAMPLES\QUERYABLESAMPLES\QueryableSamplesItemDto.cs" />
+    <None Include="Application\QUERIES\SAMPLES\QUERYABLESAMPLES\QueryableSamplesQuery.cs" />
+    <None Include="Application\QUERIES\SAMPLES\QUERYABLESAMPLES\QueryableSamplesQueryHandler.cs" />
+    <None Include="Application\SERVICES\AUDIT\AuditBufferService.cs" />
+    <None Include="Application\SERVICES\AUDIT\AuditDto.cs" />
+    <None Include="Application\SERVICES\AUDIT\AuditTypeDto.cs" />
+    <None Include="Application\SERVICES\AUDIT\IAuditBufferService.cs" />
+    <None Include="Api\CONTROLLERS\ApiControllerBase.cs" />
+    <None Include="Api\CONTROLLERS\ODATA\MODELCONFIGURATION\SampleConfiguration.cs" />
+    <None Include="Api\CONTROLLERS\ODATA\V1\SamplesController.cs" />
+    <None Include="Api\CONTROLLERS\V1\SamplesController.cs" />
+    <None Include="Api\INFRASTRUCTURE\AUTHORIZATION\AuthorizationPolicies.cs" />
+    <None Include="Api\INFRASTRUCTURE\AUTHORIZATION\Policies.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ApplicationBuilderExtensions.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\AppSettingsExtensions.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\HostBuilderExtensions.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\IocContainerExtension.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.ApiVersion.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.Authentication.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.Cors.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.Polly.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.Reflection.cs" />
+    <None Include="Api\INFRASTRUCTURE\EXTENSIONS\ServiceCollectionExtensions.Swagger.cs" />
+    <None Include="Api\INFRASTRUCTURE\FILTERS\HttpGlobalExceptionFilter.cs" />
+    <None Include="Api\INFRASTRUCTURE\FILTERS\SwaggerApiVersionFilter.cs" />
+    <None Include="Api\Program.cs" />
+    <None Include="Api\PROPERTIES\Resources.Designer.cs" />
+    <None Include="IntegrationTest\FACTS\CONTROLLERS\V1\SamplesControllerTest.cs" />
+    <None Include="IntegrationTest\INFRASTRUCTURE\TestDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,34 +171,28 @@
     <None Include="UnitTest\UnitTest.vstemplate" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Api\appsettings.Development.json" />
-    <None Include="Api\appsettings.json" />
-    <None Include="Api\appsettings.Production.json" />
-    <None Include="Api\appsettings.Staging.json" />
-    <None Include="Api\Properties\launchSettings.json" />
-    <None Include="Api\Api.csproj" />
     <None Include="Application\Application.csproj" />
-    <None Include="IntegrationTest\IntegrationTest.csproj" />
     <None Include="UnitTest\UnitTest.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Api\Properties\Resources.es.resx" />
-    <None Include="Api\Properties\Resources.resx" />
-    <None Include="Application\Properties\Resources.es.resx" />
-    <None Include="Application\Properties\Resources.resx" />
+    <None Include="Application\PROPERTIES\Resources.es.resx" />
+    <None Include="Application\PROPERTIES\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Domain\PROPERTIES\Resources.es.resx" />
     <None Include="Domain\PROPERTIES\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Domain.SeedData\Domain.SeedData.vstemplate" />
-    <Content Include="Tests.Helpers\Tests.Helpers.vstemplate" />
-    <Content Include="Tests.Helpers\__TemplateIcon.ico" />
+    <None Include="Domain.SeedData\Domain.SeedData.vstemplate" />
+    <None Include="Test.Common\Test.Common.vstemplate" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Infrastructure\PROPERTIES\Resources.es.resx" />
     <None Include="Infrastructure\PROPERTIES\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Api\PROPERTIES\Resources.es.resx" />
+    <None Include="Api\PROPERTIES\Resources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

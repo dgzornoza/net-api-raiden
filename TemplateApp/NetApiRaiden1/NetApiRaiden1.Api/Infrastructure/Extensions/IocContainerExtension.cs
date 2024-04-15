@@ -2,9 +2,9 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using NetApiRaiden1.Api.Settings;
 using NetApiRaiden1.Application.Behaviors;
 using NetApiRaiden1.Application.Infrastructure.Commands;
+using NetApiRaiden1.Application.Infrastructure.Settings;
 using NetApiRaiden1.Application.Services.Audit;
 using NetApiRaiden1.Domain.SeedWork;
 using NetApiRaiden1.Infrastructure.Domain;

@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace $safeprojectname$.Infrastructure.Authorization
+namespace $safeprojectname$.Infrastructure.Authorization;
+
+public static class Policies
 {
-    public static class Policies
+    /// <summary>
+    /// Function for add authorization policies
+    /// </summary>
+    /// <param name="options">Authorization options</param>
+    internal static void AddPolicies(AuthorizationOptions options)
     {
-        /// <summary>
-        /// Function for add authorization policies
-        /// </summary>
-        /// <param name="options">Authorization options</param>
-        internal static void AddPolicies(AuthorizationOptions options)
-        {
-            ////services.AddAuthorization(options =>
-            ////{
-            ////    options.AddPolicy(AuthorizationPolicies.AdminUsers, policy => policy
-            ////        .RequireAuthenticatedUser()
-            ////        .RequireClaim(
-            ////            ClaimTypes.Roles,
-            ////            "admin"));
-            ////});
-        }
+        ////services.AddAuthorization(options =>
+        ////{
+        ////    options.AddPolicy(AuthorizationPolicies.AdminUsers, policy => policy
+        ////        .RequireAuthenticatedUser()
+        ////        .RequireClaim(
+        ////            ClaimTypes.Roles,
+        ////            "admin"));
+        ////});
     }
 }

@@ -14,7 +14,8 @@
     <CreateInPlace>true</CreateInPlace>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="Domain.SeedData.csproj" File="Domain.SeedData.csproj" ReplaceParameters="true">
-    </Project>
+      <Project TargetFileName="Domain.SeedData.csproj" File="Domain.SeedData.csproj" ReplaceParameters="true" >
+          <ProjectItem ReplaceParameters="false" TargetFileName=".gitkeep">.gitkeep</ProjectItem>
+      </Project>
   </TemplateContent>
 </VSTemplate>
