@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.OData;
+using $safeprojectname$.Infrastructure;
 using $safeprojectname$.Infrastructure.Extensions;
 using $safeprojectname$.Infrastructure.Filters;
 using Serilog;
@@ -29,7 +30,9 @@ public partial class Program
             configure.Filters.Add(typeof(HttpGlobalExceptionFilter));
         }).AddJsonOptions(options =>
         {
+            // camel-case and UTC Dates
             options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.Converters.Add(new UtcDateTimeConverter());
         }).AddOData((options, provider) =>
         {
             options.Select().Filter().OrderBy().SetMaxTop(50).Count();
