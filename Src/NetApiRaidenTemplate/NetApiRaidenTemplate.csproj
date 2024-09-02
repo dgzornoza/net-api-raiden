@@ -111,7 +111,6 @@
     <None Include="Application\COMMANDS\AUDITS\CreateAuditCommandHandler.cs" />
     <None Include="Application\COMMANDS\AUDITS\CreateAuditCommandValidator.cs" />
     <None Include="Application\COMMANDS\AUDITS\CreateAuditDtoValidator.cs" />
-    <None Include="Application\INFRASTRUCTURE\COMMANDS\CommandHandler.cs" />
     <None Include="Application\INFRASTRUCTURE\COMMANDS\ICommand.cs" />
     <None Include="Application\INFRASTRUCTURE\COMMANDS\ICommandHandler.cs" />
     <None Include="Application\INFRASTRUCTURE\EXTENSIONS\GenericTypeExtensions.cs" />
@@ -150,6 +149,7 @@
     <None Include="Api\PROPERTIES\Resources.Designer.cs" />
     <None Include="IntegrationTest\FACTS\CONTROLLERS\V1\SamplesControllerTest.cs" />
     <None Include="IntegrationTest\INFRASTRUCTURE\TestDbContext.cs" />
+    <None Include="Application\HANDLERS\RequestHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
